@@ -4,10 +4,10 @@
 
 package frc.robot.subsystems.ClimberSubsystem;
 
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.RobotContainer;
 
-public class ClimberSet extends Command {
+public class ClimberSet extends InstantCommand {
   /** Creates a new ClimberSet. */
   double percent;
   public ClimberSet(double d) {
@@ -20,19 +20,5 @@ public class ClimberSet extends Command {
   @Override
   public void initialize() {
     RobotContainer.m_climber.set(percent);
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
   }
 }

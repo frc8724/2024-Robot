@@ -4,10 +4,10 @@
 
 package frc.robot.subsystems.Targeting;
 
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.RobotContainer;
 
-public class TargetingSet extends Command {
+public class TargetingSet extends InstantCommand {
   /** Creates a new TargetingSet. */
   double percent;
   public TargetingSet( double d) {
@@ -21,19 +21,5 @@ public class TargetingSet extends Command {
   public void initialize() {
   RobotContainer.m_climber.set(percent);
 
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
   }
 }

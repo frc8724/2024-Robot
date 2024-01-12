@@ -8,8 +8,13 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
+import frc.robot.subsystems.ClimberSubsystem.ClimberSubsystem;
 import frc.robot.subsystems.DriveBase.DriveBaseSubsystem;
 import frc.robot.subsystems.IntakeRollers.IntakeRollers;
+import frc.robot.subsystems.ShooterSubsystem.ShooterMag;
+import frc.robot.subsystems.ShooterSubsystem.ShooterWheels;
+import frc.robot.subsystems.Targeting.Targeting;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -23,7 +28,14 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
 
   public static final DriveBaseSubsystem m_robotDrive = new DriveBaseSubsystem();
-    public static final IntakeRollers m_rollers = new IntakeRollers();
+  public static final IntakeRollers m_rollers = new IntakeRollers();
+  public static final ShooterMag m_mag = new ShooterMag();
+  public static final ShooterWheels m_wheels = new ShooterWheels();
+  public static final ArmSubsystem m_arm = new ArmSubsystem();
+  public static final ClimberSubsystem m_climber = new ClimberSubsystem();
+  public static final Targeting m_targets = new Targeting();
+
+
 
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();

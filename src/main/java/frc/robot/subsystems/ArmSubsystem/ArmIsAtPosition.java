@@ -6,9 +6,9 @@ package frc.robot.subsystems.ArmSubsystem;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class CheckingPosition extends Command {
+public class ArmIsAtPosition extends Command {
   /** Creates a new CheckingPosition. */
-  public CheckingPosition() {
+  public ArmIsAtPosition() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

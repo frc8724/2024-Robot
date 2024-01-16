@@ -10,21 +10,18 @@ import frc.robot.RobotContainer;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ShooterMagSet extends InstantCommand {
-
+public class ShooterWheelsSet extends InstantCommand {
   double percent;
-  public ShooterMagSet(double d) {
+  public ShooterWheelsSet(double d) {
     // Use addRequirements() here to declare subsystem dependencies.
-     addRequirements(RobotContainer.m_mag);
+    addRequirements(RobotContainer.m_wheels);
     percent = d;
   }
-  
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.m_mag.set(percent);
+        RobotContainer.m_wheels.set(percent);
 
   }
-
 }

@@ -8,10 +8,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterWheels extends SubsystemBase {
   /** Creates a new ShooterWheels. */
-  public ShooterWheels() {}
+  public ShooterWheels() {
+
+  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    
+  }
+  public void set(double d) {
+  
   }
 }

@@ -21,7 +21,7 @@ public class ShooterWheelsSet extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-        RobotContainer.m_wheels.set(percent);
+        RobotContainer.m_wheels.setShooterSpeedVBus(percent);
 
   }
 }

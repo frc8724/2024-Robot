@@ -19,6 +19,6 @@ public class ClimberSet extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.m_climber.set(percent);
+    RobotContainer.m_climber.setInTicks(percent);
   }
 }

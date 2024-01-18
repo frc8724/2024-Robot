@@ -8,13 +8,15 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 public class ArmIsAtPosition extends Command {
   /** Creates a new CheckingPosition. */
+  double tolerance;
+
   public ArmIsAtPosition() {
     // Use addRequirements() here to declare subsystem dependencies.
-    
+    this(ArmSubsystem.POSITION_SLOP);
   }
 
-   public ArmIsAtPosition(double tolerance) {
-    
+   public ArmIsAtPosition(double t) {
+    this.tolerance = t;
   }
 
   // Called when the command is initially scheduled.

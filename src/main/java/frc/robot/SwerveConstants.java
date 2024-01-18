@@ -28,6 +28,7 @@ public final class SwerveConstants {
 
   public static class DriveConstants {
      // public static final int DRIVE_LEFT_TOP = 4; // falcons FX
+     public static final int SHOOTER_WHEELS = 0;
      public static final int DRIVE_LEFT_FRONT = 5; // falcons FX
      public static final int DRIVE_LEFT_BOTTOM = 6; // falcons FX
      // public static final int DRIVE_RIGHT_TOP = 1; // falcons FX

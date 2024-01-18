@@ -4,14 +4,44 @@
 
 package frc.robot.subsystems.IntakeRollers;
 
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.SwerveConstants;
 
 public class IntakePivot extends SubsystemBase {
-  /** Creates a new IntakePivot. */
-  public IntakePivot() {}
+
+  public static final boolean INTAKE_DOWN = true;
+  public static final boolean INTAKE_UP = false;
+
+  private final Solenoid piston = new Solenoid(PneumaticsModuleType.CTREPCM,
+      SwerveConstants.Solenoid.INTAKE);
+
+  /** Creates a new IntakePistons. */
+  public IntakePivot() {
+  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    updateSmartDashboard();
+  }
+
+  public void Up() {
+    piston.set(INTAKE_UP);
+
+  }
+
+  public void Down() {
+    piston.set(INTAKE_DOWN);
+  }
+
+  public void set(boolean b) {
+    piston.set(b);
+  }
+
+  private void updateSmartDashboard() {
+    SmartDashboard.putBoolean("Intake Position", piston.get());
   }
 }

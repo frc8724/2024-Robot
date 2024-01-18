@@ -5,11 +5,18 @@
 package frc.robot.subsystems.IntakeRollers;
 
 import edu.wpi.first.wpilibj2.command.Command;
-
+import frc.robot.subsystems.ClimberSubsystem.ClimberSubsystem;
 public class IntakePivotAtPosition extends Command {
   /** Creates a new IntakePivotAtPosition. */
+double tolerance;
+
   public IntakePivotAtPosition() {
     // Use addRequirements() here to declare subsystem dependencies.
+    this(ClimberSubsystem.POSITION_SLOP);
+  }
+   public IntakePivotAtPosition(double t) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    this.tolerance = t;
   }
 
   // Called when the command is initially scheduled.

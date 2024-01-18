@@ -5,10 +5,19 @@
 package frc.robot.subsystems.ClimberSubsystem;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 
 public class ClimberAtPosition extends Command {
+  double tolerance;
+
   /** Creates a new ClimberAtPosition. */
   public ClimberAtPosition() {
+   this(ClimberSubsystem.POSITION_SLOP);
+
+    // Use addRequirements() here to declare subsystem dependencies.
+  }
+   public ClimberAtPosition(double t) {
+      this.tolerance =t;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

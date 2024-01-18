@@ -19,7 +19,7 @@ public class ArmSet extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-  RobotContainer.m_arm.set(percent);
+  RobotContainer.m_arm.setAngleInTicks(percent);
   }
   
   // Called every time the scheduler runs while the command is scheduled.

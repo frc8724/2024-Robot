@@ -21,12 +21,27 @@ import edu.wpi.first.wpilibj.TimedRobot;
  * wherever the
  * constants are needed, to reduce verbosity.
  */
-public final class Constants {
+public final class SwerveConstants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
 
   public static class DriveConstants {
+     // public static final int DRIVE_LEFT_TOP = 4; // falcons FX
+     public static final int DRIVE_LEFT_FRONT = 5; // falcons FX
+     public static final int DRIVE_LEFT_BOTTOM = 6; // falcons FX
+     // public static final int DRIVE_RIGHT_TOP = 1; // falcons FX
+     public static final int DRIVE_RIGHT_FRONT = 2; // falcons FX
+     public static final int DRIVE_RIGHT_BOTTOM = 3; // falcons FX
+
+     public static final int ARM_FALCON = 7; // falcons FX
+
+     public static final int LEFT_SHOULDER_FALCON = 8; // falcons FX
+     public static final int RIGHT_SHOULDER_FALCON = 9; // falcons FX
+
+     public static final int ROLLER_TALON = 10; // Talon SRX
+
+     public static final int INTAKE_ROLLERS_2 = 11; // Talon SRX
     public static final int kFrontLeftDriveMotorPort = 2;
     public static final int kRearLeftDriveMotorPort = 7;
     public static final int kFrontRightDriveMotorPort = 5;
@@ -37,20 +52,20 @@ public final class Constants {
     public static final int kFrontRightTurningMotorPort = 4;
     public static final int kRearRightTurningMotorPort = 0;
 
-    public static final int[] kFrontLeftTurningEncoderPorts = new int[] { 0, 1 };
-    public static final int[] kRearLeftTurningEncoderPorts = new int[] { 2, 3 };
-    public static final int[] kFrontRightTurningEncoderPorts = new int[] { 4, 5 };
-    public static final int[] kRearRightTurningEncoderPorts = new int[] { 6, 7 };
+    // public static final int[] kFrontLeftTurningEncoderPorts = new int[] { 0, 1 };
+    // public static final int[] kRearLeftTurningEncoderPorts = new int[] { 2, 3 };
+    // public static final int[] kFrontRightTurningEncoderPorts = new int[] { 4, 5 };
+    // public static final int[] kRearRightTurningEncoderPorts = new int[] { 6, 7 };
 
-    public static final boolean kFrontLeftTurningEncoderReversed = true;
+     public static final boolean kFrontLeftTurningEncoderReversed = true;
     public static final boolean kRearLeftTurningEncoderReversed = true;
-    public static final boolean kFrontRightTurningEncoderReversed = true;
+     public static final boolean kFrontRightTurningEncoderReversed = true;
     public static final boolean kRearRightTurningEncoderReversed = true;
 
-    public static final int[] kFrontLeftDriveEncoderPorts = new int[] { 8, 9 };
-    public static final int[] kRearLeftDriveEncoderPorts = new int[] { 10, 11 };
-    public static final int[] kFrontRightDriveEncoderPorts = new int[] { 12, 13 };
-    public static final int[] kRearRightDriveEncoderPorts = new int[] { 14, 15 };
+    // public static final int[] kFrontLeftDriveEncoderPorts = new int[] { 8, 9 };
+    // public static final int[] kRearLeftDriveEncoderPorts = new int[] { 10, 11 };
+    // public static final int[] kFrontRightDriveEncoderPorts = new int[] { 12, 13 };
+    // public static final int[] kRearRightDriveEncoderPorts = new int[] { 14, 15 };
 
     public static final boolean kFrontLeftDriveEncoderReversed = false;
     public static final boolean kRearLeftDriveEncoderReversed = false;

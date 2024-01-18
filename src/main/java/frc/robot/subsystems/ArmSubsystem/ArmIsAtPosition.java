@@ -10,6 +10,11 @@ public class ArmIsAtPosition extends Command {
   /** Creates a new CheckingPosition. */
   public ArmIsAtPosition() {
     // Use addRequirements() here to declare subsystem dependencies.
+    
+  }
+
+   public ArmIsAtPosition(double tolerance) {
+    
   }
 
   // Called when the command is initially scheduled.

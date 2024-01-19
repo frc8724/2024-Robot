@@ -40,8 +40,8 @@ public class IntakePivot extends SubsystemBase {
   final double kWheelD = 0.000;
   final double kWheelF = 0.000;
 
-  private final TalonFX leftTalon = new TalonFX(Constants.DriveConstants.LEFT_SHOULDER_FALCON);
-  private final TalonFX rightTalon = new TalonFX(Constants.DriveConstants.RIGHT_SHOULDER_FALCON);
+  private final TalonFX leftTalon = new TalonFX(Constants.TalonIDs.LEFT_SHOULDER_FALCON);
+  private final TalonFX rightTalon = new TalonFX(Constants.TalonIDs.RIGHT_SHOULDER_FALCON);
   private static final double CLOSED_LOOP_RAMP_RATE = 0.01; // time from neutral to full in seconds
 
   /** Creates a new Shoulder. */

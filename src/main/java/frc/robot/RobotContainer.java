@@ -7,7 +7,7 @@ package frc.robot;
 
 import frc.robot.subsystems.VisionSubsystems.Vision;
 import frc.robot.subsystems.VisionSubsystems.Vision;
-import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.TalonIDs;
 import frc.robot.Constants.ModuleConstants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.controls.MayhemExtreme3dPro;
@@ -55,9 +55,9 @@ public class RobotContainer {
 				new RunCommand(
 						() -> m_robotDrive.drive(
 								DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Y, 0.10)
-										* DriveConstants.kMaxSpeedMetersPerSecond,
+										* TalonIDs.kMaxSpeedMetersPerSecond,
 								DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.X, 0.10)
-										* DriveConstants.kMaxSpeedMetersPerSecond,
+										* TalonIDs.kMaxSpeedMetersPerSecond,
 								DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Z, 0.10)
 										* ModuleConstants.kMaxModuleAngularSpeedRadiansPerSecond,
 								true),

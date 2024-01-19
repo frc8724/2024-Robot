@@ -10,50 +10,50 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.TalonIDs;
 
 public class DriveBaseSubsystem extends SubsystemBase {
 
     private final SwerveModule m_frontLeftSwerveModule = new SwerveModule(
             "frontLeftDriveMotor",
-            DriveConstants.kFrontLeftDriveMotorPort,
+            TalonIDs.kFrontLeftDriveMotorPort,
             "frontLeftTurningMotor",
-            DriveConstants.kFrontLeftTurningMotorPort,
-            DriveConstants.kFrontLeftDriveEncoderReversed,
-            DriveConstants.kFrontLeftTurningEncoderReversed,
-            DriveConstants.FrontLeftMag);
+            TalonIDs.kFrontLeftTurningMotorPort,
+            TalonIDs.kFrontLeftDriveEncoderReversed,
+            TalonIDs.kFrontLeftTurningEncoderReversed,
+            TalonIDs.FrontLeftMag);
 
     private final SwerveModule m_rearLeftSwerveModule = new SwerveModule(
             "rearLeftDriveMotor",
-            DriveConstants.kRearLeftDriveMotorPort,
+            TalonIDs.kRearLeftDriveMotorPort,
             "rearLeftTurningMotor",
-            DriveConstants.kRearLeftTurningMotorPort,
-            DriveConstants.kRearLeftDriveEncoderReversed,
-            DriveConstants.kRearLeftTurningEncoderReversed,
-            DriveConstants.RearLeftMag);
+            TalonIDs.kRearLeftTurningMotorPort,
+            TalonIDs.kRearLeftDriveEncoderReversed,
+            TalonIDs.kRearLeftTurningEncoderReversed,
+            TalonIDs.RearLeftMag);
 
     private final SwerveModule m_frontRightSwerveModule = new SwerveModule(
             "frontRightDriveMotor",
-            DriveConstants.kFrontRightDriveMotorPort,
+            TalonIDs.kFrontRightDriveMotorPort,
             "frontRightTurningMotor",
-            DriveConstants.kFrontRightTurningMotorPort,
-            DriveConstants.kFrontRightDriveEncoderReversed,
-            DriveConstants.kFrontRightTurningEncoderReversed,
-            DriveConstants.FrontRightMag);
+            TalonIDs.kFrontRightTurningMotorPort,
+            TalonIDs.kFrontRightDriveEncoderReversed,
+            TalonIDs.kFrontRightTurningEncoderReversed,
+            TalonIDs.FrontRightMag);
 
     private final SwerveModule m_rearRightSwerveModule = new SwerveModule(
             "rearRightDriveMotor",
-            DriveConstants.kRearRightDriveMotorPort,
+            TalonIDs.kRearRightDriveMotorPort,
             "rearRightTurningMotor",
-            DriveConstants.kRearRightTurningMotorPort,
-            DriveConstants.kRearRightDriveEncoderReversed,
-            DriveConstants.kRearRightTurningEncoderReversed,
-            DriveConstants.RearRightMag);
+            TalonIDs.kRearRightTurningMotorPort,
+            TalonIDs.kRearRightDriveEncoderReversed,
+            TalonIDs.kRearRightTurningEncoderReversed,
+            TalonIDs.RearRightMag);
 
     private final WPI_Pigeon2 m_gyro = new WPI_Pigeon2(22);
 
     SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(
-            DriveConstants.kDriveKinematics,
+            TalonIDs.kDriveKinematics,
             m_gyro.getRotation2d(),
             new SwerveModulePosition[] {
                     m_frontLeftSwerveModule.getPosition(),
@@ -122,10 +122,10 @@ public class DriveBaseSubsystem extends SubsystemBase {
         // SwerveModuleState[] swerveModuleStates =
         // DriveConstants.kDriveKinematics.toSwerveModuleStates(ChassisSpeeds.fromDiscreteSpeeds(roboChassisSpeeds,
         // DriveConstants.kDrivePeriod));
-        SwerveModuleState[] swerveModuleStates = DriveConstants.kDriveKinematics
+        SwerveModuleState[] swerveModuleStates = TalonIDs.kDriveKinematics
                 .toSwerveModuleStates(roboChassisSpeeds);
 
-        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, DriveConstants.kMaxSpeedMetersPerSecond);
+        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, TalonIDs.kMaxSpeedMetersPerSecond);
         m_frontLeftSwerveModule.setDesiredState(swerveModuleStates[0]);
         m_frontRightSwerveModule.setDesiredState(swerveModuleStates[1]);
         m_rearLeftSwerveModule.setDesiredState(swerveModuleStates[2]);
@@ -138,7 +138,7 @@ public class DriveBaseSubsystem extends SubsystemBase {
      * @param desiredStates The desired SwerveModule states.
      */
     public void setModuleStates(SwerveModuleState[] desiredStates) {
-        SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, DriveConstants.kMaxSpeedMetersPerSecond);
+        SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, TalonIDs.kMaxSpeedMetersPerSecond);
         m_frontLeftSwerveModule.setDesiredState(desiredStates[0]);
         m_frontRightSwerveModule.setDesiredState(desiredStates[1]);
         m_rearLeftSwerveModule.setDesiredState(desiredStates[2]);
@@ -159,10 +159,10 @@ public class DriveBaseSubsystem extends SubsystemBase {
     }
 
     public void zeroWheels() {
-        m_frontLeftSwerveModule.zeroTurningWheel(DriveConstants.FrontLeftMagZero);
-        m_frontRightSwerveModule.zeroTurningWheel((DriveConstants.FrontRightMagZero));
-        m_rearRightSwerveModule.zeroTurningWheel(DriveConstants.RearRightMagZero);
-        m_rearLeftSwerveModule.zeroTurningWheel(DriveConstants.RearLeftMagZero);
+        m_frontLeftSwerveModule.zeroTurningWheel(TalonIDs.FrontLeftMagZero);
+        m_frontRightSwerveModule.zeroTurningWheel((TalonIDs.FrontRightMagZero));
+        m_rearRightSwerveModule.zeroTurningWheel(TalonIDs.RearRightMagZero);
+        m_rearLeftSwerveModule.zeroTurningWheel(TalonIDs.RearLeftMagZero);
     }
 
     public void zeroGyro() {
@@ -192,6 +192,6 @@ public class DriveBaseSubsystem extends SubsystemBase {
      * @return The turn rate of the robot, in degrees per second
      */
     public double getTurnRate() {
-        return m_gyro.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
+        return m_gyro.getRate() * (TalonIDs.kGyroReversed ? -1.0 : 1.0);
     }
 }

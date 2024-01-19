@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+
+import frc.robot.subsystems.VisionSubsystems.Vision;
+import frc.robot.subsystems.VisionSubsystems.Vision;
 import frc.robot.SwerveConstants.DriveConstants;
 import frc.robot.SwerveConstants.ModuleConstants;
 import frc.robot.SwerveConstants.OperatorConstants;
@@ -38,6 +41,7 @@ public class RobotContainer {
   public static final Targeting m_targets = new Targeting();
   private static final MayhemExtreme3dPro DriverStick = new MayhemExtreme3dPro(0);
   private static final AutoChooser m_auto= new AutoChooser();
+  public static final Vision vision = new Vision(0);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =

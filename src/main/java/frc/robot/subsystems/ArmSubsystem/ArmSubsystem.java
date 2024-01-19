@@ -177,5 +177,8 @@ public class ArmSubsystem extends SubsystemBase {
   public void setPower(double power) {
     rightTalon.set(TalonFXControlMode.PercentOutput, power);
   }
+  public boolean isAbove(double x){
+     return getCurrentPositionInTicks()>x;
+  }
 }
 

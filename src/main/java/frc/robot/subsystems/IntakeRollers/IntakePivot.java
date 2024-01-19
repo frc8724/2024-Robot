@@ -16,7 +16,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.SwerveConstants;
+import frc.robot.Constants;
 
 public class IntakePivot extends SubsystemBase {
   public static final double[] LEVEL_X_PRESCORE = { 0.0, 2000.0, 75000.0, 82500.0 };
@@ -40,8 +40,8 @@ public class IntakePivot extends SubsystemBase {
   final double kWheelD = 0.000;
   final double kWheelF = 0.000;
 
-  private final TalonFX leftTalon = new TalonFX(SwerveConstants.DriveConstants.LEFT_SHOULDER_FALCON);
-  private final TalonFX rightTalon = new TalonFX(SwerveConstants.DriveConstants.RIGHT_SHOULDER_FALCON);
+  private final TalonFX leftTalon = new TalonFX(Constants.DriveConstants.LEFT_SHOULDER_FALCON);
+  private final TalonFX rightTalon = new TalonFX(Constants.DriveConstants.RIGHT_SHOULDER_FALCON);
   private static final double CLOSED_LOOP_RAMP_RATE = 0.01; // time from neutral to full in seconds
 
   /** Creates a new Shoulder. */

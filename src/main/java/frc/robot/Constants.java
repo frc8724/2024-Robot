@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
  * wherever the
  * constants are needed, to reduce verbosity.
  */
-public final class SwerveConstants {
+public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }

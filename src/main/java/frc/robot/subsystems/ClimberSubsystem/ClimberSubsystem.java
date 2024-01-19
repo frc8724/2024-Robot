@@ -14,7 +14,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.SwerveConstants;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class ClimberSubsystem extends SubsystemBase {
@@ -31,7 +31,7 @@ public class ClimberSubsystem extends SubsystemBase {
   public static final double POSITION_SLOP = 1000.0;
   static final double CLOSED_LOOP_RAMP_RATE = 1.0; // todo: lower this value
 
-  private final MayhemTalonFX talon = new MayhemTalonFX(SwerveConstants.DriveConstants.ARM_FALCON, CurrentLimit.HIGH_CURRENT);
+  private final MayhemTalonFX talon = new MayhemTalonFX(Constants.DriveConstants.ARM_FALCON, CurrentLimit.HIGH_CURRENT);
 
   /** Creates a new Arm. */
   public ClimberSubsystem() {

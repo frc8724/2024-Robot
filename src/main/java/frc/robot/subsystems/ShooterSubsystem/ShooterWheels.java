@@ -4,13 +4,13 @@ import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.SwerveConstants;
+import frc.robot.Constants;
 
 import frc.robot.subsystems.MayhemTalonFX;
 import frc.robot.subsystems.MayhemTalonFX.CurrentLimit;
 
 public class ShooterWheels extends SubsystemBase {
-    private final MayhemTalonFX shooterWheel = new MayhemTalonFX(SwerveConstants.DriveConstants.SHOOTER_WHEELS,
+    private final MayhemTalonFX shooterWheel = new MayhemTalonFX(Constants.DriveConstants.SHOOTER_WHEELS,
             CurrentLimit.HIGH_CURRENT);
 
     private final double TALON_TICKS_PER_REV = 2048.0;

@@ -10,50 +10,51 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.TalonIDs;
+import frc.robot.Constants.MotorIDs;
+import frc.robot.Constants.Swerve;
 
 public class DriveBaseSubsystem extends SubsystemBase {
 
     private final SwerveModule m_frontLeftSwerveModule = new SwerveModule(
             "frontLeftDriveMotor",
-            TalonIDs.kFrontLeftDriveMotorPort,
+            MotorIDs.kFrontLeftDriveMotorPort,
             "frontLeftTurningMotor",
-            TalonIDs.kFrontLeftTurningMotorPort,
-            TalonIDs.kFrontLeftDriveEncoderReversed,
-            TalonIDs.kFrontLeftTurningEncoderReversed,
-            TalonIDs.FrontLeftMag);
+            MotorIDs.kFrontLeftTurningMotorPort,
+            Swerve.kFrontLeftDriveEncoderReversed,
+            Swerve.kFrontLeftTurningEncoderReversed,
+            Swerve.FrontLeftMag);
 
     private final SwerveModule m_rearLeftSwerveModule = new SwerveModule(
             "rearLeftDriveMotor",
-            TalonIDs.kRearLeftDriveMotorPort,
+            MotorIDs.kRearLeftDriveMotorPort,
             "rearLeftTurningMotor",
-            TalonIDs.kRearLeftTurningMotorPort,
-            TalonIDs.kRearLeftDriveEncoderReversed,
-            TalonIDs.kRearLeftTurningEncoderReversed,
-            TalonIDs.RearLeftMag);
+            MotorIDs.kRearLeftTurningMotorPort,
+            Swerve.kRearLeftDriveEncoderReversed,
+            Swerve.kRearLeftTurningEncoderReversed,
+            Swerve.RearLeftMag);
 
     private final SwerveModule m_frontRightSwerveModule = new SwerveModule(
             "frontRightDriveMotor",
-            TalonIDs.kFrontRightDriveMotorPort,
+            MotorIDs.kFrontRightDriveMotorPort,
             "frontRightTurningMotor",
-            TalonIDs.kFrontRightTurningMotorPort,
-            TalonIDs.kFrontRightDriveEncoderReversed,
-            TalonIDs.kFrontRightTurningEncoderReversed,
-            TalonIDs.FrontRightMag);
+            MotorIDs.kFrontRightTurningMotorPort,
+            Swerve.kFrontRightDriveEncoderReversed,
+            Swerve.kFrontRightTurningEncoderReversed,
+            Swerve.FrontRightMag);
 
     private final SwerveModule m_rearRightSwerveModule = new SwerveModule(
             "rearRightDriveMotor",
-            TalonIDs.kRearRightDriveMotorPort,
+            MotorIDs.kRearRightDriveMotorPort,
             "rearRightTurningMotor",
-            TalonIDs.kRearRightTurningMotorPort,
-            TalonIDs.kRearRightDriveEncoderReversed,
-            TalonIDs.kRearRightTurningEncoderReversed,
-            TalonIDs.RearRightMag);
+            MotorIDs.kRearRightTurningMotorPort,
+            Swerve.kRearRightDriveEncoderReversed,
+            Swerve.kRearRightTurningEncoderReversed,
+            Swerve.RearRightMag);
 
     private final WPI_Pigeon2 m_gyro = new WPI_Pigeon2(22);
 
     SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(
-            TalonIDs.kDriveKinematics,
+        Swerve.kDriveKinematics,
             m_gyro.getRotation2d(),
             new SwerveModulePosition[] {
                     m_frontLeftSwerveModule.getPosition(),
@@ -122,10 +123,10 @@ public class DriveBaseSubsystem extends SubsystemBase {
         // SwerveModuleState[] swerveModuleStates =
         // DriveConstants.kDriveKinematics.toSwerveModuleStates(ChassisSpeeds.fromDiscreteSpeeds(roboChassisSpeeds,
         // DriveConstants.kDrivePeriod));
-        SwerveModuleState[] swerveModuleStates = TalonIDs.kDriveKinematics
+        SwerveModuleState[] swerveModuleStates = Swerve.kDriveKinematics
                 .toSwerveModuleStates(roboChassisSpeeds);
 
-        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, TalonIDs.kMaxSpeedMetersPerSecond);
+        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Swerve.kMaxSpeedMetersPerSecond);
         m_frontLeftSwerveModule.setDesiredState(swerveModuleStates[0]);
         m_frontRightSwerveModule.setDesiredState(swerveModuleStates[1]);
         m_rearLeftSwerveModule.setDesiredState(swerveModuleStates[2]);
@@ -138,7 +139,7 @@ public class DriveBaseSubsystem extends SubsystemBase {
      * @param desiredStates The desired SwerveModule states.
      */
     public void setModuleStates(SwerveModuleState[] desiredStates) {
-        SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, TalonIDs.kMaxSpeedMetersPerSecond);
+        SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, Swerve.kMaxSpeedMetersPerSecond);
         m_frontLeftSwerveModule.setDesiredState(desiredStates[0]);
         m_frontRightSwerveModule.setDesiredState(desiredStates[1]);
         m_rearLeftSwerveModule.setDesiredState(desiredStates[2]);
@@ -159,10 +160,10 @@ public class DriveBaseSubsystem extends SubsystemBase {
     }
 
     public void zeroWheels() {
-        m_frontLeftSwerveModule.zeroTurningWheel(TalonIDs.FrontLeftMagZero);
-        m_frontRightSwerveModule.zeroTurningWheel((TalonIDs.FrontRightMagZero));
-        m_rearRightSwerveModule.zeroTurningWheel(TalonIDs.RearRightMagZero);
-        m_rearLeftSwerveModule.zeroTurningWheel(TalonIDs.RearLeftMagZero);
+        m_frontLeftSwerveModule.zeroTurningWheel(Swerve.FrontLeftMagZero);
+        m_frontRightSwerveModule.zeroTurningWheel((Swerve.FrontRightMagZero));
+        m_rearRightSwerveModule.zeroTurningWheel(Swerve.RearRightMagZero);
+        m_rearLeftSwerveModule.zeroTurningWheel(Swerve.RearLeftMagZero);
     }
 
     public void zeroGyro() {
@@ -192,6 +193,6 @@ public class DriveBaseSubsystem extends SubsystemBase {
      * @return The turn rate of the robot, in degrees per second
      */
     public double getTurnRate() {
-        return m_gyro.getRate() * (TalonIDs.kGyroReversed ? -1.0 : 1.0);
+        return m_gyro.getRate() * (Swerve.kGyroReversed ? -1.0 : 1.0);
     }
 }

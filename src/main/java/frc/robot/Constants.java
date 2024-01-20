@@ -26,47 +26,48 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
   }
 
-  public static class TalonIDs {
-     // public static final int DRIVE_LEFT_TOP = 4; // falcons FX
-     public static final int SHOOTER_WHEELS = 0;
-     public static final int DRIVE_LEFT_FRONT = 5; // falcons FX
-     public static final int DRIVE_LEFT_BOTTOM = 6; // falcons FX
-     // public static final int DRIVE_RIGHT_TOP = 1; // falcons FX
-     public static final int DRIVE_RIGHT_FRONT = 2; // falcons FX
-     public static final int DRIVE_RIGHT_BOTTOM = 3; // falcons FX
+  public static class MotorIDs {
+    // Drive Motors
+    public static final int kFrontLeftDriveMotorPort = 1; // kraken
+    public static final int kRearLeftDriveMotorPort = 2; // kraken
+    public static final int kFrontRightDriveMotorPort = 3; // kraken
+    public static final int kRearRightDriveMotorPort = 4; // kraken
+    // Drive Turing
+    public static final int kFrontLeftTurningMotorPort = 5; // falcon fx
+    public static final int kRearLeftTurningMotorPort = 6; // falcon fx
+    public static final int kFrontRightTurningMotorPort = 7; // falcon fx
+    public static final int kRearRightTurningMotorPort = 8; // falcon fx
 
-     public static final int ARM_FALCON = 7; // falcons FX
+    // Arm Pivot
+    public static final int LEFT_SHOULDER_FALCON = 9; // falcons FX
+    public static final int RIGHT_SHOULDER_FALCON = 10; // falcons FX
 
-     public static final int LEFT_SHOULDER_FALCON = 8; // falcons FX
-     public static final int RIGHT_SHOULDER_FALCON = 9; // falcons FX
+    // Magazine
+    public static final int MAGAZINE_TALON_LEFT = 11; // neo 550
+    public static final int MAGAZINE_TALON_RIGHT = 12; // neo 550
 
-     public static final int ROLLER_TALON = 10; // Talon SRX
+    // Shooter
+    public static final int SHOOTER_WHEEL_LEFT = 13; // neo
+    public static final int SHOOTER_WHEEL_RIGHT = 14; // neo
 
-     public static final int INTAKE_ROLLERS_2 = 11; // Talon SRX
-    public static final int kFrontLeftDriveMotorPort = 2;
-    public static final int kRearLeftDriveMotorPort = 7;
-    public static final int kFrontRightDriveMotorPort = 5;
-    public static final int kRearRightDriveMotorPort = 1;
+    // Intake Pivot
+    public static final int INTAKE_PIVOT_LEFT = 15; // neo
+    public static final int INTAKE_PIVOT_RIGHT = 16; // neo
 
-    public static final int kFrontLeftTurningMotorPort = 3;
-    public static final int kRearLeftTurningMotorPort = 6;
-    public static final int kFrontRightTurningMotorPort = 4;
-    public static final int kRearRightTurningMotorPort = 0;
+    // Intake Rollers
+    public static final int INTAKE_ROLLERS = 17; // neo
 
-    // public static final int[] kFrontLeftTurningEncoderPorts = new int[] { 0, 1 };
-    // public static final int[] kRearLeftTurningEncoderPorts = new int[] { 2, 3 };
-    // public static final int[] kFrontRightTurningEncoderPorts = new int[] { 4, 5 };
-    // public static final int[] kRearRightTurningEncoderPorts = new int[] { 6, 7 };
+    // Climber
+    public static final int CLIMBER_FALCON_1 = 18; // falcons FX
+    public static final int CLIMBER_FALCON_2 = 19; // falcons FX
 
-     public static final boolean kFrontLeftTurningEncoderReversed = true;
+  }
+
+  public static class Swerve {
+    public static final boolean kFrontLeftTurningEncoderReversed = true;
     public static final boolean kRearLeftTurningEncoderReversed = true;
-     public static final boolean kFrontRightTurningEncoderReversed = true;
+    public static final boolean kFrontRightTurningEncoderReversed = true;
     public static final boolean kRearRightTurningEncoderReversed = true;
-
-    // public static final int[] kFrontLeftDriveEncoderPorts = new int[] { 8, 9 };
-    // public static final int[] kRearLeftDriveEncoderPorts = new int[] { 10, 11 };
-    // public static final int[] kFrontRightDriveEncoderPorts = new int[] { 12, 13 };
-    // public static final int[] kRearRightDriveEncoderPorts = new int[] { 14, 15 };
 
     public static final boolean kFrontLeftDriveEncoderReversed = false;
     public static final boolean kRearLeftDriveEncoderReversed = false;
@@ -133,9 +134,4 @@ public final class Constants {
 
     public static final double kPModuleDriveController = 1;
   }
-  public final class Solenoid {
-    public static final int INTAKE = 0;
-    public static final int CLIMBER = 1;
-    public static final int CAMERA_LIGHTS = 2;
-}
 }

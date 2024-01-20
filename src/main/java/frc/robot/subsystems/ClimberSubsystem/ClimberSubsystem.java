@@ -31,7 +31,7 @@ public class ClimberSubsystem extends SubsystemBase {
   public static final double POSITION_SLOP = 1000.0;
   static final double CLOSED_LOOP_RAMP_RATE = 1.0; // todo: lower this value
 
-  private final MayhemTalonFX talon = new MayhemTalonFX(Constants.TalonIDs.ARM_FALCON, CurrentLimit.HIGH_CURRENT);
+  private final MayhemTalonFX talon = new MayhemTalonFX(Constants.MotorIDs.CLIMBER_FALCON_1, CurrentLimit.HIGH_CURRENT);
 
   /** Creates a new Arm. */
   public ClimberSubsystem() {

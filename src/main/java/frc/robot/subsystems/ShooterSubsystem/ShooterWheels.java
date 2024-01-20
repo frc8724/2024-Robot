@@ -10,7 +10,9 @@ import frc.robot.subsystems.MayhemTalonFX;
 import frc.robot.subsystems.MayhemTalonFX.CurrentLimit;
 
 public class ShooterWheels extends SubsystemBase {
-    private final MayhemTalonFX shooterWheel = new MayhemTalonFX(Constants.TalonIDs.SHOOTER_WHEELS,
+    private final MayhemTalonFX shooterWheel = new MayhemTalonFX(Constants.MotorIDs.SHOOTER_WHEEL_LEFT,
+            CurrentLimit.HIGH_CURRENT);
+    private final MayhemTalonFX shooterWheelFollower = new MayhemTalonFX(Constants.MotorIDs.SHOOTER_WHEEL_RIGHT,
             CurrentLimit.HIGH_CURRENT);
 
     private final double TALON_TICKS_PER_REV = 2048.0;

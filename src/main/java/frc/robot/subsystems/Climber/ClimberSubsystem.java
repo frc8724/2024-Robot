@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems.ClimberSubsystem;
+package frc.robot.subsystems.Climber;
 import frc.robot.subsystems.MayhemTalonFX;
 import frc.robot.subsystems.MayhemTalonFX.CurrentLimit;
 
@@ -31,11 +31,12 @@ public class ClimberSubsystem extends SubsystemBase {
   public static final double POSITION_SLOP = 1000.0;
   static final double CLOSED_LOOP_RAMP_RATE = 1.0; // todo: lower this value
 
-  private final MayhemTalonFX talon = new MayhemTalonFX(Constants.MotorIDs.CLIMBER_FALCON_1, CurrentLimit.HIGH_CURRENT);
+  private final MayhemTalonFX talonLeft = new MayhemTalonFX(Constants.MotorIDs.CLIMBER_FALCON_LEFT, CurrentLimit.HIGH_CURRENT);
+  private final MayhemTalonFX talonRight = new MayhemTalonFX(Constants.MotorIDs.CLIMBER_FALCON_RIGHT, CurrentLimit.HIGH_CURRENT);
 
   /** Creates a new Arm. */
   public ClimberSubsystem() {
-    configTalon(talon);
+    configTalon(talonLeft);
     zero();
   }
 
@@ -79,7 +80,7 @@ public class ClimberSubsystem extends SubsystemBase {
  
 
   public double getCurrentPosition() {
-    return talon.getSelectedSensorPosition();
+    return talonLeft.getSelectedSensorPosition();
   }
 
   public double getCurrentPositionInTicks() {
@@ -87,8 +88,8 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public double getTargetPosition() {
-    if (talon.getControlMode() == ControlMode.Position) {
-      return talon.getClosedLoopTarget();
+    if (talonLeft.getControlMode() == ControlMode.Position) {
+      return talonLeft.getClosedLoopTarget();
     }
     return 0.0;
   }
@@ -102,7 +103,7 @@ public class ClimberSubsystem extends SubsystemBase {
   public void setInTicks(double p) {
     m_targetPosition = p;
     manualMode = false;
-    talon.set(ControlMode.MotionMagic, p);
+    talonLeft.set(ControlMode.MotionMagic, p);
   }
 
   public boolean isAtPosition(double tolerance) {
@@ -112,24 +113,24 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void stop() {
     manualMode = true;
-    talon.set(ControlMode.PercentOutput, 0.0);
+    talonLeft.set(ControlMode.PercentOutput, 0.0);
   }
 
   // Set the arm to horizontal and then call zero().
   public void zero() {
     // DriverStation.reportWarning("Arm: zero", false);
-    talon.setSelectedSensorPosition(0.0);
-    talon.set(ControlMode.PercentOutput, 0.0);
+    talonLeft.setSelectedSensorPosition(0.0);
+    talonLeft.set(ControlMode.PercentOutput, 0.0);
   }
 
   public void setPower(double d) {
     manualMode = true;
-    talon.set(ControlMode.PercentOutput, d);
+    talonLeft.set(ControlMode.PercentOutput, d);
   }
 
   public void setAutoPower(double d) {
     manualMode = false;
-    talon.set(ControlMode.PercentOutput, d);
+    talonLeft.set(ControlMode.PercentOutput, d);
   }
 }
 

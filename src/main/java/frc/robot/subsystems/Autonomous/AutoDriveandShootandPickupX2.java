@@ -7,7 +7,7 @@ package frc.robot.subsystems.Autonomous;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.SystemZero;
 import frc.robot.subsystems.DriveBase.DriveForDistance;
-import frc.robot.subsystems.IntakeRollers.IntakeRollersPickupSet;
+import frc.robot.subsystems.Intake.IntakeRollersPickupSet;
 import frc.robot.subsystems.ShooterSubsystem.ShootNote;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more

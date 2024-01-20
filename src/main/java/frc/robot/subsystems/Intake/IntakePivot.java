@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems.IntakeRollers;
+package frc.robot.subsystems.Intake;
 
 import java.lang.annotation.Target;
 
@@ -40,8 +40,8 @@ public class IntakePivot extends SubsystemBase {
   final double kWheelD = 0.000;
   final double kWheelF = 0.000;
 
-  private final TalonFX leftTalon = new TalonFX(Constants.MotorIDs.LEFT_SHOULDER_FALCON);
-  private final TalonFX rightTalon = new TalonFX(Constants.MotorIDs.RIGHT_SHOULDER_FALCON);
+  private final TalonFX leftTalon = new TalonFX(Constants.MotorIDs.INTAKE_PIVOT_LEFT);
+  private final TalonFX rightTalon = new TalonFX(Constants.MotorIDs.INTAKE_PIVOT_RIGHT);
   private static final double CLOSED_LOOP_RAMP_RATE = 0.01; // time from neutral to full in seconds
 
   /** Creates a new Shoulder. */

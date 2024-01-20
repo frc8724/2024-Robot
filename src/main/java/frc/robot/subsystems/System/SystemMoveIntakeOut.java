@@ -13,8 +13,8 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.ArmSubsystem.ArmIsAtPosition;
 import frc.robot.subsystems.ArmSubsystem.ArmSet;
 import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
-import frc.robot.subsystems.IntakeRollers.IntakePivotAtPosition;
-import frc.robot.subsystems.IntakeRollers.IntakePivotSet;
+import frc.robot.subsystems.Intake.IntakePivotAtPosition;
+import frc.robot.subsystems.Intake.IntakePivotSet;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:

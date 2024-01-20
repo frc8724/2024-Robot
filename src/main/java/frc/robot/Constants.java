@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static class OperatorConstants {
+  public static class Operator {
     public static final int kDriverControllerPort = 0;
   }
 
@@ -58,9 +58,8 @@ public final class Constants {
     public static final int INTAKE_ROLLERS = 17; // neo
 
     // Climber
-    public static final int CLIMBER_FALCON_1 = 18; // falcons FX
-    public static final int CLIMBER_FALCON_2 = 19; // falcons FX
-
+    public static final int CLIMBER_FALCON_LEFT = 18; // falcons FX
+    public static final int CLIMBER_FALCON_RIGHT = 19; // falcons FX
   }
 
   public static class Swerve {

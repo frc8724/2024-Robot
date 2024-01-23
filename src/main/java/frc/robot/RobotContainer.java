@@ -17,12 +17,18 @@ import frc.robot.subsystems.Autonomous.AutoChooser;
 import frc.robot.subsystems.Autonomous.AutoStandStill;
 import frc.robot.subsystems.Climber.ClimberSubsystem;
 import frc.robot.subsystems.DriveBase.DriveBaseSubsystem;
+import frc.robot.subsystems.DriveBase.DriveZeroGyro;
+import frc.robot.subsystems.DriveBase.DriveZeroWheels;
+import frc.robot.subsystems.DriveBase.DrivebaseResetEncoders;
 import frc.robot.subsystems.Intake.IntakeRollers;
 import frc.robot.subsystems.ShooterSubsystem.ShooterMag;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheels;
 import frc.robot.subsystems.Targeting.Targeting;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -79,7 +85,15 @@ m_auto.addAuto(new AutoStandStill());
    * joysticks}.
    */
   private void configureBindings() {
-    
+    		DriverStick.Button(9).onTrue(
+				new SequentialCommandGroup(
+						new DriveZeroWheels(),
+						new DriveZeroGyro(),
+						new WaitCommand(1.0),
+						new DrivebaseResetEncoders(),
+						new InstantCommand(() -> m_robotDrive.drive(0, 0, 0, true), m_robotDrive)));
+
+
   }
 
   /**

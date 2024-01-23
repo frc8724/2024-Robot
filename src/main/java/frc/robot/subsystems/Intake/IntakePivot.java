@@ -12,6 +12,8 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -40,33 +42,24 @@ public class IntakePivot extends SubsystemBase {
   final double kWheelD = 0.000;
   final double kWheelF = 0.000;
 
-  private final TalonFX leftTalon = new TalonFX(Constants.MotorIDs.INTAKE_PIVOT_LEFT);
-  private final TalonFX rightTalon = new TalonFX(Constants.MotorIDs.INTAKE_PIVOT_RIGHT);
+  CANSparkMax leftTalon = new CANSparkMax(Constants.MotorIDs.INTAKE_PIVOT_LEFT, CANSparkMaxLowLevel.MotorType.kBrushless);
+  CANSparkMax rightTalon = new CANSparkMax(Constants.MotorIDs.INTAKE_PIVOT_RIGHT, CANSparkMaxLowLevel.MotorType.kBrushless);
+
   private static final double CLOSED_LOOP_RAMP_RATE = 0.01; // time from neutral to full in seconds
 
   /** Creates a new Shoulder. */
   public IntakePivot() {
-    leftTalon.configFactoryDefault();
-    rightTalon.configFactoryDefault();
-
-    configTalon(leftTalon);
-    configTalon(rightTalon);
-
     leftTalon.follow(rightTalon);
     leftTalon.setInverted(true);
     rightTalon.setInverted(false);
 
-    leftTalon.setSensorPhase(false);
-    rightTalon.setSensorPhase(false);
+    // leftTalon.setSensorPhase(false);
+    // rightTalon.setSensorPhase(false);
 
-    configureDriveTalon(rightTalon);
+    // configureDriveTalon(rightTalon);
     // configureDriveTalon(leftTalon);
 
     zero();
-  }
-
-  private void configTalon(TalonFX talon) {
-    talon.setNeutralMode(NeutralMode.Brake);
   }
 
   // Ideas to tune the Shoulder.
@@ -112,12 +105,12 @@ public class IntakePivot extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Shoulder Current Ticks",
-        rightTalon.getSelectedSensorPosition());
-    if (rightTalon.getControlMode() != ControlMode.PercentOutput) {
-      SmartDashboard.putNumber("Shoulder Target Ticks",
-          rightTalon.getClosedLoopTarget());
-    }
+    // SmartDashboard.putNumber("Shoulder Current Ticks",
+        // rightTalon.getSelectedSensorPosition());
+    // if (rightTalon.getControlMode() != ControlMode.PercentOutput) {
+      // SmartDashboard.putNumber("Shoulder Target Ticks",
+          // rightTalon.getClosedLoopTarget());
+    // }
 
     // wheelP = SmartDashboard.getNumber("Shoulder P", kWheelP);
     // SmartDashboard.putNumber("Shoulder P", kWheelP);
@@ -128,7 +121,7 @@ public class IntakePivot extends SubsystemBase {
     // // wheelF = SmartDashboard.getNumber("Shoulder F", kWheelF);
     // SmartDashboard.putNumber("Shoulder F", kWheelF);
 
-    SmartDashboard.putBoolean("Shoulder at Position", isAtPosition());
+   // SmartDashboard.putBoolean("Shoulder at Position", isAtPosition());
 
     // SmartDashboard.putNumber("Shoulder error", rightTalon.getClosedLoopError());
 
@@ -140,17 +133,17 @@ public class IntakePivot extends SubsystemBase {
 
   public void setAngleInTicks(double ticks) {
     TargetPositionTicks = ticks;
-    rightTalon.set(ControlMode.MotionMagic, ticks, DemandType.ArbitraryFeedForward, 0.05);
+    // rightTalon.set(ControlMode.MotionMagic, ticks, DemandType.ArbitraryFeedForward, 0.05);
   }
 
   public double getCurrentPositionInTicks() {
-    return rightTalon.getSelectedSensorPosition();
+     return 0; //rightTalon.getSelectedSensorPosition();
   }
 
   public double getTargetPositionTicks() {
-    if (rightTalon.getControlMode() != ControlMode.PercentOutput) {
-      return rightTalon.getClosedLoopTarget();
-    }
+    // if (rightTalon.getControlMode() != ControlMode.PercentOutput) {
+    //   return 0; //rightTalon.getClosedLoopTarget();
+    // }
     return 0.0;
   }
 
@@ -169,13 +162,13 @@ public class IntakePivot extends SubsystemBase {
   // Set the arm to horizontal and then call zero().
   public void zero() {
     // DriverStation.reportWarning("Shoulder: zero", false);
-    rightTalon.setSelectedSensorPosition(0.0);
-    rightTalon.set(TalonFXControlMode.Position, 0.0);
+    // rightTalon.setSelectedSensorPosition(0.0);
+    // rightTalon.set(TalonFXControlMode.Position, 0.0);
 
   }
 
   public void setPower(double power) {
-    rightTalon.set(TalonFXControlMode.PercentOutput, power);
+    // rightTalon.set(TalonFXControlMode.PercentOutput, power);
   }
 }
 

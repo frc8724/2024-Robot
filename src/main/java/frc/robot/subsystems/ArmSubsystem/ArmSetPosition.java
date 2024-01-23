@@ -7,10 +7,10 @@ package frc.robot.subsystems.ArmSubsystem;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.RobotContainer;
 
-public class ArmSet extends InstantCommand {
+public class ArmSetPosition extends InstantCommand {
   /** Creates a new ArmSet. */
   double percent;
-  public ArmSet(double d) {
+  public ArmSetPosition(double d) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_arm);
     percent = d;

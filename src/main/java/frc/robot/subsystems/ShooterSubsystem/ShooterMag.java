@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ShooterMag extends SubsystemBase {
-  TalonFX m_motor = new TalonFX(Constants.MotorIDs.MAGAZINE_TALON_LEFT);
-  TalonFX m_motorFollower = new TalonFX(Constants.MotorIDs.MAGAZINE_TALON_RIGHT);
+  TalonFX m_motor = new TalonFX(Constants.MotorIDs.MAGAZINE_LEFT);
+  TalonFX m_motorFollower = new TalonFX(Constants.MotorIDs.MAGAZINE_RIGHT);
 
   /** Creates a new ShooterMag. */
   public ShooterMag() {}

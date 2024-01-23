@@ -171,7 +171,6 @@ public class ArmSubsystem extends SubsystemBase {
     // DriverStation.reportWarning("Shoulder: zero", false);
     rightTalon.setSelectedSensorPosition(0.0);
     rightTalon.set(TalonFXControlMode.Position, 0.0);
-
   }
 
   public void setPower(double power) {

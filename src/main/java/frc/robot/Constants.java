@@ -26,6 +26,12 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
   }
 
+  public final class Joysticks {
+    public static final int DRIVER_GAMEPAD = 0;
+    public static final int DRIVER_JOYSTICK = 1;
+    public static final int OPERATOR_GAMEPAD = 2;
+    public static final int OPERATOR_JOYSTICK = 3;
+}
   public static class MotorIDs {
     // Drive Motors
     public static final int kFrontLeftDriveMotorPort = 1; // kraken
@@ -43,8 +49,8 @@ public final class Constants {
     public static final int RIGHT_SHOULDER_FALCON = 10; // falcons FX
 
     // Magazine
-    public static final int MAGAZINE_TALON_LEFT = 11; // neo 550
-    public static final int MAGAZINE_TALON_RIGHT = 12; // neo 550
+    public static final int MAGAZINE_LEFT = 11; // neo 550
+    public static final int MAGAZINE_RIGHT = 12; // neo 550
 
     // Shooter
     public static final int SHOOTER_WHEEL_LEFT = 13; // neo

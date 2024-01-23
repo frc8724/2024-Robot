@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.ArmSubsystem.ArmIsAtPosition;
-import frc.robot.subsystems.ArmSubsystem.ArmSet;
+import frc.robot.subsystems.ArmSubsystem.ArmSetPosition;
 import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.Intake.IntakePivotAtPosition;
 import frc.robot.subsystems.Intake.IntakePivotSet;
@@ -27,7 +27,7 @@ public class SystemMoveIntakeOut extends SequentialCommandGroup {
     addCommands(
       new SelectCommand< Boolean >(
         Map.ofEntries(
-            Map.entry(false, new ArmSet(ArmSubsystem.STOW)),
+            Map.entry(false, new ArmSetPosition(ArmSubsystem.STOW)),
             Map.entry(true, new WaitCommand(0.0))),
         () -> RobotContainer.m_arm.getCurrentPositionInTicks()> ArmSubsystem.FLOOR_PICKUP_BACK),
         new ArmIsAtPosition(),

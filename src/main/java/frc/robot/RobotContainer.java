@@ -14,6 +14,7 @@ import frc.robot.Constants.Swerve;
 import frc.robot.controls.MayhemExtreme3dPro;
 import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.Autonomous.AutoChooser;
+import frc.robot.subsystems.Autonomous.AutoStandStill;
 import frc.robot.subsystems.Climber.ClimberSubsystem;
 import frc.robot.subsystems.DriveBase.DriveBaseSubsystem;
 import frc.robot.subsystems.Intake.IntakeRollers;
@@ -50,6 +51,9 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+
+m_auto.addAuto(new AutoStandStill());
+
     // Configure the trigger bindings
     configureBindings();
     m_robotDrive.setDefaultCommand(

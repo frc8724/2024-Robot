@@ -5,12 +5,16 @@
 package frc.robot.subsystems.Autonomous;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class AutoChooser extends SubsystemBase {
   /** Creates a new AutoChooser. */
-  public AutoChooser() {}
+  public AutoChooser() {
+        SmartDashboard.putData("Auto Mode", autoChooser);
+
+  }
 
   @Override
   public void periodic() {

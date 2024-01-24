@@ -79,18 +79,20 @@ public final class Constants {
     public static final boolean kFrontRightDriveEncoderReversed = false;
     public static final boolean kRearRightDriveEncoderReversed = false;
 
-    public static final int FrontLeftMag = 2;
-    public static final int RearLeftMag = 0;
-    public static final int FrontRightMag = 1;
-    public static final int RearRightMag = 3;
+    
+    public static final int FrontLeftMag = 3;
+    public static final int RearLeftMag = 1;
+    public static final int FrontRightMag = 0;
+    public static final int RearRightMag = 2;
 
     public static final int ninety_degrees_in_ticks = 0;
     public static final int one_eighty_degrees_in_ticks = 2048;
 
-    public static final int FrontLeftMagZero = 333 + ninety_degrees_in_ticks; // 455;
-    public static final int FrontRightMagZero = 678 + ninety_degrees_in_ticks;
-    public static final int RearRightMagZero = 792 + ninety_degrees_in_ticks;// 333;
-    public static final int RearLeftMagZero = 455 + ninety_degrees_in_ticks; // 333;// 792;
+    public static final int FrontLeftMagZero = 798 + ninety_degrees_in_ticks; // 455;
+    public static final int FrontRightMagZero = 471 + ninety_degrees_in_ticks;
+    public static final int RearRightMagZero = 306 + ninety_degrees_in_ticks;// 333;
+    public static final int RearLeftMagZero = 638 + ninety_degrees_in_ticks; // 333;// 792;
+
 
     // If you call DriveSubsystem.drive() with a different period make sure to
     // update this.

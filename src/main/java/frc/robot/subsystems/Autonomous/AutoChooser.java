@@ -30,6 +30,5 @@ public class AutoChooser extends SubsystemBase {
 
   public Command getAutoCommand(){
     return autoChooser.getSelected();
-
   }
 }

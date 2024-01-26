@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class IntakeRollers extends SubsystemBase {
-  CANSparkMax m_motor = new CANSparkMax(Constants.MotorIDs.INTAKE_ROLLERS, CANSparkMaxLowLevel.MotorType.kBrushless);
+//  CANSparkMax m_motor = new CANSparkMax(Constants.MotorIDs.INTAKE_ROLLERS, CANSparkMaxLowLevel.MotorType.kBrushless);
 
   /** Creates a new IntakeRollers. */
   public IntakeRollers() {
-    m_motor.setSmartCurrentLimit(999);
+    //m_motor.setSmartCurrentLimit(999);
   }
 
   @Override
@@ -24,7 +24,7 @@ public class IntakeRollers extends SubsystemBase {
   }
 
   public void set(double d) {
-    m_motor.set(d);
+   // m_motor.set(d);
   }
 
 }

@@ -59,17 +59,19 @@ public class RobotContainer {
   public RobotContainer() {
 
 m_auto.addAuto(new AutoStandStill());
+m_auto.addAuto(new AutoDriveOut());
+
 
     // Configure the trigger bindings
     configureBindings();
     m_robotDrive.setDefaultCommand(
 				new RunCommand(
 						() -> m_robotDrive.drive(
-								DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Y, 0.10)
+								DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Y, 0.20)
 										* Swerve.kMaxSpeedMetersPerSecond,
-								DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.X, 0.10)
+								DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.X, 0.2)
 										* Swerve.kMaxSpeedMetersPerSecond,
-								DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Z, 0.10)
+								DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Z, 0.20)
 										* ModuleConstants.kMaxModuleAngularSpeedRadiansPerSecond,
 								true),
 						m_robotDrive));

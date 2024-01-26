@@ -31,12 +31,12 @@ public class ClimberSubsystem extends SubsystemBase {
   public static final double POSITION_SLOP = 1000.0;
   static final double CLOSED_LOOP_RAMP_RATE = 1.0; // todo: lower this value
 
-  private final MayhemTalonFX talonLeft = new MayhemTalonFX(Constants.MotorIDs.CLIMBER_FALCON_LEFT, CurrentLimit.HIGH_CURRENT);
-  private final MayhemTalonFX talonRight = new MayhemTalonFX(Constants.MotorIDs.CLIMBER_FALCON_RIGHT, CurrentLimit.HIGH_CURRENT);
+  // private final MayhemTalonFX talonLeft = new MayhemTalonFX(Constants.MotorIDs.CLIMBER_FALCON_LEFT, CurrentLimit.HIGH_CURRENT);
+  // private final MayhemTalonFX talonRight = new MayhemTalonFX(Constants.MotorIDs.CLIMBER_FALCON_RIGHT, CurrentLimit.HIGH_CURRENT);
 
   /** Creates a new Arm. */
   public ClimberSubsystem() {
-    configTalon(talonLeft);
+  //  configTalon(talonLeft);
     zero();
   }
 
@@ -80,7 +80,8 @@ public class ClimberSubsystem extends SubsystemBase {
  
 
   public double getCurrentPosition() {
-    return talonLeft.getSelectedSensorPosition();
+   // return talonLeft.getSelectedSensorPosition();
+   return 0;
   }
 
   public double getCurrentPositionInTicks() {
@@ -88,9 +89,9 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public double getTargetPosition() {
-    if (talonLeft.getControlMode() == ControlMode.Position) {
-      return talonLeft.getClosedLoopTarget();
-    }
+    // if (talonLeft.getControlMode() == ControlMode.Position) {
+    //   return talonLeft.getClosedLoopTarget();
+    // }
     return 0.0;
   }
 
@@ -103,7 +104,7 @@ public class ClimberSubsystem extends SubsystemBase {
   public void setInTicks(double p) {
     m_targetPosition = p;
     manualMode = false;
-    talonLeft.set(ControlMode.MotionMagic, p);
+    //talonLeft.set(ControlMode.MotionMagic, p);
   }
 
   public boolean isAtPosition(double tolerance) {
@@ -113,24 +114,24 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void stop() {
     manualMode = true;
-    talonLeft.set(ControlMode.PercentOutput, 0.0);
+   // talonLeft.set(ControlMode.PercentOutput, 0.0);
   }
 
   // Set the arm to horizontal and then call zero().
   public void zero() {
     // DriverStation.reportWarning("Arm: zero", false);
-    talonLeft.setSelectedSensorPosition(0.0);
-    talonLeft.set(ControlMode.PercentOutput, 0.0);
+    //talonLeft.setSelectedSensorPosition(0.0);
+   // talonLeft.set(ControlMode.PercentOutput, 0.0);
   }
 
   public void setPower(double d) {
     manualMode = true;
-    talonLeft.set(ControlMode.PercentOutput, d);
+ //   talonLeft.set(ControlMode.PercentOutput, d);
   }
 
   public void setAutoPower(double d) {
     manualMode = false;
-    talonLeft.set(ControlMode.PercentOutput, d);
+   // talonLeft.set(ControlMode.PercentOutput, d);
   }
 }
 

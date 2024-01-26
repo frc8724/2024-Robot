@@ -14,6 +14,7 @@ import frc.robot.Constants.Swerve;
 import frc.robot.controls.MayhemExtreme3dPro;
 import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.Autonomous.AutoChooser;
+import frc.robot.subsystems.Autonomous.AutoDriveOut;
 import frc.robot.subsystems.Autonomous.AutoStandStill;
 import frc.robot.subsystems.Climber.ClimberSubsystem;
 import frc.robot.subsystems.DriveBase.DriveBaseSubsystem;
@@ -67,10 +68,10 @@ m_auto.addAuto(new AutoDriveOut());
     m_robotDrive.setDefaultCommand(
 				new RunCommand(
 						() -> m_robotDrive.drive(
-								DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Y, 0.20)
+              	DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.X, 0.2)
 										* Swerve.kMaxSpeedMetersPerSecond,
-								DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.X, 0.2)
-										* Swerve.kMaxSpeedMetersPerSecond,
+                 DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Y, 0.20)
+                    * Swerve.kMaxSpeedMetersPerSecond,
 								DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Z, 0.20)
 										* ModuleConstants.kMaxModuleAngularSpeedRadiansPerSecond,
 								true),

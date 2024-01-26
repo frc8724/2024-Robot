@@ -5,6 +5,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.subsystems.DriveBase.DriveZeroGyro;
+import frc.robot.subsystems.DriveBase.DriveZeroWheels;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -16,5 +19,9 @@ public class SystemZero extends InstantCommand {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    new DriveZeroWheels();
+    new DriveZeroGyro();
+    new WaitCommand(1.0);
+  }
 }

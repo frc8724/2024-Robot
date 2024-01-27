@@ -88,7 +88,7 @@ public final class Constants {
     public static final int ninety_degrees_in_ticks = 0;
     public static final int one_eighty_degrees_in_ticks = 2048;
 
-    public static final int FrontLeftMagZero = 798 + ninety_degrees_in_ticks; // 455;
+    public static final int FrontLeftMagZero = 1780 + ninety_degrees_in_ticks; // 455;
     public static final int FrontRightMagZero = 471 + ninety_degrees_in_ticks;
     public static final int RearRightMagZero = 306 + ninety_degrees_in_ticks;// 333;
     public static final int RearLeftMagZero = 638 + ninety_degrees_in_ticks; // 333;// 792;

@@ -5,6 +5,7 @@
 package frc.robot.subsystems.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.SystemZero;
 import frc.robot.subsystems.DriveBase.DriveForDistance;
 
@@ -18,7 +19,7 @@ public class AutoDriveOut extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new SystemZero(),
-      new DriveForDistance(0.0,0.3, 0.0,50.0)
+      new DriveForDistance(0.0,0.2, 0.0,0.4)
     );
 
   }

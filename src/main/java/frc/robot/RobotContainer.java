@@ -70,7 +70,7 @@ m_auto.addAuto(new AutoDriveOut());
 						() -> m_robotDrive.drive(
               	DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.X, 0.2)
 										* Swerve.kMaxSpeedMetersPerSecond,
-                 DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Y, 0.20)
+                 -DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Y, 0.20)
                     * Swerve.kMaxSpeedMetersPerSecond,
 								DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Z, 0.20)
 										* ModuleConstants.kMaxModuleAngularSpeedRadiansPerSecond,

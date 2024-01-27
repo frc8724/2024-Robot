@@ -28,7 +28,7 @@ public class DriveForDistance extends Command {
   public void initialize() {
     Pose2d pose = new Pose2d();
     RobotContainer.m_robotDrive.resetOdometry(pose);
-    RobotContainer.m_robotDrive.drive(m_x, m_y, m_rot, false);
+    RobotContainer.m_robotDrive.drive(m_x, m_y, m_rot, true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -39,7 +39,7 @@ public class DriveForDistance extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // RobotContainer.m_robotDrive.drive(0.0, 0.0, 0.0, false);
+    RobotContainer.m_robotDrive.drive(0.0, 0.0, 0.0, false);
   }
 
   double getDistance(double x, double y) {

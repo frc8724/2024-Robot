@@ -9,6 +9,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MotorIDs;
 import frc.robot.Constants.Swerve;
@@ -111,6 +112,11 @@ public class DriveBaseSubsystem extends SubsystemBase {
      */
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
         ChassisSpeeds roboChassisSpeeds = null;
+        SmartDashboard.putNumber("driveX", xSpeed);
+        SmartDashboard.putNumber("driveY", ySpeed);
+        SmartDashboard.putNumber("driveRot", rot);
+        SmartDashboard.putBoolean("driveField", fieldRelative);
+
 
         if (fieldRelative) {
             roboChassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, m_gyro.getRotation2d());

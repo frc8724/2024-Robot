@@ -88,12 +88,12 @@ public class SwerveModule extends SubsystemBase {
 
     public void zeroTurningWheel(double MagTickTarget) {
         double magTicks = m_magEncoder.get();
-        double magRad = magTicks / MAG_MAX * (Math.PI * 2);
-        double magTargetRad = MagTickTarget / MAG_MAX * (Math.PI * 2);
+        // double magRad = magTicks / MAG_MAX * (Math.PI * 2);
+        // double magTargetRad = MagTickTarget / MAG_MAX * (Math.PI * 2);
 
-        double wheelRad = m_turningMotor.getRotationRadians();
+        // double wheelRad = m_turningMotor.getRotationRadians();
 
-        double diffRad = magTargetRad - magRad;
+        // double diffRad = magTargetRad - magRad;
 
         // SmartDashboard.putNumber(this.m_magEncoder.m_analogInput.getChannel() + "
         // test magTicks", magTicks);
@@ -105,8 +105,8 @@ public class SwerveModule extends SubsystemBase {
         // test magTargetRad", magTargetRad);
         // SmartDashboard.putNumber(this.m_magEncoder.m_analogInput.getChannel() + "
         // test wheelRad ", wheelRad);
-
-        m_turningMotor.set(wheelRad + diffRad);
+        double encoderTicks = magTicks*SwerveTurningFalcon.MOTOR_TICKS_PER_WHEEL_ROTATION/MAG_MAX;
+        m_turningMotor.setSensorPosition(encoderTicks);
     }
 
     public void setTurningWheel(double rad) {

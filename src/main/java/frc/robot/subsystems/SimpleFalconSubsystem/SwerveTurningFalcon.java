@@ -15,9 +15,9 @@ public class SwerveTurningFalcon extends SubsystemBase {
   private TalonFX motor;
   private String name;
 
-  final double MOTOR_TICKS_PER_ROTATION = 2048.0;
-  final double MOTOR_RATIO_TO_WHEEL = 150.0 / 7.0;
-  final double MOTOR_TICKS_PER_WHEEL_ROTATION = MOTOR_TICKS_PER_ROTATION *
+  static final double MOTOR_TICKS_PER_ROTATION = 2048.0;
+static  final double MOTOR_RATIO_TO_WHEEL = 150.0 / 7.0;
+ public static final double MOTOR_TICKS_PER_WHEEL_ROTATION = MOTOR_TICKS_PER_ROTATION *
       MOTOR_RATIO_TO_WHEEL;
 
   /** Creates a new SimpleFalconSubsystem. */
@@ -151,6 +151,7 @@ public class SwerveTurningFalcon extends SubsystemBase {
       ticks = motor.getSelectedSensorPosition() + e - s + MOTOR_TICKS_PER_WHEEL_ROTATION;
     } else {
       ticks = motor.getSelectedSensorPosition() - (s - e);
+      
     }
     motor.set(TalonFXControlMode.Position, ticks);
     m_set = e;
@@ -187,5 +188,11 @@ public class SwerveTurningFalcon extends SubsystemBase {
     // shortestRotation(-Math.PI * 3.0 / 4.0, Math.PI * 3.0 / 4.0)); // should be
     // -Pi/2 = 1.57
 
+  }
+
+  public void setSensorPosition(double encoderTicks) {
+    // TODO Auto-generated method stub
+    motor.setSelectedSensorPosition(encoderTicks);
+    motor.set(TalonFXControlMode.Position, encoderTicks);
   }
 }

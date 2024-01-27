@@ -34,6 +34,10 @@ public class SwerveDrivebase extends SubsystemBase {
 
   public void drive(Translation2d translation, double rotation, boolean fieldRelative)
   {
+    // https://yagsl.gitbook.io/yagsl/configuring-yagsl/code-setup
+    // another team's implementation:
+    // https://github.com/Gryphon-Robotics-4990/Test_YAGSL2/blob/main/src/main/java/frc/robot/RobotContainer.java
+    // Chief Delphi: https://www.chiefdelphi.com/t/yet-another-generic-swerve-library-yagsl-v1-release/450844/22
     swerveDrive.drive(translation,
                       rotation,
                       fieldRelative,

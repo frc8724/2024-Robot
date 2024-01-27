@@ -20,12 +20,12 @@
   },
   "encoder": {
     "type": "thrifty",
-    "id": 0,
+    "id": 3,
     "canbus": null
   },
   "inverted": {
     "drive": false,
-    "angle": false
+    "angle": true
   },
   "absoluteEncoderInverted": false
 }

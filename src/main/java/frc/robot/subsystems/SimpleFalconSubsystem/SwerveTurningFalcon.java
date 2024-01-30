@@ -4,17 +4,23 @@
 
 package frc.robot.subsystems.SimpleFalconSubsystem;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.can.*;
+//import com.ctre.phoenix.motorcontrol.TalonFXSensorCollection;
+// import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+// import com.ctre.phoenix.motorcontrol.can.*;
+import com.ctre.phoenix6.hardware.*;
+import com.ctre.phoenix6.configs.*;
+import com.ctre.phoenix6.controls.PositionDutyCycle;
 
 public class SwerveTurningFalcon extends SubsystemBase {
   private TalonFX motor;
   private String name;
-
+  // private TalonFXSensorCollection;
+   //TalonFXSensorCollection talonFX = new TalonFXSensorCollection();
   static final double MOTOR_TICKS_PER_ROTATION = 2048.0;
 static  final double MOTOR_RATIO_TO_WHEEL = 150.0 / 7.0;
  public static final double MOTOR_TICKS_PER_WHEEL_ROTATION = MOTOR_TICKS_PER_ROTATION *
@@ -25,19 +31,30 @@ static  final double MOTOR_RATIO_TO_WHEEL = 150.0 / 7.0;
     motor = new TalonFX(id);
     motor.setInverted(invert);
     this.name = name;
-    motor.setSelectedSensorPosition(0);
+    // motor.setSelectedSensorPosition(0);
+    motor.getConfigurator().apply(new TalonFXConfiguration());
+    motor.setPosition(0);
 
-    motor.config_kP(0, 0.5);
-    motor.config_kI(0, 0.0);
-    motor.config_kD(0, 0.5);
-    motor.config_kF(0, 0.0);
+    // motor.config_kP(0, 0.5);
+    // motor.config_kI(0, 0.0);
+    // motor.config_kD(0, 0.5);
+    // motor.config_kF(0, 0.0);
+    var slot0Configs = new Slot0Configs();
+    slot0Configs.kP =0.5;
+    slot0Configs.kP =0.0;
+    slot0Configs.kP =0.5;
+    slot0Configs.kP =0.0;
+    motor.getConfigurator().apply(slot0Configs, 0.050);
 
-    motor.configNominalOutputForward(0.0);
-    motor.configNominalOutputReverse(0.0);
-    motor.configPeakOutputForward(+12.0);
-    motor.configPeakOutputReverse(-12.0);
-    motor.configNeutralDeadband(0.0);
-    motor.setNeutralMode(NeutralMode.Coast);
+
+
+    // motor.configNominalOutputForward(0.0);
+    // motor.configNominalOutputReverse(0.0);
+    // motor.configPeakOutputForward(+12.0);
+    // motor.configPeakOutputReverse(-12.0);
+    // motor.configNeutralDeadband(0.0);
+    // motor.setNeutralMode(NeutralMode.Coast);
+    // Timer.delay(0.1);
   }
 
   double m_set;
@@ -133,7 +150,7 @@ static  final double MOTOR_RATIO_TO_WHEEL = 150.0 / 7.0;
     double rotation = this.shortestRotation(currentRotation, value);
     double finalRotation = currentRotation + rotation;
     double e = convertRadiansToTicks(finalRotation);
-    double s = motor.getSelectedSensorPosition() % MOTOR_TICKS_PER_WHEEL_ROTATION;
+    double s = motor.getPosition().getValueAsDouble() % MOTOR_TICKS_PER_WHEEL_ROTATION;
 
     if (this.name == "frontLeftTurningMotor") {
       SmartDashboard.putNumber(this.name + " desired radians", value);
@@ -148,34 +165,35 @@ static  final double MOTOR_RATIO_TO_WHEEL = 150.0 / 7.0;
     }
     double ticks;
     if (e - s + MOTOR_TICKS_PER_WHEEL_ROTATION < s - e) {
-      ticks = motor.getSelectedSensorPosition() + e - s + MOTOR_TICKS_PER_WHEEL_ROTATION;
+      ticks = motor.getPosition().getValueAsDouble() + e - s + MOTOR_TICKS_PER_WHEEL_ROTATION;
     } else {
-      ticks = motor.getSelectedSensorPosition() - (s - e);
+      ticks = motor.getPosition().getValueAsDouble() - (s - e);
       
     }
-    motor.set(TalonFXControlMode.Position, ticks);
+   
+    motor.setControl(new PositionDutyCycle(ticks));
     m_set = e;
   }
 
   public double getRotationRadians() {
-    double limitedSensorPosition = motor.getSelectedSensorPosition() % (MOTOR_TICKS_PER_WHEEL_ROTATION);
+    double limitedSensorPosition = motor.getPosition().getValueAsDouble() % (MOTOR_TICKS_PER_WHEEL_ROTATION);
     return limitedSensorPosition / MOTOR_TICKS_PER_WHEEL_ROTATION * 2 * Math.PI;
   }
 
   public double getRotationTicks() {
-    return motor.getSelectedSensorPosition();
+    return motor.getPosition().getValueAsDouble();
   }
 
   public void reset() {
     set(0.0);
-    motor.setSelectedSensorPosition(0.0);
+    motor.getPosition().getValueAsDouble();
   }
 
   @Override
   public void periodic() {
     // // This method will be called once per scheduler run
-    SmartDashboard.putNumber(this.name + " position", motor.getSelectedSensorPosition());
-    SmartDashboard.putNumber(this.name + " error", motor.getClosedLoopError());
+    SmartDashboard.putNumber(this.name + " position", motor.getPosition().getValueAsDouble());
+    SmartDashboard.putNumber(this.name + " error", motor.getClosedLoopError().getValueAsDouble());
     // SmartDashboard.putNumber(this.name + " MOTOR_TICKS_PER_WHEEL_ROTATION",
     // MOTOR_TICKS_PER_WHEEL_ROTATION);
     // SmartDashboard.putNumber(this.name + " rads", this.getRotationRadians());
@@ -192,7 +210,7 @@ static  final double MOTOR_RATIO_TO_WHEEL = 150.0 / 7.0;
 
   public void setSensorPosition(double encoderTicks) {
     // TODO Auto-generated method stub
-    motor.setSelectedSensorPosition(encoderTicks);
-    motor.set(TalonFXControlMode.Position, encoderTicks);
+    motor.setPosition(encoderTicks);
+    motor.setControl(new PositionDutyCycle(encoderTicks));
   }
 }

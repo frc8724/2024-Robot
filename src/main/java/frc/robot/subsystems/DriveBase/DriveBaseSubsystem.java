@@ -134,9 +134,9 @@ public class DriveBaseSubsystem extends SubsystemBase {
 
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Swerve.kMaxSpeedMetersPerSecond);
         m_frontLeftSwerveModule.setDesiredState(swerveModuleStates[0]);
-        m_frontRightSwerveModule.setDesiredState(swerveModuleStates[1]);
-        m_rearLeftSwerveModule.setDesiredState(swerveModuleStates[2]);
-        m_rearRightSwerveModule.setDesiredState(swerveModuleStates[3]);
+        // m_frontRightSwerveModule.setDesiredState(swerveModuleStates[1]);
+        // m_rearLeftSwerveModule.setDesiredState(swerveModuleStates[2]);
+        // m_rearRightSwerveModule.setDesiredState(swerveModuleStates[3]);
     }
 
     /**
@@ -147,17 +147,17 @@ public class DriveBaseSubsystem extends SubsystemBase {
     public void setModuleStates(SwerveModuleState[] desiredStates) {
         SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, Swerve.kMaxSpeedMetersPerSecond);
         m_frontLeftSwerveModule.setDesiredState(desiredStates[0]);
-        m_frontRightSwerveModule.setDesiredState(desiredStates[1]);
-        m_rearLeftSwerveModule.setDesiredState(desiredStates[2]);
-        m_rearRightSwerveModule.setDesiredState(desiredStates[3]);
+        // m_frontRightSwerveModule.setDesiredState(desiredStates[1]);
+        // m_rearLeftSwerveModule.setDesiredState(desiredStates[2]);
+        // m_rearRightSwerveModule.setDesiredState(desiredStates[3]);
     }
 
     /** Resets the drive encoders to currently read a position of 0. */
     public void resetEncoders() {
         m_frontLeftSwerveModule.resetEncoders();
-        m_frontRightSwerveModule.resetEncoders();
-        m_rearLeftSwerveModule.resetEncoders();
-        m_rearRightSwerveModule.resetEncoders();
+        // m_frontRightSwerveModule.resetEncoders();
+        // m_rearLeftSwerveModule.resetEncoders();
+        // m_rearRightSwerveModule.resetEncoders();
     }
 
     /** Zeroes the heading of the robot. */
@@ -166,10 +166,11 @@ public class DriveBaseSubsystem extends SubsystemBase {
     }
 
     public void zeroWheels() {
+        System.out.println("Testing Code");
         m_frontLeftSwerveModule.zeroTurningWheel(Swerve.FrontLeftMagZero);
-        m_frontRightSwerveModule.zeroTurningWheel((Swerve.FrontRightMagZero));
-        m_rearRightSwerveModule.zeroTurningWheel(Swerve.RearRightMagZero);
-        m_rearLeftSwerveModule.zeroTurningWheel(Swerve.RearLeftMagZero);
+        // m_frontRightSwerveModule.zeroTurningWheel((Swerve.FrontRightMagZero));
+        // m_rearRightSwerveModule.zeroTurningWheel(Swerve.RearRightMagZero);
+        // m_rearLeftSwerveModule.zeroTurningWheel(Swerve.RearLeftMagZero);
     }
 
     public void zeroGyro() {

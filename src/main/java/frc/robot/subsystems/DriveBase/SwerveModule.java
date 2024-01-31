@@ -88,6 +88,7 @@ public class SwerveModule extends SubsystemBase {
 
     public void zeroTurningWheel(double magTickTarget) {
         double magTicks = m_magEncoder.get();
+        System.out.println("Mag: " + magTicks + " vs Desired " + magTickTarget); 
         double magRad = magTicks / MAG_MAX * (Math.PI * 2);
         double magTargetRad = magTickTarget / MAG_MAX * (Math.PI * 2);
 

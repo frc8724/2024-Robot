@@ -7,11 +7,13 @@ package frc.robot.subsystems.SimpleFalconSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import com.ctre.phoenix6.hardware.*;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.can.*;
+import com.ctre.phoenix6.configs.*;
+import com.ctre.phoenix6.controls.PositionDutyCycle;
 
 public class SwerveDriveFalcon extends SubsystemBase {
+  // private TalonFX motor;
   private TalonFX motor;
   private String name;
 
@@ -24,19 +26,14 @@ public class SwerveDriveFalcon extends SubsystemBase {
     motor = new TalonFX(id);
     motor.setInverted(invert);
     this.name = name;
-    motor.setSelectedSensorPosition(0);
-    motor.config_kP(0, 0.05);
-    motor.config_kI(0, 0.0);
-    motor.config_kD(0, 0.0);
-    motor.config_kF(0, 0.0);
-
-    motor.configNominalOutputForward(0.0);
-    motor.configNominalOutputReverse(0.0);
-    motor.configPeakOutputForward(+12.0);
-    motor.configPeakOutputReverse(-12.0);
-    motor.configNeutralDeadband(0.0);
-
-    motor.setNeutralMode(NeutralMode.Coast);
+    
+    motor.getConfigurator().apply(new TalonFXConfiguration());
+    var slot0Configs = new Slot0Configs();
+    slot0Configs.kP =0.5;
+    slot0Configs.kP =0.0;
+    slot0Configs.kP =0.5;
+    slot0Configs.kP =0.0;
+    motor.getConfigurator().apply(slot0Configs, 0.050);
   }
 
   double m_set;
@@ -51,7 +48,7 @@ public class SwerveDriveFalcon extends SubsystemBase {
    */
   public void set(double value) {
     double ticksPer100ms = convertMpsToTicksPer100ms(value);
-    motor.set(TalonFXControlMode.Velocity, ticksPer100ms);
+    motor.set( ticksPer100ms);
     m_set = value;
   }
 
@@ -59,19 +56,19 @@ public class SwerveDriveFalcon extends SubsystemBase {
    * get meters per second of the drive wheel
    */
   public double getRotationalVelocity() {
-    var ticksPerSecond = motor.getSelectedSensorVelocity() / 0.100;
-    var metersPerSecond = ticksPerSecond / Drive1rotationTicks * Math.PI * WheelDiameterMeters;
+    var ticksPerSecond = motor.getVelocity().getValueAsDouble()/ 0.100;
+    var metersPerSecond = (double)ticksPerSecond / Drive1rotationTicks * Math.PI * WheelDiameterMeters;
     return metersPerSecond;
   }
 
   // distance in meters
   public double getDistance() {
-    return motor.getSelectedSensorPosition() / Drive1rotationTicks * WheelDiameterMeters * Math.PI;
+    return motor.getPosition().getValueAsDouble() / Drive1rotationTicks * WheelDiameterMeters * Math.PI;
   }
 
   public void reset() {
     set(0.0);
-    motor.setSelectedSensorPosition(0.0);
+    motor.setPosition(0.0);
   }
 
   @Override

@@ -8,13 +8,15 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
+// import com.ctre.phoenix.motorcontrol.NeutralMode;
 //import com.ctre.phoenix.motorcontrol.TalonFXSensorCollection;
 // import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 // import com.ctre.phoenix.motorcontrol.can.*;
 import com.ctre.phoenix6.hardware.*;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.configs.*;
 import com.ctre.phoenix6.controls.PositionDutyCycle;
+import com.ctre.phoenix6.controls.PositionVoltage;
 
 public class SwerveTurningFalcon extends SubsystemBase {
   private TalonFX motor;
@@ -22,29 +24,34 @@ public class SwerveTurningFalcon extends SubsystemBase {
   // private TalonFXSensorCollection;
    //TalonFXSensorCollection talonFX = new TalonFXSensorCollection();
   static final double MOTOR_TICKS_PER_ROTATION = 2048.0;
-static  final double MOTOR_RATIO_TO_WHEEL = 150.0 / 7.0;
- public static final double MOTOR_TICKS_PER_WHEEL_ROTATION = MOTOR_TICKS_PER_ROTATION *
+  static  final double MOTOR_RATIO_TO_WHEEL = 150.0 / 7.0;
+  public static final double MOTOR_TICKS_PER_WHEEL_ROTATION = MOTOR_TICKS_PER_ROTATION *
       MOTOR_RATIO_TO_WHEEL;
+
+  private PositionVoltage m_angleSetter = new PositionVoltage(0);
 
   /** Creates a new SimpleFalconSubsystem. */
   public SwerveTurningFalcon(String name, int id, boolean invert) {
     motor = new TalonFX(id);
     motor.setInverted(invert);
     this.name = name;
-    // motor.setSelectedSensorPosition(0);
+    
     motor.getConfigurator().apply(new TalonFXConfiguration());
-    motor.setPosition(0);
+    //motor.setPosition(0);
 
     // motor.config_kP(0, 0.5);
     // motor.config_kI(0, 0.0);
     // motor.config_kD(0, 0.5);
     // motor.config_kF(0, 0.0);
-    var slot0Configs = new Slot0Configs();
-    slot0Configs.kP =0.5;
-    slot0Configs.kP =0.0;
-    slot0Configs.kP =0.5;
-    slot0Configs.kP =0.0;
-    motor.getConfigurator().apply(slot0Configs, 0.050);
+    // var slot0Configs = new Slot0Configs();
+    // slot0Configs.kP =0.5;
+    // slot0Configs.kI =0.0;
+    // slot0Configs.kD =0.5;
+    //slot0Configs.kF =0.0;
+
+    
+
+    //motor.getConfigurator().apply(slot0Configs, 0.050);
 
 
 
@@ -55,6 +62,21 @@ static  final double MOTOR_RATIO_TO_WHEEL = 150.0 / 7.0;
     // motor.configNeutralDeadband(0.0);
     // motor.setNeutralMode(NeutralMode.Coast);
     // Timer.delay(0.1);
+
+    var talonfxConfig = new TalonFXConfiguration();
+    talonfxConfig.Slot0.kS = 0.0;
+    talonfxConfig.Slot0.kV = 0.0;
+    talonfxConfig.Slot0.kP = 40.0;
+    talonfxConfig.Slot0.kI = 0.0;
+    talonfxConfig.Slot0.kD = 0.05;
+    talonfxConfig.ClosedLoopGeneral.ContinuousWrap = true;
+    talonfxConfig.Voltage.PeakForwardVoltage = 12;
+    talonfxConfig.Voltage.PeakReverseVoltage = -12;
+    talonfxConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+    //talonfxConfig.MotorOutput.Inverted = invert;
+    motor.getConfigurator().apply(talonfxConfig);
+    Timer.delay(0.5);
+    motor.setPosition(0);
   }
 
   double m_set;
@@ -146,6 +168,7 @@ static  final double MOTOR_RATIO_TO_WHEEL = 150.0 / 7.0;
    * @param value radians
    */
   public void set(double value) {
+    System.out.println("Desired rotation: " + value);
     double currentRotation = this.getRotationRadians();
     double rotation = this.shortestRotation(currentRotation, value);
     double finalRotation = currentRotation + rotation;
@@ -157,6 +180,7 @@ static  final double MOTOR_RATIO_TO_WHEEL = 150.0 / 7.0;
       SmartDashboard.putNumber(this.name + " current radians", currentRotation);
       SmartDashboard.putNumber(this.name + " rotation mod", rotation);
       SmartDashboard.putNumber(this.name + " shortest radians", finalRotation);
+      SmartDashboard.putNumber(this.name + " motor position", motor.getPosition().getValueAsDouble());
       // System.out.println("rotation: " + rotation);
       // System.out.println("final rot: " + finalRotation);
       // System.out.println("final Tick: " + e);
@@ -171,7 +195,10 @@ static  final double MOTOR_RATIO_TO_WHEEL = 150.0 / 7.0;
       
     }
    
+    System.out.println("Motor Ticks to set to: " + ticks);
     motor.setControl(new PositionDutyCycle(ticks));
+    //motor.setPosition(ticks);
+    //motor.setControl(m_angleSetter.withPosition(finalRotation));
     m_set = e;
   }
 

@@ -37,21 +37,24 @@ public class SimpleFalconSubsystem extends SubsystemBase {
   }
 
   public double getRotationRadians() {
-    return motor.getSelectedSensorPosition() / Turning1RotationTicks * Math.PI;
+    // return motor.getSelectedSensorPosition() / Turning1RotationTicks * Math.PI;
+    return 0.0;
   }
 
   /**
    * get meters per second of the drive wheel
    */
   public double getRotationalVelocity() {
-    var ticksPerSecond = motor.getSelectedSensorVelocity() / 0.100;
-    var metersPerSecond = ticksPerSecond / Drive1rotationTicks * Math.PI * WheelDiameterMeters;
-    return metersPerSecond;
+    // var ticksPerSecond = motor.getSelectedSensorVelocity() / 0.100;
+    // var metersPerSecond = ticksPerSecond / Drive1rotationTicks * Math.PI * WheelDiameterMeters;
+    // return metersPerSecond;
+    return 0;
   }
 
   // distance in meters
   public double getDistance() {
-    return motor.getSelectedSensorPosition() / Drive1rotationTicks * WheelDiameterMeters * Math.PI;
+    // return motor.getSelectedSensorPosition() / Drive1rotationTicks * WheelDiameterMeters * Math.PI;
+    return 0.0;
   }
 
   public void reset() {

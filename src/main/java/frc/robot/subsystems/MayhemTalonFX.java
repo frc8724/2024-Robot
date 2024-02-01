@@ -84,7 +84,8 @@ public class MayhemTalonFX extends TalonFX {
     // }
 
     public double getSpeed() {
-        return this.getSelectedSensorVelocity(0);
+        // return this.getSelectedSensorVelocity(0);
+        return 0;
     }
 
     public void setEncPosition(int i) {

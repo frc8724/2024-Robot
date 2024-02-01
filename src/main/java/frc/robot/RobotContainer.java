@@ -11,6 +11,7 @@ import frc.robot.Constants.MotorIDs;
 import frc.robot.Constants.ModuleConstants;
 import frc.robot.Constants.Operator;
 import frc.robot.Constants.Swerve;
+import frc.robot.commands.TestSwerveTurnToPos;
 import frc.robot.controls.MayhemExtreme3dPro;
 import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.Autonomous.AutoChooser;
@@ -65,17 +66,17 @@ m_auto.addAuto(new AutoDriveOut());
 
     // Configure the trigger bindings
     configureBindings();
-    m_robotDrive.setDefaultCommand(
-				new RunCommand(
-						() -> m_robotDrive.drive(
-              	DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.X, 0.2)
-										* Swerve.kMaxSpeedMetersPerSecond,
-                 -DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Y, 0.20)
-                    * Swerve.kMaxSpeedMetersPerSecond,
-								DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Z, 0.20)
-										* ModuleConstants.kMaxModuleAngularSpeedRadiansPerSecond,
-								true),
-						m_robotDrive));
+    // m_robotDrive.setDefaultCommand(
+		// 		new RunCommand(
+		// 				() -> m_robotDrive.drive(
+    //           	DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.X, 0.2)
+		// 								* Swerve.kMaxSpeedMetersPerSecond,
+    //              -DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Y, 0.20)
+    //                 * Swerve.kMaxSpeedMetersPerSecond,
+		// 						DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Z, 0.20)
+		// 								* ModuleConstants.kMaxModuleAngularSpeedRadiansPerSecond,
+		// 						true),
+		// 				m_robotDrive));
   }
 
   /**
@@ -88,15 +89,27 @@ m_auto.addAuto(new AutoDriveOut());
    * joysticks}.
    */
   private void configureBindings() {
-    		DriverStick.Button(9).onTrue(
-				new SequentialCommandGroup(
-						new DriveZeroWheels(),
-						new DriveZeroGyro(),
-						new WaitCommand(1.0),
-						new DrivebaseResetEncoders(),
-						new InstantCommand(() -> m_robotDrive.drive(0, 0, 0, true), m_robotDrive)));
+    		// DriverStick.Button(9).onTrue(
+				// new SequentialCommandGroup(
+				// 		new DriveZeroWheels(),
+				// 		new DriveZeroGyro(),
+				// 		new WaitCommand(1.0),
+				// 		new DrivebaseResetEncoders(),
+				// 		new InstantCommand(() -> m_robotDrive.drive(0, 0, 0, true), m_robotDrive)));
 
 
+        DriverStick.Button(7).onTrue(new TestSwerveTurnToPos(0.0));
+        DriverStick.Button(8).onTrue(new TestSwerveTurnToPos(0.5));
+
+        DriverStick.Button(9).onTrue(new TestSwerveTurnToPos(1.0));
+        DriverStick.Button(10).onTrue(new TestSwerveTurnToPos(3.0)); 
+        
+        m_robotDrive.setDefaultCommand(
+				new RunCommand(
+						() -> m_robotDrive.setWheelsAt(
+              	DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.X, 0.2)
+										* 10),
+						m_robotDrive));
   }
 
   /**

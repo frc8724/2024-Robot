@@ -17,12 +17,11 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.configs.*;
 import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.controls.PositionVoltage;
+import com.ctre.phoenix6.controls.VelocityDutyCycle;
 
 public class SwerveTurningFalcon extends SubsystemBase {
   private TalonFX motor;
   private String name;
-  // private TalonFXSensorCollection;
-   //TalonFXSensorCollection talonFX = new TalonFXSensorCollection();
   static final double MOTOR_TICKS_PER_ROTATION = 2048.0;
   static  final double MOTOR_RATIO_TO_WHEEL = 150.0 / 7.0;
   public static final double MOTOR_TICKS_PER_WHEEL_ROTATION = MOTOR_TICKS_PER_ROTATION *
@@ -66,17 +65,24 @@ public class SwerveTurningFalcon extends SubsystemBase {
     var talonfxConfig = new TalonFXConfiguration();
     talonfxConfig.Slot0.kS = 0.0;
     talonfxConfig.Slot0.kV = 0.0;
-    talonfxConfig.Slot0.kP = 40.0;
+    talonfxConfig.Slot0.kP = 5.0;
     talonfxConfig.Slot0.kI = 0.0;
-    talonfxConfig.Slot0.kD = 0.05;
+    talonfxConfig.Slot0.kD = 0.1; // was 0.05
     talonfxConfig.ClosedLoopGeneral.ContinuousWrap = true;
-    talonfxConfig.Voltage.PeakForwardVoltage = 12;
-    talonfxConfig.Voltage.PeakReverseVoltage = -12;
+    talonfxConfig.Voltage.PeakForwardVoltage = 8;
+    talonfxConfig.Voltage.PeakReverseVoltage = -8;
     talonfxConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+
+    talonfxConfig.TorqueCurrent.PeakForwardTorqueCurrent = 100.0;
+    talonfxConfig.TorqueCurrent.PeakReverseTorqueCurrent = 100.0;
     //talonfxConfig.MotorOutput.Inverted = invert;
     motor.getConfigurator().apply(talonfxConfig);
     Timer.delay(0.5);
+    // motor.setPosition(10);
+    
     motor.setPosition(0);
+
+    System.out.println("Turning Init");
   }
 
   double m_set;
@@ -160,6 +166,10 @@ public class SwerveTurningFalcon extends SubsystemBase {
     return newAngle;
   }
 
+  private final PositionVoltage m_voltagePosition = new PositionVoltage(
+    0, 0, true, 0, 0, 
+    false, false, false);
+ 
   /**
    * value is from -pi to +pi. In order to ensure
    * smoother rotation we check if we are crossing pi
@@ -168,38 +178,47 @@ public class SwerveTurningFalcon extends SubsystemBase {
    * @param value radians
    */
   public void set(double value) {
-    System.out.println("Desired rotation: " + value);
-    double currentRotation = this.getRotationRadians();
-    double rotation = this.shortestRotation(currentRotation, value);
-    double finalRotation = currentRotation + rotation;
-    double e = convertRadiansToTicks(finalRotation);
-    double s = motor.getPosition().getValueAsDouble() % MOTOR_TICKS_PER_WHEEL_ROTATION;
+    // System.out.println("Turning: set.");
+    // System.out.println("Desired rotation: " + value);
+    // double currentRotation = this.getRotationRadians();
+    // double rotation = this.shortestRotation(currentRotation, value);
+    // double finalRotation = currentRotation + rotation;
+    // double e = convertRadiansToTicks(finalRotation);
+    // double s = motor.getPosition().getValueAsDouble() % MOTOR_TICKS_PER_WHEEL_ROTATION;
 
-    if (this.name == "frontLeftTurningMotor") {
-      SmartDashboard.putNumber(this.name + " desired radians", value);
-      SmartDashboard.putNumber(this.name + " current radians", currentRotation);
-      SmartDashboard.putNumber(this.name + " rotation mod", rotation);
-      SmartDashboard.putNumber(this.name + " shortest radians", finalRotation);
-      SmartDashboard.putNumber(this.name + " motor position", motor.getPosition().getValueAsDouble());
-      // System.out.println("rotation: " + rotation);
-      // System.out.println("final rot: " + finalRotation);
-      // System.out.println("final Tick: " + e);
-      // System.out.println("motor curr ticks: " + motor.getSelectedSensorPosition());
-      // System.out.println("==============================");
-    }
-    double ticks;
-    if (e - s + MOTOR_TICKS_PER_WHEEL_ROTATION < s - e) {
-      ticks = motor.getPosition().getValueAsDouble() + e - s + MOTOR_TICKS_PER_WHEEL_ROTATION;
-    } else {
-      ticks = motor.getPosition().getValueAsDouble() - (s - e);
+    // if (this.name == "frontLeftTurningMotor") {
+    //   SmartDashboard.putNumber(this.name + " desired radians", value);
+    //   SmartDashboard.putNumber(this.name + " current radians", currentRotation);
+    //   SmartDashboard.putNumber(this.name + " rotation mod", rotation);
+    //   SmartDashboard.putNumber(this.name + " shortest radians", finalRotation);
+    //   SmartDashboard.putNumber(this.name + " motor position", motor.getPosition().getValueAsDouble());
+    //   // System.out.println("rotation: " + rotation);
+    //   // System.out.println("final rot: " + finalRotation);
+    //   // System.out.println("final Tick: " + e);
+    //   // System.out.println("motor curr ticks: " + motor.getSelectedSensorPosition());
+    //   // System.out.println("==============================");
+    // }
+    // double ticks;
+    // if (e - s + MOTOR_TICKS_PER_WHEEL_ROTATION < s - e) {
+    //   ticks = motor.getPosition().getValueAsDouble() + e - s + MOTOR_TICKS_PER_WHEEL_ROTATION;
+    // } else {
+    //   ticks = motor.getPosition().getValueAsDouble() - (s - e);
       
-    }
+    // }
    
-    System.out.println("Motor Ticks to set to: " + ticks);
-    motor.setControl(new PositionDutyCycle(ticks));
+    // System.out.println("Motor Ticks to set to: " + ticks);
+    // motor.setControl(new PositionDutyCycle(ticks));
+    // motor.set(0.1); // motors turned.
+    // motor.setControl(new PositionVoltage(20.0)); // motor jiggle, but not move.
+    // motor.setControl(new VelocityDutyCycle(0.00)); // loud jiggle
+    // motor.setControl(new PositionVoltage(1000.0));
+    // double d = motor.getPosition().getValueAsDouble();
+    motor.setControl(m_voltagePosition.withPosition(value));
+    SmartDashboard.putNumber("Turn Rotation", value);
+    
     //motor.setPosition(ticks);
     //motor.setControl(m_angleSetter.withPosition(finalRotation));
-    m_set = e;
+    // m_set = e;
   }
 
   public double getRotationRadians() {

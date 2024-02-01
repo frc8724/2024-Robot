@@ -1,7 +1,8 @@
 package frc.robot.subsystems.DriveBase;
 
-import com.ctre.phoenix.sensors.WPI_Pigeon2;
-import com.ctre.phoenix.sensors.WPI_PigeonIMU;
+// import com.ctre.phoenix.sensors.WPI_Pigeon2;
+// import com.ctre.phoenix.sensors.WPI_PigeonIMU;
+import com.ctre.phoenix6.hardware.Pigeon2;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -52,7 +53,7 @@ public class DriveBaseSubsystem extends SubsystemBase {
             Swerve.kRearRightTurningEncoderReversed,
             Swerve.RearRightMag);
 
-    private final WPI_Pigeon2 m_gyro = new WPI_Pigeon2(22);
+    private final Pigeon2 m_gyro = new Pigeon2(22);
 
     SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(
         Swerve.kDriveKinematics,
@@ -65,7 +66,7 @@ public class DriveBaseSubsystem extends SubsystemBase {
             });
 
     public DriveBaseSubsystem() {
-        m_gyro.configFactoryDefault();
+        // m_gyro.configFactoryDefault();
         m_gyro.setYaw(0);
     }
 

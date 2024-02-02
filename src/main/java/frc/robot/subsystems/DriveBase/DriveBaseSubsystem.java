@@ -160,9 +160,9 @@ public class DriveBaseSubsystem extends SubsystemBase {
 
     public void zeroWheels() {
         m_frontLeftSwerveModule.zeroTurningWheel(DriveConstants.FrontLeftMagZero);
+        m_rearLeftSwerveModule.zeroTurningWheel(DriveConstants.RearLeftMagZero);
         m_frontRightSwerveModule.zeroTurningWheel((DriveConstants.FrontRightMagZero));
         m_rearRightSwerveModule.zeroTurningWheel(DriveConstants.RearRightMagZero);
-        m_rearLeftSwerveModule.zeroTurningWheel(DriveConstants.RearLeftMagZero);
     }
 
     public void zeroGyro() {

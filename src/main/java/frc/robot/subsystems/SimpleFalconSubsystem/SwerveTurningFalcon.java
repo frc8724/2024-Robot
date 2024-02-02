@@ -136,10 +136,10 @@ public class SwerveTurningFalcon extends SubsystemBase {
     double s = motor.getSelectedSensorPosition() % MOTOR_TICKS_PER_WHEEL_ROTATION;
 
     if (this.name == "frontLeftTurningMotor") {
-      SmartDashboard.putNumber(this.name + " desired radians", value);
-      SmartDashboard.putNumber(this.name + " current radians", currentRotation);
-      SmartDashboard.putNumber(this.name + " rotation mod", rotation);
-      SmartDashboard.putNumber(this.name + " shortest radians", finalRotation);
+      // SmartDashboard.putNumber(this.name + " desired radians", value);
+      // SmartDashboard.putNumber(this.name + " current radians", currentRotation);
+      // SmartDashboard.putNumber(this.name + " rotation mod", rotation);
+      // SmartDashboard.putNumber(this.name + " shortest radians", finalRotation);
       // System.out.println("rotation: " + rotation);
       // System.out.println("final rot: " + finalRotation);
       // System.out.println("final Tick: " + e);

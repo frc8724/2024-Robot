@@ -6,7 +6,6 @@ package frc.robot;
 
 
 import frc.robot.subsystems.VisionSubsystems.Vision;
-import frc.robot.subsystems.VisionSubsystems.Vision;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ModuleConstants;
 import frc.robot.Constants.OperatorConstants;
@@ -15,10 +14,13 @@ import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.Autonomous.AutoChooser;
 import frc.robot.subsystems.ClimberSubsystem.ClimberSubsystem;
 import frc.robot.subsystems.DriveBase.DriveBaseSubsystem;
+import frc.robot.subsystems.DriveBase.DriveForDistance;
 import frc.robot.subsystems.DriveBase.DriveZeroGyro;
 import frc.robot.subsystems.DriveBase.DriveZeroWheels;
 import frc.robot.subsystems.DriveBase.DrivebaseResetEncoders;
 import frc.robot.subsystems.IntakeRollers.IntakeRollers;
+import frc.robot.subsystems.LimeLight.CenterOnTag;
+import frc.robot.subsystems.LimeLight.LimeLightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem.ShooterMag;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheels;
 import frc.robot.subsystems.Targeting.Targeting;
@@ -48,6 +50,7 @@ public class RobotContainer {
   private static final MayhemExtreme3dPro DriverStick = new MayhemExtreme3dPro(0);
   private static final AutoChooser m_auto= new AutoChooser();
   public static final Vision vision = new Vision(0);
+  public static final LimeLightSubsystem m_limelight = new LimeLightSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -60,11 +63,11 @@ public class RobotContainer {
     m_robotDrive.setDefaultCommand(
 				new RunCommand(
 						() -> m_robotDrive.drive(
-								DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Y, 0.10)
+								-DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Y, 0.10)
 										* DriveConstants.kMaxSpeedMetersPerSecond,
-								DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.X, 0.10)
+								-DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.X, 0.10)
 										* DriveConstants.kMaxSpeedMetersPerSecond,
-								DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Z, 0.20)
+								-DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Z, 0.20)
 										* ModuleConstants.kMaxModuleAngularSpeedRadiansPerSecond,
 								true),
 						m_robotDrive));
@@ -89,6 +92,12 @@ public class RobotContainer {
 						new DrivebaseResetEncoders(),
 						new InstantCommand(() -> m_robotDrive.drive(0, 0, 0, true), m_robotDrive)));
     
+    DriverStick.Button(01).onTrue(new CenterOnTag());
+    DriverStick.Button(10).onTrue(new DriveForDistance(0.0, 0.2, 0.0, 1.0));
+    DriverStick.Button(11).onTrue(new DriveForDistance(0.2, 0.0, 0.0, 1.0));
+    DriverStick.Button(12).onTrue(new DriveForDistance(0, 0, -.3, 1.0));
+        
+
   }
 
   /**

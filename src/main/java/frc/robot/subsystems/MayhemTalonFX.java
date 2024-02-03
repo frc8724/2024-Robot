@@ -20,10 +20,16 @@ public class MayhemTalonFX extends TalonFX {
 
         this.configFactoryDefault();
 
+        this.configNeutralDeadband(0.0);
+
         this.configNominalOutputForward(0.0);
         this.configNominalOutputReverse(0.0);
         this.configPeakOutputForward(1.0);
         this.configPeakOutputReverse(-1.0);
+        this.configMotionCruiseVelocity(0);
+        this.configMotionAcceleration(0);
+        this.configClosedloopRamp(0.0);
+        this.configAllowableClosedloopError(0, 0);
 
         this.configVoltageCompSaturation(12.0); // "full output" scaled to 12.0V for all modes when enabled.
         this.enableVoltageCompensation(true); // turn on voltage compensation

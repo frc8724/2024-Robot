@@ -40,26 +40,26 @@ public class ArmSubsystem extends SubsystemBase {
   final double kWheelD = 0.000;
   final double kWheelF = 0.000;
 
-  private final TalonFX leftTalon = new TalonFX(Constants.DriveConstants.LEFT_SHOULDER_FALCON);
-  private final TalonFX rightTalon = new TalonFX(Constants.DriveConstants.RIGHT_SHOULDER_FALCON);
+  // private final TalonFX leftTalon = new TalonFX(Constants.DriveConstants.LEFT_SHOULDER_FALCON);
+  // private final TalonFX rightTalon = new TalonFX(Constants.DriveConstants.RIGHT_SHOULDER_FALCON);
   private static final double CLOSED_LOOP_RAMP_RATE = 0.01; // time from neutral to full in seconds
 
   /** Creates a new Shoulder. */
   public ArmSubsystem() {
-    leftTalon.configFactoryDefault();
-    rightTalon.configFactoryDefault();
+    // leftTalon.configFactoryDefault();
+    // rightTalon.configFactoryDefault();
 
-    configTalon(leftTalon);
-    configTalon(rightTalon);
+    // configTalon(leftTalon);
+    // configTalon(rightTalon);
 
-    leftTalon.follow(rightTalon);
-    leftTalon.setInverted(true);
-    rightTalon.setInverted(false);
+    // leftTalon.follow(rightTalon);
+    // leftTalon.setInverted(true);
+    // rightTalon.setInverted(false);
 
-    leftTalon.setSensorPhase(false);
-    rightTalon.setSensorPhase(false);
+    // leftTalon.setSensorPhase(false);
+    // rightTalon.setSensorPhase(false);
 
-    configureDriveTalon(rightTalon);
+    // configureDriveTalon(rightTalon);
     // configureDriveTalon(leftTalon);
 
     zero();
@@ -112,12 +112,12 @@ public class ArmSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Shoulder Current Ticks",
-        rightTalon.getSelectedSensorPosition());
-    if (rightTalon.getControlMode() != ControlMode.PercentOutput) {
-      SmartDashboard.putNumber("Shoulder Target Ticks",
-          rightTalon.getClosedLoopTarget());
-    }
+    // SmartDashboard.putNumber("Shoulder Current Ticks",
+    //     rightTalon.getSelectedSensorPosition());
+    // if (rightTalon.getControlMode() != ControlMode.PercentOutput) {
+    //   SmartDashboard.putNumber("Shoulder Target Ticks",
+    //       rightTalon.getClosedLoopTarget());
+    // }
 
     // wheelP = SmartDashboard.getNumber("Shoulder P", kWheelP);
     // SmartDashboard.putNumber("Shoulder P", kWheelP);
@@ -140,17 +140,18 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void setAngleInTicks(double ticks) {
     TargetPositionTicks = ticks;
-    rightTalon.set(ControlMode.MotionMagic, ticks, DemandType.ArbitraryFeedForward, 0.05);
+    // rightTalon.set(ControlMode.MotionMagic, ticks, DemandType.ArbitraryFeedForward, 0.05);
   }
 
   public double getCurrentPositionInTicks() {
-    return rightTalon.getSelectedSensorPosition();
+    // return rightTalon.getSelectedSensorPosition();
+    return 0.0;
   }
 
   public double getTargetPositionTicks() {
-    if (rightTalon.getControlMode() != ControlMode.PercentOutput) {
-      return rightTalon.getClosedLoopTarget();
-    }
+    // if (rightTalon.getControlMode() != ControlMode.PercentOutput) {
+    //   return rightTalon.getClosedLoopTarget();
+    // }
     return 0.0;
   }
 
@@ -169,13 +170,13 @@ public class ArmSubsystem extends SubsystemBase {
   // Set the arm to horizontal and then call zero().
   public void zero() {
     // DriverStation.reportWarning("Shoulder: zero", false);
-    rightTalon.setSelectedSensorPosition(0.0);
-    rightTalon.set(TalonFXControlMode.Position, 0.0);
+    // rightTalon.setSelectedSensorPosition(0.0);
+    // rightTalon.set(TalonFXControlMode.Position, 0.0);
 
   }
 
   public void setPower(double power) {
-    rightTalon.set(TalonFXControlMode.PercentOutput, power);
+    // rightTalon.set(TalonFXControlMode.PercentOutput, power);
   }
   public boolean isAbove(double x){
      return getCurrentPositionInTicks()>x;

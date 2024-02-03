@@ -6,13 +6,15 @@ package frc.robot.subsystems.SimpleFalconSubsystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.subsystems.MayhemTalonFX;
+import frc.robot.subsystems.MayhemTalonFX.CurrentLimit;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.*;
 
 public class SwerveTurningFalcon extends SubsystemBase {
-  private TalonFX motor;
+  private MayhemTalonFX motor;
   private String name;
 
   final double MOTOR_TICKS_PER_ROTATION = 2048.0;
@@ -22,7 +24,7 @@ public class SwerveTurningFalcon extends SubsystemBase {
 
   /** Creates a new SimpleFalconSubsystem. */
   public SwerveTurningFalcon(String name, int id, boolean invert) {
-    motor = new TalonFX(id);
+    motor = new MayhemTalonFX(id, CurrentLimit.HIGH_CURRENT);
     motor.setInverted(invert);
     this.name = name;
     motor.setSelectedSensorPosition(0);

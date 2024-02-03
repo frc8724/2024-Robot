@@ -6,13 +6,17 @@ package frc.robot.subsystems.SimpleFalconSubsystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.subsystems.MayhemTalonFX;
+import frc.robot.subsystems.MayhemTalonFX.CurrentLimit;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.*;
 
+// import frc.robot.subsystems.MayhemTalonFX.CurrentLimit;
+
 public class SwerveDriveFalcon extends SubsystemBase {
-  private TalonFX motor;
+  private MayhemTalonFX motor;
   private String name;
 
   private final double Drive1rotationTicks = 13824.0;
@@ -21,10 +25,13 @@ public class SwerveDriveFalcon extends SubsystemBase {
 
   /** Creates a new SimpleFalconSubsystem. */
   public SwerveDriveFalcon(String name, int id, boolean invert) {
-    motor = new TalonFX(id);
+    motor = new MayhemTalonFX(id, CurrentLimit.HIGH_CURRENT);
     motor.setInverted(invert);
     this.name = name;
-    motor.setSelectedSensorPosition(0);
+    // motor.setSelectedSensorPosition(0);
+    motor.configVoltageCompSaturation(12.0); // "full output" scaled to 12.0V for all modes when enabled.
+    motor.enableVoltageCompensation(true); // turn on voltage compensation
+
     motor.config_kP(0, 0.05);
     motor.config_kI(0, 0.0);
     motor.config_kD(0, 0.0);

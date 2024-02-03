@@ -29,20 +29,20 @@ public final class Constants {
   public static class DriveConstants {
     // public static final int DRIVE_LEFT_TOP = 4; // falcons FX
     public static final int SHOOTER_WHEELS = 0;
-    public static final int DRIVE_LEFT_FRONT = 5; // falcons FX
-    public static final int DRIVE_LEFT_BOTTOM = 6; // falcons FX
+    // public static final int DRIVE_LEFT_FRONT = 5; // falcons FX
+    // public static final int DRIVE_LEFT_BOTTOM = 6; // falcons FX
     // public static final int DRIVE_RIGHT_TOP = 1; // falcons FX
-    public static final int DRIVE_RIGHT_FRONT = 2; // falcons FX
-    public static final int DRIVE_RIGHT_BOTTOM = 3; // falcons FX
+    // public static final int DRIVE_RIGHT_FRONT = 2; // falcons FX
+    // public static final int DRIVE_RIGHT_BOTTOM = 3; // falcons FX
 
-    public static final int ARM_FALCON = 7; // falcons FX
+    public static final int ARM_FALCON = 20; // falcons FX
 
-    public static final int LEFT_SHOULDER_FALCON = 8; // falcons FX
-    public static final int RIGHT_SHOULDER_FALCON = 9; // falcons FX
+    public static final int LEFT_SHOULDER_FALCON = 21; // falcons FX
+    public static final int RIGHT_SHOULDER_FALCON = 22; // falcons FX
 
-    public static final int ROLLER_TALON = 10; // Talon SRX
+    public static final int ROLLER_TALON = 23; // Talon SRX
 
-    public static final int INTAKE_ROLLERS_2 = 11; // Talon SRX
+    public static final int INTAKE_ROLLERS_2 = 24; // Talon SRX
     public static final int kFrontLeftDriveMotorPort = 1;
     public static final int kRearLeftDriveMotorPort = 2;
     public static final int kFrontRightDriveMotorPort = 3;
@@ -68,10 +68,10 @@ public final class Constants {
     // public static final int[] kFrontRightDriveEncoderPorts = new int[] { 12, 13 };
     // public static final int[] kRearRightDriveEncoderPorts = new int[] { 14, 15 };
 
-    public static final boolean kFrontLeftDriveEncoderReversed = false;
-    public static final boolean kRearLeftDriveEncoderReversed = true;
-    public static final boolean kFrontRightDriveEncoderReversed = false;
-    public static final boolean kRearRightDriveEncoderReversed = false;
+    public static final boolean kFrontLeftDriveEncoderReversed = true;
+    public static final boolean kRearLeftDriveEncoderReversed = false;
+    public static final boolean kFrontRightDriveEncoderReversed = true;
+    public static final boolean kRearRightDriveEncoderReversed = true;
 
     public static final int FrontLeftMag = 3;
     public static final int RearLeftMag = 1;
@@ -84,7 +84,7 @@ public final class Constants {
     public static final int FrontLeftMagZero = 769;
     public static final int RearLeftMagZero = 2665;
     public static final int FrontRightMagZero = 456;
-    public static final int RearRightMagZero = 2694;
+    public static final int RearRightMagZero = 306;
     
 
     // If you call DriveSubsystem.drive() with a different period make sure to

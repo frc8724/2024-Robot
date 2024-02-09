@@ -7,7 +7,9 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.*;
 
-public class MayhemTalonFX extends TalonFX {
+import frc.robot.IMayhemTalonFX;
+
+public class MayhemTalonFX extends TalonFX implements IMayhemTalonFX {
 
     public enum CurrentLimit {
         HIGH_CURRENT, LOW_CURRENT
@@ -54,46 +56,58 @@ public class MayhemTalonFX extends TalonFX {
         }
     }
 
-    public void changeControlMode(ControlMode mode) {
-        controlMode = mode;
+    // @Override
+    // public void changeControlMode(ControlMode mode) {
+    //     controlMode = mode;
+    // }
+
+    // @Override
+    // public void set(double d) {
+    //     this.set(controlMode, d);
+    // }
+
+    public void setSmartCurrentLimit(double d){
+        super.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, d, 40.0, 2.0));
     }
 
-    public void set(int deviceID) {
-        this.set(controlMode, deviceID);
-    }
+    // @Override
+    // public void setFeedbackDevice(FeedbackDevice feedback) {
+    //     this.configSelectedFeedbackSensor(feedback, 0, 0);
+    // }
 
-    public void setFeedbackDevice(FeedbackDevice feedback) {
-        this.configSelectedFeedbackSensor(feedback, 0, 0);
-    }
+    // @Override
+    // public void configNominalOutputVoltage(float f, float g) {
+    //     this.configNominalOutputForward(f / 12.0, 0);
+    //     this.configNominalOutputReverse(g / 12.0, 0);
+    // }
 
-    public void configNominalOutputVoltage(float f, float g) {
-        this.configNominalOutputForward(f / 12.0, 0);
-        this.configNominalOutputReverse(g / 12.0, 0);
-    }
+    // @Override
+    // public void configPeakOutputVoltage(double d, double e) {
+    //     this.configPeakOutputForward(d / 12.0, 0);
+    //     this.configPeakOutputReverse(e / 12.0, 0);
 
-    public void configPeakOutputVoltage(double d, double e) {
-        this.configPeakOutputForward(d / 12.0, 0);
-        this.configPeakOutputReverse(e / 12.0, 0);
-
-    }
+    // }
 
     // public double getError() {
     // return this.getClosedLoopError(0);
     // }
 
-    public void setPosition(int zeroPositionCount) {
-        this.setSelectedSensorPosition(zeroPositionCount, 0, 0);
-    }
+    // @Override
+    // public void setPosition(int zeroPositionCount) {
+    //     this.setSelectedSensorPosition(zeroPositionCount, 0, 0);
+    // }
 
     // public int getPosition() {
     // return this.getSelectedSensorPosition(0);
     // }
 
-    public double getSpeed() {
-        return this.getSelectedSensorVelocity(0);
-    }
+    // @Override
+    // public double getSpeed() {
+    //     return this.getSelectedSensorVelocity(0);
+    // }
 
-    public void setEncPosition(int i) {
-        setPosition(i);
-    }
+    // @Override
+    // public void setEncPosition(int i) {
+    //     setPosition(i);
+    // }
 }

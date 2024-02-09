@@ -10,6 +10,7 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ModuleConstants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.controls.MayhemExtreme3dPro;
+import frc.robot.subsystems.MayhemTalonFX;
 import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.Autonomous.AutoChooser;
 import frc.robot.subsystems.ClimberSubsystem.ClimberSubsystem;
@@ -21,6 +22,7 @@ import frc.robot.subsystems.DriveBase.DrivebaseResetEncoders;
 import frc.robot.subsystems.IntakeRollers.IntakeRollers;
 import frc.robot.subsystems.LimeLight.CenterOnTag;
 import frc.robot.subsystems.LimeLight.LimeLightSubsystem;
+import frc.robot.subsystems.MayhemTalonFX.CurrentLimit;
 import frc.robot.subsystems.ShooterSubsystem.ShooterMag;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheels;
 import frc.robot.subsystems.Targeting.Targeting;
@@ -39,13 +41,23 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+  private static final IMayhemTalonFX intakeTop = new FakeFalconFX(Constants.DriveConstants.kIntakeRollerId, CurrentLimit.HIGH_CURRENT);
+  private static final IMayhemTalonFX armLeft = new FakeFalconFX(Constants.DriveConstants.kArmLeftId, CurrentLimit.HIGH_CURRENT);
+  private static final IMayhemTalonFX armRight = new FakeFalconFX(Constants.DriveConstants.kArmRightId, CurrentLimit.HIGH_CURRENT);
+  private static final IMayhemTalonFX shooterLeft = new FakeFalconFX(Constants.DriveConstants.kShooterLeftId, CurrentLimit.HIGH_CURRENT);
+  private static final IMayhemTalonFX shooterRight = new FakeFalconFX(Constants.DriveConstants.kShooterRightId, CurrentLimit.HIGH_CURRENT);
+  private static final IMayhemTalonFX magLeft = new FakeFalconFX(Constants.DriveConstants.kMagLeftId, CurrentLimit.HIGH_CURRENT);
+  private static final IMayhemTalonFX magRight = new FakeFalconFX(Constants.DriveConstants.kMagRightId, CurrentLimit.HIGH_CURRENT);
+  private static final IMayhemTalonFX climberLeft = new FakeFalconFX(Constants.DriveConstants.kMagRightId, CurrentLimit.HIGH_CURRENT);
+  private static final IMayhemTalonFX climberRight = new FakeFalconFX(Constants.DriveConstants.kMagRightId, CurrentLimit.HIGH_CURRENT);
 
   public static final DriveBaseSubsystem m_robotDrive = new DriveBaseSubsystem();
-  public static final IntakeRollers m_rollers = new IntakeRollers();
-  public static final ShooterMag m_mag = new ShooterMag();
-  public static final ShooterWheels m_wheels = new ShooterWheels();
-  public static final ArmSubsystem m_arm = new ArmSubsystem();
-  public static final ClimberSubsystem m_climber = new ClimberSubsystem();
+  public static final IntakeRollers m_rollers = new IntakeRollers(intakeTop);
+  public static final ShooterMag m_mag = new ShooterMag(magLeft, magRight);
+  public static final ShooterWheels m_wheels = new ShooterWheels(shooterLeft, shooterRight);
+  public static final ArmSubsystem m_arm = new ArmSubsystem(armLeft, armRight);
+  public static final ClimberSubsystem m_climber = new ClimberSubsystem(climberLeft, climberRight);
+
   public static final Targeting m_targets = new Targeting();
   private static final MayhemExtreme3dPro DriverStick = new MayhemExtreme3dPro(0);
   private static final AutoChooser m_auto= new AutoChooser();

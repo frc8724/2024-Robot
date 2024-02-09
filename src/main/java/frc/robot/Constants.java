@@ -27,22 +27,6 @@ public final class Constants {
   }
 
   public static class DriveConstants {
-    // public static final int DRIVE_LEFT_TOP = 4; // falcons FX
-    public static final int SHOOTER_WHEELS = 0;
-    // public static final int DRIVE_LEFT_FRONT = 5; // falcons FX
-    // public static final int DRIVE_LEFT_BOTTOM = 6; // falcons FX
-    // public static final int DRIVE_RIGHT_TOP = 1; // falcons FX
-    // public static final int DRIVE_RIGHT_FRONT = 2; // falcons FX
-    // public static final int DRIVE_RIGHT_BOTTOM = 3; // falcons FX
-
-    public static final int ARM_FALCON = 20; // falcons FX
-
-    public static final int LEFT_SHOULDER_FALCON = 21; // falcons FX
-    public static final int RIGHT_SHOULDER_FALCON = 22; // falcons FX
-
-    public static final int ROLLER_TALON = 23; // Talon SRX
-
-    public static final int INTAKE_ROLLERS_2 = 24; // Talon SRX
     public static final int kFrontLeftDriveMotorPort = 1;
     public static final int kRearLeftDriveMotorPort = 2;
     public static final int kFrontRightDriveMotorPort = 3;
@@ -53,20 +37,24 @@ public final class Constants {
     public static final int kFrontRightTurningMotorPort = 7;
     public static final int kRearRightTurningMotorPort = 8;
 
-    // public static final int[] kFrontLeftTurningEncoderPorts = new int[] { 0, 1 };
-    // public static final int[] kRearLeftTurningEncoderPorts = new int[] { 2, 3 };
-    // public static final int[] kFrontRightTurningEncoderPorts = new int[] { 4, 5 };
-    // public static final int[] kRearRightTurningEncoderPorts = new int[] { 6, 7 };
+    public static final int kShooterLeftId = 10;
+    public static final int kShooterRightId = 11;
+
+    public static final int kMagLeftId = 12;
+    public static final int kMagRightId = 13;
+
+    public static final int kArmLeftId = 14;
+    public static final int kArmRightId = 15;
+
+    public static final int kIntakeRollerId = 16; // Talon SRX
+
+    public static final int kClimberLeftId = 17;
+    public static final int kClimberRightId = 18;
 
     public static final boolean kFrontLeftTurningEncoderReversed = true;
     public static final boolean kRearLeftTurningEncoderReversed = true;
     public static final boolean kFrontRightTurningEncoderReversed = true;
     public static final boolean kRearRightTurningEncoderReversed = true;
-
-    // public static final int[] kFrontLeftDriveEncoderPorts = new int[] { 8, 9 };
-    // public static final int[] kRearLeftDriveEncoderPorts = new int[] { 10, 11 };
-    // public static final int[] kFrontRightDriveEncoderPorts = new int[] { 12, 13 };
-    // public static final int[] kRearRightDriveEncoderPorts = new int[] { 14, 15 };
 
     public static final boolean kFrontLeftDriveEncoderReversed = true;
     public static final boolean kRearLeftDriveEncoderReversed = false;

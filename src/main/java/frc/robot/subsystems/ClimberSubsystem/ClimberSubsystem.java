@@ -6,6 +6,8 @@ package frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.MayhemTalonFX;
 import frc.robot.subsystems.MayhemTalonFX.CurrentLimit;
 
+import org.opencv.dnn.Image2BlobParams;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
@@ -15,6 +17,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.IMayhemTalonFX;
 import frc.robot.RobotContainer;
 
 public class ClimberSubsystem extends SubsystemBase {
@@ -31,15 +34,19 @@ public class ClimberSubsystem extends SubsystemBase {
   public static final double POSITION_SLOP = 1000.0;
   static final double CLOSED_LOOP_RAMP_RATE = 1.0; // todo: lower this value
 
-  private final MayhemTalonFX talon = new MayhemTalonFX(Constants.DriveConstants.ARM_FALCON, CurrentLimit.HIGH_CURRENT);
+  IMayhemTalonFX leftMotor;
+  IMayhemTalonFX rightMotor;
 
   /** Creates a new Arm. */
-  public ClimberSubsystem() {
-    configTalon(talon);
+  public ClimberSubsystem(IMayhemTalonFX left, IMayhemTalonFX right) {
+    leftMotor = left;
+    rightMotor = right;
+
+    configTalon(leftMotor);
     zero();
   }
 
-  private void configTalon(TalonFX talon) {
+  private void configTalon(IMayhemTalonFX talon) {
     talon.setNeutralMode(NeutralMode.Brake);
 
     talon.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
@@ -79,7 +86,7 @@ public class ClimberSubsystem extends SubsystemBase {
  
 
   public double getCurrentPosition() {
-    return talon.getSelectedSensorPosition();
+    return leftMotor.getSelectedSensorPosition();
   }
 
   public double getCurrentPositionInTicks() {
@@ -87,8 +94,8 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public double getTargetPosition() {
-    if (talon.getControlMode() == ControlMode.Position) {
-      return talon.getClosedLoopTarget();
+    if (leftMotor.getControlMode() == ControlMode.Position) {
+      return leftMotor.getClosedLoopTarget();
     }
     return 0.0;
   }
@@ -102,7 +109,7 @@ public class ClimberSubsystem extends SubsystemBase {
   public void setInTicks(double p) {
     m_targetPosition = p;
     manualMode = false;
-    talon.set(ControlMode.MotionMagic, p);
+    leftMotor.set(ControlMode.MotionMagic, p);
   }
 
   public boolean isAtPosition(double tolerance) {
@@ -112,24 +119,24 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void stop() {
     manualMode = true;
-    talon.set(ControlMode.PercentOutput, 0.0);
+    leftMotor.set(ControlMode.PercentOutput, 0.0);
   }
 
   // Set the arm to horizontal and then call zero().
   public void zero() {
     // DriverStation.reportWarning("Arm: zero", false);
-    talon.setSelectedSensorPosition(0.0);
-    talon.set(ControlMode.PercentOutput, 0.0);
+    leftMotor.setSelectedSensorPosition(0.0);
+    leftMotor.set(ControlMode.PercentOutput, 0.0);
   }
 
   public void setPower(double d) {
     manualMode = true;
-    talon.set(ControlMode.PercentOutput, d);
+    leftMotor.set(ControlMode.PercentOutput, d);
   }
 
   public void setAutoPower(double d) {
     manualMode = false;
-    talon.set(ControlMode.PercentOutput, d);
+    leftMotor.set(ControlMode.PercentOutput, d);
   }
 }
 

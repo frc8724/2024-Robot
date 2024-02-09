@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.IMayhemTalonFX;
 
 public class ArmSubsystem extends SubsystemBase {
   public static final double[] LEVEL_X_PRESCORE = { 0.0, 2000.0, 75000.0, 82500.0 };
@@ -44,8 +45,13 @@ public class ArmSubsystem extends SubsystemBase {
   // private final TalonFX rightTalon = new TalonFX(Constants.DriveConstants.RIGHT_SHOULDER_FALCON);
   private static final double CLOSED_LOOP_RAMP_RATE = 0.01; // time from neutral to full in seconds
 
+IMayhemTalonFX leftMotor;
+IMayhemTalonFX rightMotor;
+
   /** Creates a new Shoulder. */
-  public ArmSubsystem() {
+  public ArmSubsystem(IMayhemTalonFX left, IMayhemTalonFX right) {
+    leftMotor = left;
+    rightMotor = right;
     // leftTalon.configFactoryDefault();
     // rightTalon.configFactoryDefault();
 

@@ -5,10 +5,11 @@
 package frc.robot.subsystems.ShooterSubsystem;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.IMayhemTalonFX;
 
 public class ShooterMag extends SubsystemBase {
   /** Creates a new ShooterMag. */
-  public ShooterMag() {}
+  public ShooterMag(IMayhemTalonFX left, IMayhemTalonFX right) {}
 
   @Override
   public void periodic() {

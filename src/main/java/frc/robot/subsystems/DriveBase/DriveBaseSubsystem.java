@@ -104,7 +104,7 @@ public class DriveBaseSubsystem extends SubsystemBase {
      *
      * @param xSpeed        Speed of the robot in the x direction (forward).
      * @param ySpeed        Speed of the robot in the y direction (sideways).
-     * @param rot           ngular rate of the robot.
+     * @param rot           Angular rate of the robot.
      * @param fieldRelative Whether the provided x and y speeds are relative to the
      *                      field.
      */

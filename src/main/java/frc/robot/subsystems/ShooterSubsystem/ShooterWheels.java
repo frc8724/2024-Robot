@@ -25,10 +25,12 @@ public class ShooterWheels extends SubsystemBase {
 
     public double m_targetSpeedRPM;
 
-    public ShooterWheels(IMayhemTalonFX left, IMayhemTalonFX right)
-    {
+    public ShooterWheels(IMayhemTalonFX left, IMayhemTalonFX right) {
         leftMotor = left;
         rightMotor = right;
+        left.setInverted(true);
+        right.setInverted(false);
+        right.follow(left);
     }
 
     // Note: for ease of thinking, 1 RPM =~ 3.4 native units for the shooter
@@ -57,11 +59,10 @@ public class ShooterWheels extends SubsystemBase {
     private void configureWheelFalcons() {
         // most of the configuration is shared for the two Falcons
         // configureOneWheelFalcon(shooterWheel);
-        
 
         // with the exception of one rotating the opposite direction
         // shooterWheel.setInverted(true);
-        
+
     }
 
     private void configureOneWheelFalcon(IMayhemTalonFX shooterWheelFalcon) {
@@ -69,7 +70,8 @@ public class ShooterWheels extends SubsystemBase {
         // shooterWheelFalcon.setNeutralMode(NeutralMode.Coast);
         // shooterWheelFalcon.configNominalOutputVoltage(+0.0f, -0.0f);
         // shooterWheelFalcon.configPeakOutputVoltage(+12.0, 0.0);
-        // shooterWheelFalcon.configNeutralDeadband(0.001); // Config neutral deadband to be the smallest possible
+        // shooterWheelFalcon.configNeutralDeadband(0.001); // Config neutral deadband
+        // to be the smallest possible
 
         // For PIDF computations, 1023 is interpreted as "full" motor output
         // Velocity is in native units of TicksPer100ms.
@@ -96,12 +98,13 @@ public class ShooterWheels extends SubsystemBase {
     }
 
     private void updateDashboard() {
-        // SmartDashboard.putNumber("Shooter Wheel RPM",
-        //         convertTicksPer100msToRPM(shooterWheel.getSelectedSensorVelocity(0)));
+        SmartDashboard.putNumber("Shooter Wheel RPM",
+                convertTicksPer100msToRPM(leftMotor.getSelectedSensorVelocity(0)));
 
         SmartDashboard.putNumber("Shooter Wheel target RPM", m_targetSpeedRPM);
         // SmartDashboard.putNumber("Shooter Wheel Error",
-        //         m_targetSpeedRPM - convertTicksPer100msToRPM(shooterWheel.getSelectedSensorVelocity(0)));
+        // m_targetSpeedRPM -
+        // convertTicksPer100msToRPM(shooterWheel.getSelectedSensorVelocity(0)));
 
         SmartDashboard.putBoolean("Is the shooter too slow?", this.isShooterTooSlow());
         SmartDashboard.putBoolean("Is the shooter too fast?", this.isShooterTooFast());
@@ -123,14 +126,14 @@ public class ShooterWheels extends SubsystemBase {
         System.out.println("setShooterSpeed: " + rpm);
         double ticks = convertRpmToTicksPer100ms(rpm);
         if (rpm > 50) {
-            // shooterWheel.set(ControlMode.Velocity, ticks);
+            leftMotor.set(ControlMode.Velocity, ticks);
         } else {
             setShooterSpeedVBus(0);
         }
     }
 
     public void setShooterSpeedVBus(double pos) {
-        // shooterWheel.set(ControlMode.PercentOutput, pos);
+        leftMotor.set(ControlMode.PercentOutput, pos);
     }
 
     public double getShooterSpeed() {
@@ -184,4 +187,4 @@ public class ShooterWheels extends SubsystemBase {
         // return shooterWheel.getMotorOutputVoltage();
         return 0.0;
     }
-  }
+}

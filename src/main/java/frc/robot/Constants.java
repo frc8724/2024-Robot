@@ -37,8 +37,8 @@ public final class Constants {
     public static final int kFrontRightTurningMotorPort = 7;
     public static final int kRearRightTurningMotorPort = 8;
 
-    public static final int kShooterLeftId = 10;
-    public static final int kShooterRightId = 11;
+    public static final int kShooterLeftId = 11;
+    public static final int kShooterRightId = 10;
 
     public static final int kMagLeftId = 12;
     public static final int kMagRightId = 13;
@@ -73,7 +73,6 @@ public final class Constants {
     public static final int RearLeftMagZero = 2665;
     public static final int FrontRightMagZero = 456;
     public static final int RearRightMagZero = 306;
-    
 
     // If you call DriveSubsystem.drive() with a different period make sure to
     // update this.
@@ -122,9 +121,10 @@ public final class Constants {
 
     public static final double kPModuleDriveController = 1;
   }
+
   public final class Solenoid {
     public static final int INTAKE = 0;
     public static final int CLIMBER = 1;
     public static final int CAMERA_LIGHTS = 2;
-}
+  }
 }

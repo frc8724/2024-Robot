@@ -7,9 +7,9 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.IMayhemTalonFX;
-import frc.robot.subsystems.MayhemTalonFX;
-import frc.robot.subsystems.MayhemTalonFX.CurrentLimit;
+import frc.robot.motors.IMayhemTalonFX;
+import frc.robot.motors.MayhemTalonFX;
+import frc.robot.motors.MayhemTalonFX.CurrentLimit;
 
 public class ShooterWheels extends SubsystemBase {
     IMayhemTalonFX leftMotor;

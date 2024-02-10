@@ -5,18 +5,29 @@
 package frc.robot.subsystems.ShooterSubsystem;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.IMayhemTalonFX;
+import frc.robot.motors.IMayhemCANSparkMax;
 
 public class ShooterMag extends SubsystemBase {
+  IMayhemCANSparkMax leftMotor;
+  IMayhemCANSparkMax rightMotor;
+
   /** Creates a new ShooterMag. */
-  public ShooterMag(IMayhemTalonFX left, IMayhemTalonFX right) {}
+  public ShooterMag(IMayhemCANSparkMax left, IMayhemCANSparkMax right) {
+    leftMotor = left;
+    rightMotor = right;
+
+    leftMotor.setInverted(true);
+    rightMotor.setInverted(false);
+    rightMotor.follow(leftMotor.getMotor());
+  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
 
+  /** set vbus percent power */
   public void set(double d) {
-  
+    leftMotor.setVBusPower(d);
   }
 }

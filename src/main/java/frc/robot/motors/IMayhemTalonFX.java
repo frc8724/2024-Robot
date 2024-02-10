@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.robot.motors;
 
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;

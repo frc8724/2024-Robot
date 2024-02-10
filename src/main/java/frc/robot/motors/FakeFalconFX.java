@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot;
+package frc.robot.motors;
 
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.ParamEnum;
@@ -33,7 +33,7 @@ import com.ctre.phoenix.motorcontrol.can.BaseTalon;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
 
-import frc.robot.subsystems.MayhemTalonFX.CurrentLimit;
+import frc.robot.motors.MayhemTalonFX.CurrentLimit;
 
 /** Add your docs here. */
 public class FakeFalconFX implements IMayhemTalonFX {
@@ -77,7 +77,7 @@ public class FakeFalconFX implements IMayhemTalonFX {
         return ErrorCode.OK;
     }
 
-    public FakeFalconFX(int id, CurrentLimit limit) {
+    public FakeFalconFX(int id, frc.robot.motors.MayhemTalonFX.CurrentLimit limit) {
     }
 
     public void set(double d) {

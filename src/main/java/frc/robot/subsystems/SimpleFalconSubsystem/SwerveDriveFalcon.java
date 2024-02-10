@@ -6,8 +6,8 @@ package frc.robot.subsystems.SimpleFalconSubsystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsystems.MayhemTalonFX;
-import frc.robot.subsystems.MayhemTalonFX.CurrentLimit;
+import frc.robot.motors.MayhemTalonFX;
+import frc.robot.motors.MayhemTalonFX.CurrentLimit;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;

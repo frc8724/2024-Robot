@@ -3,8 +3,8 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems.ClimberSubsystem;
-import frc.robot.subsystems.MayhemTalonFX;
-import frc.robot.subsystems.MayhemTalonFX.CurrentLimit;
+import frc.robot.motors.MayhemTalonFX;
+import frc.robot.motors.MayhemTalonFX.CurrentLimit;
 
 import org.opencv.dnn.Image2BlobParams;
 
@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.IMayhemTalonFX;
+import frc.robot.motors.IMayhemTalonFX;
 import frc.robot.RobotContainer;
 
 public class ClimberSubsystem extends SubsystemBase {

@@ -9,7 +9,13 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ModuleConstants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.controls.MayhemExtreme3dPro;
-import frc.robot.subsystems.MayhemTalonFX;
+import frc.robot.motors.FakeFalconFX;
+import frc.robot.motors.FakeMayhemCANSparkMax;
+import frc.robot.motors.IMayhemCANSparkMax;
+import frc.robot.motors.IMayhemTalonFX;
+import frc.robot.motors.MayhemCANSparkMax;
+import frc.robot.motors.MayhemTalonFX;
+import frc.robot.motors.MayhemTalonFX.CurrentLimit;
 import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.Autonomous.AutoChooser;
 import frc.robot.subsystems.Autonomous.AutoDriveOut;
@@ -22,13 +28,16 @@ import frc.robot.subsystems.DriveBase.DrivebaseResetEncoders;
 import frc.robot.subsystems.IntakeRollers.IntakeRollers;
 import frc.robot.subsystems.LimeLight.CenterOnTag;
 import frc.robot.subsystems.LimeLight.LimeLightSubsystem;
-import frc.robot.subsystems.MayhemTalonFX.CurrentLimit;
 import frc.robot.subsystems.ShooterSubsystem.ShooterMag;
 import frc.robot.subsystems.ShooterSubsystem.ShooterMagSet;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheels;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheelsSet;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheelsSetRPM;
 import frc.robot.subsystems.Targeting.Targeting;
+
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -57,10 +66,10 @@ public class RobotContainer {
       CurrentLimit.HIGH_CURRENT);
   private static final IMayhemTalonFX shooterRight = new MayhemTalonFX(Constants.DriveConstants.kShooterRightId,
       CurrentLimit.HIGH_CURRENT);
-  private static final IMayhemTalonFX magLeft = new FakeFalconFX(Constants.DriveConstants.kMagLeftId,
-      CurrentLimit.HIGH_CURRENT);
-  private static final IMayhemTalonFX magRight = new FakeFalconFX(Constants.DriveConstants.kMagRightId,
-      CurrentLimit.HIGH_CURRENT);
+  private static final IMayhemCANSparkMax magLeft = new MayhemCANSparkMax(Constants.DriveConstants.kMagLeftId,
+      MotorType.kBrushless);
+  private static final IMayhemCANSparkMax magRight = new FakeMayhemCANSparkMax(Constants.DriveConstants.kMagRightId,
+       MotorType.kBrushless);
   private static final IMayhemTalonFX climberLeft = new FakeFalconFX(Constants.DriveConstants.kMagRightId,
       CurrentLimit.HIGH_CURRENT);
   private static final IMayhemTalonFX climberRight = new FakeFalconFX(Constants.DriveConstants.kMagRightId,

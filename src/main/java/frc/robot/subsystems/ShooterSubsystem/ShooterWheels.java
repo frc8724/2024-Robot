@@ -31,6 +31,8 @@ public class ShooterWheels extends SubsystemBase {
         left.setInverted(true);
         right.setInverted(false);
         right.follow(left);
+
+        configureOneWheelFalcon(left);
     }
 
     // Note: for ease of thinking, 1 RPM =~ 3.4 native units for the shooter
@@ -46,31 +48,31 @@ public class ShooterWheels extends SubsystemBase {
     /**
      * Creates a new Shooter.
      */
-    public ShooterWheels() {
-        configureWheelFalcons();
-    }
+    // public ShooterWheels() {
+    // configureWheelFalcons();
+    // }
 
-    public void init() {
-        configureWheelFalcons();
-        setShooterSpeedVBus(0.0);
-    }
+    // public void init() {
+    // configureWheelFalcons();
+    // setShooterSpeedVBus(0.0);
+    // }
 
     // configure a pair of shooter wheel falcons
-    private void configureWheelFalcons() {
-        // most of the configuration is shared for the two Falcons
-        // configureOneWheelFalcon(shooterWheel);
+    // private void configureWheelFalcons() {
+    // // most of the configuration is shared for the two Falcons
+    // // configureOneWheelFalcon(shooterWheel);
 
-        // with the exception of one rotating the opposite direction
-        // shooterWheel.setInverted(true);
+    // // with the exception of one rotating the opposite direction
+    // // shooterWheel.setInverted(true);
 
-    }
+    // }
 
     private void configureOneWheelFalcon(IMayhemTalonFX shooterWheelFalcon) {
-        // shooterWheelFalcon.setFeedbackDevice(FeedbackDevice.IntegratedSensor);
-        // shooterWheelFalcon.setNeutralMode(NeutralMode.Coast);
-        // shooterWheelFalcon.configNominalOutputVoltage(+0.0f, -0.0f);
-        // shooterWheelFalcon.configPeakOutputVoltage(+12.0, 0.0);
-        // shooterWheelFalcon.configNeutralDeadband(0.001); // Config neutral deadband
+        shooterWheelFalcon.setFeedbackDevice(FeedbackDevice.IntegratedSensor);
+        shooterWheelFalcon.setNeutralMode(NeutralMode.Coast);
+        shooterWheelFalcon.configNominalOutputVoltage(+0.0f, 0.0);
+        shooterWheelFalcon.configPeakOutputVoltage(+12.0, -12.0);
+        shooterWheelFalcon.configNeutralDeadband(0.001, 0); // Config neutral deadband
         // to be the smallest possible
 
         // For PIDF computations, 1023 is interpreted as "full" motor output
@@ -83,11 +85,11 @@ public class ShooterWheels extends SubsystemBase {
         // shooterWheelFalcon.config_kP(0, 6.0, 0); // if we are 100 rpm off, then apply
         // 10% more output = 10% * 1023 / 100
         // rpm
-        shooterWheelFalcon.config_kP(0, 0.1, 0);
+        shooterWheelFalcon.config_kP(0, 0.0, 0);
         shooterWheelFalcon.config_kI(0, 0.0, 0);
-        shooterWheelFalcon.config_kD(0, 10.0, 0); // CTRE recommends starting at 10x P-gain
-        shooterWheelFalcon.config_kF(0, 1023.0 * 0.6 / 13000, 0); // at 0.6 Percent VBus, the
-                                                                  // shooter is at 13000
+        shooterWheelFalcon.config_kD(0, 0.0, 0); // CTRE recommends starting at 10x P-gain
+        shooterWheelFalcon.config_kF(0, 1023.0 * 0.25 / 1560, 0); // at 0.25 Percent VBus, the
+                                                                  // shooter is at 1560
         shooterWheelFalcon.configAllowableClosedloopError(0, 0, 0); // no "neutral" zone around target
     }
 
@@ -126,7 +128,7 @@ public class ShooterWheels extends SubsystemBase {
         System.out.println("setShooterSpeed: " + rpm);
         double ticks = convertRpmToTicksPer100ms(rpm);
         if (rpm > 50) {
-            leftMotor.set(ControlMode.Velocity, ticks);
+            leftMotor.set(ControlMode.Velocity, rpm);
         } else {
             setShooterSpeedVBus(0);
         }

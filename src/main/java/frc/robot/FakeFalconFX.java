@@ -37,34 +37,70 @@ import frc.robot.subsystems.MayhemTalonFX.CurrentLimit;
 
 /** Add your docs here. */
 public class FakeFalconFX implements IMayhemTalonFX {
-    public ErrorCode configMotionCruiseVelocity(double sensorUnitsPer100ms){ return ErrorCode.OK;}
-    public ErrorCode configMotionAcceleration(double sensorUnitsPer100msPerSec){return ErrorCode.OK;}
-    public ErrorCode configClosedloopRamp(double secondsFromNeutralToFull){return ErrorCode.OK;}
-    public double getSelectedSensorPosition() { return 0.0;}
-    public double getClosedLoopTarget(){return 0.0;}
-    public ErrorCode setSelectedSensorPosition(double sensorPos){return ErrorCode.OK;}
+    public ErrorCode configMotionCruiseVelocity(double sensorUnitsPer100ms) {
+        return ErrorCode.OK;
+    }
 
+    public ErrorCode configMotionAcceleration(double sensorUnitsPer100msPerSec) {
+        return ErrorCode.OK;
+    }
 
-    public ErrorCode config_kP(int slotIdx, double value){return ErrorCode.OK;}
-    public ErrorCode config_kI(int slotIdx, double value){return ErrorCode.OK;}
-    public ErrorCode config_kD(int slotIdx, double value){return ErrorCode.OK;}
-    public ErrorCode config_kF(int slotIdx, double value){return ErrorCode.OK;}
+    public ErrorCode configClosedloopRamp(double secondsFromNeutralToFull) {
+        return ErrorCode.OK;
+    }
 
-    public FakeFalconFX(int id, CurrentLimit limit){}
+    public double getSelectedSensorPosition() {
+        return 0.0;
+    }
 
-    public void set(double d){}
+    public double getClosedLoopTarget() {
+        return 0.0;
+    }
 
-    public void configNominalOutputVoltage(float f, float g){}
+    public ErrorCode setSelectedSensorPosition(double sensorPos) {
+        return ErrorCode.OK;
+    }
 
-    public void configPeakOutputVoltage(double d, double e){}
+    public ErrorCode config_kP(int slotIdx, double value) {
+        return ErrorCode.OK;
+    }
 
-    public void setPosition(int zeroPositionCount){}
+    public ErrorCode config_kI(int slotIdx, double value) {
+        return ErrorCode.OK;
+    }
 
-    public double getSpeed(){ return 0.0;}
+    public ErrorCode config_kD(int slotIdx, double value) {
+        return ErrorCode.OK;
+    }
 
-    public void setEncPosition(int i){}
+    public ErrorCode config_kF(int slotIdx, double value) {
+        return ErrorCode.OK;
+    }
 
-    public void setSmartCurrentLimit(double d){}
+    public FakeFalconFX(int id, CurrentLimit limit) {
+    }
+
+    public void set(double d) {
+    }
+
+    public void configNominalOutputVoltage(float f, float g) {
+    }
+
+    public void configPeakOutputVoltage(double d, double e) {
+    }
+
+    public void setPosition(int zeroPositionCount) {
+    }
+
+    public double getSpeed() {
+        return 0.0;
+    }
+
+    public void setEncPosition(int i) {
+    }
+
+    public void setSmartCurrentLimit(double d) {
+    }
 
     public void changeControlMode(ControlMode mode) {
     }
@@ -92,7 +128,9 @@ public class FakeFalconFX implements IMayhemTalonFX {
         return null;
     }
 
-    public ErrorCode configSelectedFeedbackSensor(TalonFXFeedbackDevice f, int i , int j){return ErrorCode.OK;}
+    public ErrorCode configSelectedFeedbackSensor(TalonFXFeedbackDevice f, int i, int j) {
+        return ErrorCode.OK;
+    }
 
     @Override
     public ErrorCode configSupplyCurrentLimit(SupplyCurrentLimitConfiguration currLimitCfg, int timeoutMs) {
@@ -412,7 +450,7 @@ public class FakeFalconFX implements IMayhemTalonFX {
     @Override
     public void enableVoltageCompensation(boolean enable) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
@@ -568,25 +606,25 @@ public class FakeFalconFX implements IMayhemTalonFX {
     @Override
     public void neutralOutput() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void overrideLimitSwitchesEnable(boolean enable) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void overrideSoftLimitsEnable(boolean enable) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void processMotionProfileBuffer() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
@@ -598,19 +636,19 @@ public class FakeFalconFX implements IMayhemTalonFX {
     @Override
     public void selectProfileSlot(int slotIdx, int pidIdx) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void set(ControlMode Mode, double demand) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void set(ControlMode Mode, double demand0, DemandType demand1Type, double demand1) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
@@ -628,19 +666,19 @@ public class FakeFalconFX implements IMayhemTalonFX {
     @Override
     public void setInverted(boolean invert) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void setInverted(InvertType invertType) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void setNeutralMode(NeutralMode neutralMode) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
@@ -652,7 +690,7 @@ public class FakeFalconFX implements IMayhemTalonFX {
     @Override
     public void setSensorPhase(boolean PhaseSensor) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
@@ -664,12 +702,18 @@ public class FakeFalconFX implements IMayhemTalonFX {
     @Override
     public void follow(IMotorController masterToFollow) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void valueUpdated() {
         // TODO Auto-generated method stub
-        
+
+    }
+
+    @Override
+    public void configNominalOutputVoltage(double f, double g) {
+        // TODO Auto-generated method stub
+
     }
 }

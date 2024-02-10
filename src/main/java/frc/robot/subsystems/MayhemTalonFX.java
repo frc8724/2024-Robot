@@ -58,33 +58,52 @@ public class MayhemTalonFX extends TalonFX implements IMayhemTalonFX {
 
     // @Override
     // public void changeControlMode(ControlMode mode) {
-    //     controlMode = mode;
+    // controlMode = mode;
     // }
 
     // @Override
     // public void set(double d) {
-    //     this.set(controlMode, d);
+    // this.set(controlMode, d);
     // }
 
-    public void setSmartCurrentLimit(double d){
+    public void setSmartCurrentLimit(double d) {
         super.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, d, 40.0, 2.0));
+    }
+
+    @Override
+    public void configNominalOutputVoltage(double f, double g) {
+        this.configNominalOutputForward(f);
+        this.configNominalOutputReverse(g);
+    }
+
+    @Override
+    public void setFeedbackDevice(FeedbackDevice integratedsensor) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void configPeakOutputVoltage(double d, double e) {
+        this.configPeakOutputForward(d);
+        this.configPeakOutputReverse(e);
+
     }
 
     // @Override
     // public void setFeedbackDevice(FeedbackDevice feedback) {
-    //     this.configSelectedFeedbackSensor(feedback, 0, 0);
+    // this.configSelectedFeedbackSensor(feedback, 0, 0);
     // }
 
     // @Override
     // public void configNominalOutputVoltage(float f, float g) {
-    //     this.configNominalOutputForward(f / 12.0, 0);
-    //     this.configNominalOutputReverse(g / 12.0, 0);
+    // this.configNominalOutputForward(f / 12.0, 0);
+    // this.configNominalOutputReverse(g / 12.0, 0);
     // }
 
     // @Override
     // public void configPeakOutputVoltage(double d, double e) {
-    //     this.configPeakOutputForward(d / 12.0, 0);
-    //     this.configPeakOutputReverse(e / 12.0, 0);
+    // this.configPeakOutputForward(d / 12.0, 0);
+    // this.configPeakOutputReverse(e / 12.0, 0);
 
     // }
 
@@ -94,7 +113,7 @@ public class MayhemTalonFX extends TalonFX implements IMayhemTalonFX {
 
     // @Override
     // public void setPosition(int zeroPositionCount) {
-    //     this.setSelectedSensorPosition(zeroPositionCount, 0, 0);
+    // this.setSelectedSensorPosition(zeroPositionCount, 0, 0);
     // }
 
     // public int getPosition() {
@@ -103,11 +122,11 @@ public class MayhemTalonFX extends TalonFX implements IMayhemTalonFX {
 
     // @Override
     // public double getSpeed() {
-    //     return this.getSelectedSensorVelocity(0);
+    // return this.getSelectedSensorVelocity(0);
     // }
 
     // @Override
     // public void setEncPosition(int i) {
-    //     setPosition(i);
+    // setPosition(i);
     // }
 }

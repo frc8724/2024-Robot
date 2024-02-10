@@ -27,6 +27,7 @@ import frc.robot.subsystems.ShooterSubsystem.ShooterMag;
 import frc.robot.subsystems.ShooterSubsystem.ShooterMagSet;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheels;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheelsSet;
+import frc.robot.subsystems.ShooterSubsystem.ShooterWheelsSetRPM;
 import frc.robot.subsystems.Targeting.Targeting;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -132,7 +133,7 @@ public class RobotContainer {
     DriverStick.Button(11).onTrue(new DriveForDistance(0.2, 0.0, 0.0, 1.0));
     DriverStick.Button(12).onTrue(new DriveForDistance(0, 0, -.3, 1.0));
     DriverStick.Button(7).onTrue(new ShooterWheelsSet(0));
-    DriverStick.Button(8).onTrue(new ShooterWheelsSet(0.25));
+    DriverStick.Button(8).onTrue(new ShooterWheelsSetRPM(1500.0));
 
   }
 

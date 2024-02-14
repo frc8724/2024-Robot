@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems.ShooterSubsystem;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.motors.IMayhemCANSparkMax;
 
@@ -17,8 +18,9 @@ public class ShooterMag extends SubsystemBase {
     rightMotor = right;
 
     leftMotor.setInverted(true);
+    
+    // rightMotor.follow(leftMotor.getMotor());
     rightMotor.setInverted(false);
-    rightMotor.follow(leftMotor.getMotor());
   }
 
   @Override
@@ -29,5 +31,6 @@ public class ShooterMag extends SubsystemBase {
   /** set vbus percent power */
   public void set(double d) {
     leftMotor.setVBusPower(d);
+    rightMotor.setVBusPower(d);
   }
 }

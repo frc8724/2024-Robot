@@ -4,6 +4,7 @@ import com.ctre.phoenix.sensors.WPI_Pigeon2;
 import com.ctre.phoenix.sensors.WPI_PigeonIMU;
 
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
@@ -50,11 +51,11 @@ public class DriveBaseSubsystem extends SubsystemBase {
             DriveConstants.kRearRightTurningEncoderReversed,
             DriveConstants.RearRightMag);
 
-    private final WPI_Pigeon2 m_gyro = new WPI_Pigeon2(22);
+    // private final WPI_Pigeon2 m_gyro = new WPI_Pigeon2(22);
 
     SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(
             DriveConstants.kDriveKinematics,
-            m_gyro.getRotation2d(),
+            new Rotation2d(), //m_gyro.getRotation2d(),
             new SwerveModulePosition[] {
                     m_frontLeftSwerveModule.getPosition(),
                     m_frontRightSwerveModule.getPosition(),
@@ -63,8 +64,8 @@ public class DriveBaseSubsystem extends SubsystemBase {
             });
 
     public DriveBaseSubsystem() {
-        m_gyro.configFactoryDefault();
-        m_gyro.setYaw(0);
+        // m_gyro.configFactoryDefault();
+        // m_gyro.setYaw(0);
     }
 
     @Override
@@ -74,7 +75,7 @@ public class DriveBaseSubsystem extends SubsystemBase {
         // System.out.println("Gyro rotation 2: " + m_gyro.getYaw());
 
         m_odometry.update(
-                m_gyro.getRotation2d(),
+                new Rotation2d(), // m_gyro.getRotation2d(),
                 new SwerveModulePosition[] {
                         m_frontLeftSwerveModule.getPosition(),
                         m_frontRightSwerveModule.getPosition(),
@@ -89,7 +90,7 @@ public class DriveBaseSubsystem extends SubsystemBase {
 
     public void resetOdometry(Pose2d pose) {
         m_odometry.resetPosition(
-                m_gyro.getRotation2d(),
+                new Rotation2d(), // m_gyro.getRotation2d(),
                 new SwerveModulePosition[] {
                         m_frontLeftSwerveModule.getPosition(),
                         m_frontRightSwerveModule.getPosition(),
@@ -112,7 +113,8 @@ public class DriveBaseSubsystem extends SubsystemBase {
         ChassisSpeeds roboChassisSpeeds = null;
 
         if (fieldRelative) {
-            roboChassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, m_gyro.getRotation2d());
+            var imu = new Rotation2d(); //  m_gyro.getRotation2d()
+            roboChassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, imu);
         } else {
             roboChassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, rot);
         }
@@ -155,7 +157,7 @@ public class DriveBaseSubsystem extends SubsystemBase {
 
     /** Zeroes the heading of the robot. */
     public void zeroHeading() {
-        m_gyro.reset();
+        // m_gyro.reset();
     }
 
     public void zeroWheels() {
@@ -166,7 +168,7 @@ public class DriveBaseSubsystem extends SubsystemBase {
     }
 
     public void zeroGyro() {
-        m_gyro.setYaw(0);
+        // m_gyro.setYaw(0);
     }
 
     public void setWheelsAt(double rad) {
@@ -183,7 +185,8 @@ public class DriveBaseSubsystem extends SubsystemBase {
      * @return the robot's heading in degrees, from -180 to 180
      */
     public double getHeading() {
-        return m_gyro.getRotation2d().getDegrees();
+        // return m_gyro.getRotation2d().getDegrees();
+        return 0.0;
     }
 
     /**
@@ -192,6 +195,7 @@ public class DriveBaseSubsystem extends SubsystemBase {
      * @return The turn rate of the robot, in degrees per second
      */
     public double getTurnRate() {
-        return m_gyro.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
+        // return m_gyro.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
+        return 0.0;
     }
 }

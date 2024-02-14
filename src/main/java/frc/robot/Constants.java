@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+    public static final int kOperatorControllerPort = 1;
   }
 
   public static class DriveConstants {
@@ -56,10 +57,10 @@ public final class Constants {
     public static final boolean kFrontRightTurningEncoderReversed = true;
     public static final boolean kRearRightTurningEncoderReversed = true;
 
-    public static final boolean kFrontLeftDriveEncoderReversed = true;
+    public static final boolean kFrontLeftDriveEncoderReversed = false;
     public static final boolean kRearLeftDriveEncoderReversed = false;
-    public static final boolean kFrontRightDriveEncoderReversed = true;
-    public static final boolean kRearRightDriveEncoderReversed = true;
+    public static final boolean kFrontRightDriveEncoderReversed = false;
+    public static final boolean kRearRightDriveEncoderReversed = false;
 
     public static final int FrontLeftMag = 3;
     public static final int RearLeftMag = 1;
@@ -69,10 +70,10 @@ public final class Constants {
     public static final int ninety_degrees_in_ticks = 0;
     public static final int one_eighty_degrees_in_ticks = 2048;
 
-    public static final int FrontLeftMagZero = 769;
-    public static final int RearLeftMagZero = 2665;
-    public static final int FrontRightMagZero = 456;
-    public static final int RearRightMagZero = 306;
+    public static final int FrontLeftMagZero = 1827;
+    public static final int RearLeftMagZero = 1955;
+    public static final int FrontRightMagZero = 1568;
+    public static final int RearRightMagZero = 2367;
 
     // If you call DriveSubsystem.drive() with a different period make sure to
     // update this.

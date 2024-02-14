@@ -68,7 +68,7 @@ public class RobotContainer {
       CurrentLimit.HIGH_CURRENT);
   private static final IMayhemCANSparkMax magLeft = new MayhemCANSparkMax(Constants.DriveConstants.kMagLeftId,
       MotorType.kBrushless);
-  private static final IMayhemCANSparkMax magRight = new FakeMayhemCANSparkMax(Constants.DriveConstants.kMagRightId,
+  private static final IMayhemCANSparkMax magRight = new MayhemCANSparkMax(Constants.DriveConstants.kMagRightId,
        MotorType.kBrushless);
   private static final IMayhemTalonFX climberLeft = new FakeFalconFX(Constants.DriveConstants.kMagRightId,
       CurrentLimit.HIGH_CURRENT);
@@ -89,8 +89,8 @@ public class RobotContainer {
   public static final LimeLightSubsystem m_limelight = new LimeLightSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController = new CommandXboxController(
-      OperatorConstants.kDriverControllerPort);
+  private final CommandXboxController m_operatorController = new CommandXboxController(
+      OperatorConstants.kOperatorControllerPort);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -109,6 +109,12 @@ public class RobotContainer {
                     * ModuleConstants.kMaxModuleAngularSpeedRadiansPerSecond,
                 true),
             m_robotDrive));
+
+    m_arm.setDefaultCommand(
+        new RunCommand(
+            () -> m_arm.moveArm(m_operatorController.getLeftX()),
+            m_arm)
+    );
 
     m_auto.addAuto(new AutoDriveOut());
   }
@@ -144,6 +150,11 @@ public class RobotContainer {
     DriverStick.Button(7).onTrue(new ShooterWheelsSet(0));
     DriverStick.Button(8).onTrue(new ShooterWheelsSetRPM(1500.0));
 
+    DriverStick.Button(6).onTrue(new ShooterWheelsSetRPM(2000.0));
+    DriverStick.Button(4).onTrue(new ShooterWheelsSet(0));
+
+    DriverStick.Button(5).onTrue(new ShooterMagSet(50));
+    DriverStick.Button(3).onTrue(new ShooterMagSet(0));
   }
 
   /**

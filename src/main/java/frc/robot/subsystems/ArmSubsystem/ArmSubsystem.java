@@ -45,33 +45,35 @@ public class ArmSubsystem extends SubsystemBase {
   // private final TalonFX rightTalon = new TalonFX(Constants.DriveConstants.RIGHT_SHOULDER_FALCON);
   private static final double CLOSED_LOOP_RAMP_RATE = 0.01; // time from neutral to full in seconds
 
-IMayhemTalonFX leftMotor;
-IMayhemTalonFX rightMotor;
+  double TargetPositionTicks;
+
+  IMayhemTalonFX leftMotor;
+  IMayhemTalonFX rightMotor;
 
   /** Creates a new Shoulder. */
   public ArmSubsystem(IMayhemTalonFX left, IMayhemTalonFX right) {
     leftMotor = left;
     rightMotor = right;
-    // leftTalon.configFactoryDefault();
-    // rightTalon.configFactoryDefault();
+    // leftMotor.configFactoryDefault();
+    // rightMotor.configFactoryDefault();
 
-    // configTalon(leftTalon);
-    // configTalon(rightTalon);
+    configTalon(leftMotor);
+    configTalon(rightMotor);
 
-    // leftTalon.follow(rightTalon);
-    // leftTalon.setInverted(true);
-    // rightTalon.setInverted(false);
+    leftMotor.follow(rightMotor);
+    leftMotor.setInverted(true);
+    rightMotor.setInverted(false);
 
-    // leftTalon.setSensorPhase(false);
-    // rightTalon.setSensorPhase(false);
+    leftMotor.setSensorPhase(false);
+    rightMotor.setSensorPhase(false);
 
-    // configureDriveTalon(rightTalon);
+    configureDriveTalon(rightMotor);
     // configureDriveTalon(leftTalon);
 
     zero();
   }
 
-  private void configTalon(TalonFX talon) {
+  private void configTalon(IMayhemTalonFX talon) {
     talon.setNeutralMode(NeutralMode.Brake);
   }
 
@@ -83,7 +85,7 @@ IMayhemTalonFX rightMotor;
   // 3. Command the Shoulder to go to 0.
   // 4. Update wheelF until it is stable at 0 degrees.
 
-  private void configureDriveTalon(final TalonFX talon) {
+  private void configureDriveTalon(final IMayhemTalonFX talon) {
 
     final int slot = 0;
     final int timeout = 100;
@@ -96,23 +98,24 @@ IMayhemTalonFX rightMotor;
     talon.config_kD(slot, kWheelD, timeout);
     talon.config_kF(slot, kWheelF, timeout);
 
-    talon.configPeakOutputForward(1.0);
-    talon.configPeakOutputReverse(-1.0);
-    talon.configNominalOutputForward(0.0);
-    talon.configNominalOutputReverse(0.0);
+    // talon.configPeakOutputForward(1.0);
+    // talon.configPeakOutputReverse(-1.0);
+    // talon.configNominalOutputForward(0.0);
+    // talon.configNominalOutputReverse(0.0);
 
     talon.configClosedloopRamp(CLOSED_LOOP_RAMP_RATE); // specify minimum time for neutral to full in seconds
     talon.selectProfileSlot(slot, timeout);
-    talon.configForwardSoftLimitEnable(false);
-    talon.configReverseSoftLimitEnable(false);
+    // talon.configForwardSoftLimitEnable(false);
+    // talon.configReverseSoftLimitEnable(false);
     talon.configAllowableClosedloopError(slot, 50, timeout);
 
-    talon.configClosedLoopPeakOutput(slot, 1.0);
+    // talon.configClosedLoopPeakOutput(slot, 1.0);
 
     talon.configMotionCruiseVelocity(40000); // measured velocity of ~100K at 85%; set cruise to that
     talon.configMotionAcceleration(30000); // acceleration of 2x velocity allows cruise to be attained in 1 second
                                            // second
-    talon.set(TalonFXControlMode.Position, 0.0);
+    // talon.set(TalonFXControlMode.Position, 0.0);
+    talon.set(ControlMode.Position, 0.0);
   }
 
   @Override
@@ -142,7 +145,9 @@ IMayhemTalonFX rightMotor;
     // rightTalon.getMotorOutputPercent());
   }
 
-  double TargetPositionTicks;
+  public void moveArm(double outputPercentage) {
+    SmartDashboard.putNumber("Controller X input", outputPercentage);
+  }
 
   public void setAngleInTicks(double ticks) {
     TargetPositionTicks = ticks;

@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems.IntakeRollers;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
 
@@ -17,9 +18,7 @@ public class IntakeRollers extends SubsystemBase {
   /** Creates a new IntakeRollers. */
   public IntakeRollers(IMayhemTalonFX top) {
     topRollerMotor = top;
-    // bottomRollerMotor = bottom;
-    // topRollerMotor.setSmartCurrentLimit(999);
-    // bottomRollerMotor.setSmartCurrentLimit(999);
+    topRollerMotor.setInverted(true);
   }
 
   @Override
@@ -28,8 +27,7 @@ public class IntakeRollers extends SubsystemBase {
   }
 
   public void set(double d) {
-    // topRollerMotor.set(d);
-    // bottomRollerMotor.set(d);
+    topRollerMotor.set(ControlMode.PercentOutput, d);
   }
 
 }

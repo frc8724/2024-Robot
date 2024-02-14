@@ -26,6 +26,7 @@ import frc.robot.subsystems.DriveBase.DriveZeroGyro;
 import frc.robot.subsystems.DriveBase.DriveZeroWheels;
 import frc.robot.subsystems.DriveBase.DrivebaseResetEncoders;
 import frc.robot.subsystems.IntakeRollers.IntakeRollers;
+import frc.robot.subsystems.IntakeRollers.IntakeRollersSet;
 import frc.robot.subsystems.LimeLight.CenterOnTag;
 import frc.robot.subsystems.LimeLight.LimeLightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem.ShooterMag;
@@ -56,7 +57,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  private static final IMayhemTalonFX intakeTop = new FakeFalconFX(Constants.DriveConstants.kIntakeRollerId,
+  private static final IMayhemTalonFX intakeTop = new MayhemTalonFX(Constants.DriveConstants.kIntakeRollerId,
       CurrentLimit.HIGH_CURRENT);
   private static final IMayhemTalonFX armLeft = new FakeFalconFX(Constants.DriveConstants.kArmLeftId,
       CurrentLimit.HIGH_CURRENT);
@@ -147,14 +148,28 @@ public class RobotContainer {
     DriverStick.Button(10).onTrue(new DriveForDistance(0.0, 0.2, 0.0, 1.0));
     DriverStick.Button(11).onTrue(new DriveForDistance(0.2, 0.0, 0.0, 1.0));
     DriverStick.Button(12).onTrue(new DriveForDistance(0, 0, -.3, 1.0));
-    DriverStick.Button(7).onTrue(new ShooterWheelsSet(0));
-    DriverStick.Button(8).onTrue(new ShooterWheelsSetRPM(1500.0));
 
+    // Set intake roller speed
+    DriverStick.Button(7).onTrue(new IntakeRollersSet(0.5));
+    DriverStick.Button(7).onFalse(new IntakeRollersSet(0.0));
+
+    // Set Shooter to on and off
     DriverStick.Button(6).onTrue(new ShooterWheelsSetRPM(2000.0));
     DriverStick.Button(4).onTrue(new ShooterWheelsSet(0));
-
+    // Set Mag to on and off
     DriverStick.Button(5).onTrue(new ShooterMagSet(50));
     DriverStick.Button(3).onTrue(new ShooterMagSet(0));
+
+    // DriverStick.Button(5).onTrue(
+    //     new SequentialCommandGroup(
+    //         new ShooterMagSet(50),
+    //         new IntakeRollersSet(50))
+    // );
+    // DriverStick.Button(3).onTrue(
+    //     new SequentialCommandGroup(
+    //         new ShooterMagSet(0),
+    //         new IntakeRollersSet(0))
+    // );
   }
 
   /**

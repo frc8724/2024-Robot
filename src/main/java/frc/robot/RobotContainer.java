@@ -114,8 +114,8 @@ public class RobotContainer {
     m_arm.setDefaultCommand(
         new RunCommand(
             () -> {
-                m_arm.moveArm(m_operatorController.getLeftX());
-                m_arm.setPower(m_operatorController.getLeftX()/4);}
+                m_arm.moveArm(-m_operatorController.getLeftY());
+                m_arm.setPower(-m_operatorController.getLeftY()/8);}
             ,
             m_arm)
     );
@@ -153,15 +153,16 @@ public class RobotContainer {
     DriverStick.Button(12).onTrue(new DriveForDistance(0, 0, -.3, 1.0));
 
     // Set intake roller speed
-    DriverStick.Button(7).onTrue(new IntakeRollersSet(0.5));
-    DriverStick.Button(7).onFalse(new IntakeRollersSet(0.0));
+    //all for operator on the 
+    m_operatorController.button(5).onTrue(new IntakeRollersSet(0.5));
+    m_operatorController.leftTrigger(2).onFalse(new IntakeRollersSet(0.0));
 
     // Set Shooter to on and off
-    DriverStick.Button(6).onTrue(new ShooterWheelsSetRPM(2000.0));
-    DriverStick.Button(4).onTrue(new ShooterWheelsSet(0));
+    m_operatorController.button(6).onTrue(new ShooterWheelsSetRPM(2000.0));
+    m_operatorController.rightTrigger(3).onTrue(new ShooterWheelsSet(0));
     // Set Mag to on and off
-    DriverStick.Button(5).onTrue(new ShooterMagSet(50));
-    DriverStick.Button(3).onTrue(new ShooterMagSet(0));
+    m_operatorController.button(4).onTrue(new ShooterMagSet(50));
+    m_operatorController.button(1).onTrue(new ShooterMagSet(0));
 
     
 

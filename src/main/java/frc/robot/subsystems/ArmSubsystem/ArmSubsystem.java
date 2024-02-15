@@ -41,8 +41,6 @@ public class ArmSubsystem extends SubsystemBase {
   final double kWheelD = 0.000;
   final double kWheelF = 0.000;
 
-  // private final TalonFX leftTalon = new TalonFX(Constants.DriveConstants.LEFT_SHOULDER_FALCON);
-  // private final TalonFX rightTalon = new TalonFX(Constants.DriveConstants.RIGHT_SHOULDER_FALCON);
   private static final double CLOSED_LOOP_RAMP_RATE = 0.01; // time from neutral to full in seconds
 
   double TargetPositionTicks;
@@ -60,15 +58,15 @@ public class ArmSubsystem extends SubsystemBase {
     configTalon(leftMotor);
     configTalon(rightMotor);
 
-    leftMotor.follow(rightMotor);
-    leftMotor.setInverted(true);
-    rightMotor.setInverted(false);
+    
+    leftMotor.setInverted(false);
+    rightMotor.setInverted(true);
 
     leftMotor.setSensorPhase(false);
     rightMotor.setSensorPhase(false);
 
     configureDriveTalon(rightMotor);
-    // configureDriveTalon(leftTalon);
+    configureDriveTalon(leftMotor);
 
     zero();
   }
@@ -187,8 +185,10 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void setPower(double power) {
-    // rightTalon.set(TalonFXControlMode.PercentOutput, power);
+    leftMotor.set(ControlMode.PercentOutput, power);   
+    rightMotor.set(ControlMode.PercentOutput, power);
   }
+
   public boolean isAbove(double x){
      return getCurrentPositionInTicks()>x;
   }

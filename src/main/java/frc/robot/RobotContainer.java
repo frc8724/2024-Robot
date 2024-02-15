@@ -59,9 +59,9 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   private static final IMayhemTalonFX intakeTop = new MayhemTalonFX(Constants.DriveConstants.kIntakeRollerId,
       CurrentLimit.HIGH_CURRENT);
-  private static final IMayhemTalonFX armLeft = new FakeFalconFX(Constants.DriveConstants.kArmLeftId,
+  private static final IMayhemTalonFX armLeft = new MayhemTalonFX(Constants.DriveConstants.kArmLeftId,
       CurrentLimit.HIGH_CURRENT);
-  private static final IMayhemTalonFX armRight = new FakeFalconFX(Constants.DriveConstants.kArmRightId,
+  private static final IMayhemTalonFX armRight = new MayhemTalonFX(Constants.DriveConstants.kArmRightId,
       CurrentLimit.HIGH_CURRENT);
   private static final IMayhemTalonFX shooterLeft = new MayhemTalonFX(Constants.DriveConstants.kShooterLeftId,
       CurrentLimit.HIGH_CURRENT);
@@ -113,7 +113,10 @@ public class RobotContainer {
 
     m_arm.setDefaultCommand(
         new RunCommand(
-            () -> m_arm.moveArm(m_operatorController.getLeftX()),
+            () -> {
+                m_arm.moveArm(m_operatorController.getLeftX());
+                m_arm.setPower(m_operatorController.getLeftX()/4);}
+            ,
             m_arm)
     );
 
@@ -159,6 +162,8 @@ public class RobotContainer {
     // Set Mag to on and off
     DriverStick.Button(5).onTrue(new ShooterMagSet(50));
     DriverStick.Button(3).onTrue(new ShooterMagSet(0));
+
+    
 
     // DriverStick.Button(5).onTrue(
     //     new SequentialCommandGroup(

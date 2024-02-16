@@ -16,6 +16,9 @@ import frc.robot.motors.IMayhemTalonFX;
 import frc.robot.motors.MayhemCANSparkMax;
 import frc.robot.motors.MayhemTalonFX;
 import frc.robot.motors.MayhemTalonFX.CurrentLimit;
+import frc.robot.subsystems.SystemZero;
+import frc.robot.subsystems.ArmSubsystem.ArmIsAtPosition;
+import frc.robot.subsystems.ArmSubsystem.ArmSet;
 import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.Autonomous.AutoChooser;
 import frc.robot.subsystems.Autonomous.AutoDriveOut;
@@ -29,6 +32,7 @@ import frc.robot.subsystems.IntakeRollers.IntakeRollers;
 import frc.robot.subsystems.IntakeRollers.IntakeRollersSet;
 import frc.robot.subsystems.LimeLight.CenterOnTag;
 import frc.robot.subsystems.LimeLight.LimeLightSubsystem;
+import frc.robot.subsystems.ShooterSubsystem.ShootNote;
 import frc.robot.subsystems.ShooterSubsystem.ShooterMag;
 import frc.robot.subsystems.ShooterSubsystem.ShooterMagSet;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheels;
@@ -115,7 +119,7 @@ public class RobotContainer {
         new RunCommand(
             () -> {
                 m_arm.moveArm(-m_operatorController.getLeftY());
-                m_arm.setPower(-m_operatorController.getLeftY()/8);}
+                m_arm.setPower(-m_operatorController.getLeftY()/4);}
             ,
             m_arm)
     );
@@ -155,14 +159,38 @@ public class RobotContainer {
     // Set intake roller speed
     //all for operator on the 
     m_operatorController.button(5).onTrue(new IntakeRollersSet(0.5));
-    m_operatorController.leftTrigger(2).onFalse(new IntakeRollersSet(0.0));
+    m_operatorController.button(5).onFalse(new IntakeRollersSet(0.0));
+
+    m_operatorController.button(5).onTrue(new ShooterMagSet(0.5));
+    m_operatorController.button(5).onFalse(new ShooterMagSet(0.0));
+
+    m_operatorController.button(5).onTrue(new ShooterWheelsSet(-0.0));
+    m_operatorController.button(5).onFalse(new ShooterWheelsSet(0.0));
+
+    // m_operatorController.leftTrigger(2).onFalse(new IntakeRollersSet(0.0));
 
     // Set Shooter to on and off
-    m_operatorController.button(6).onTrue(new ShooterWheelsSetRPM(2000.0));
-    m_operatorController.rightTrigger(3).onTrue(new ShooterWheelsSet(0));
+    m_operatorController.button(6).onTrue(new ShooterWheelsSetRPM(1500.0));
+    m_operatorController.button(6).onFalse(new ShooterWheelsSet(0));
     // Set Mag to on and off
-    m_operatorController.button(4).onTrue(new ShooterMagSet(50));
-    m_operatorController.button(1).onTrue(new ShooterMagSet(0));
+    m_operatorController.button(4).onTrue(new ShooterMagSet(5));
+    m_operatorController.button(4).onFalse(new ShooterMagSet(0));
+    // shoot note automatically
+    m_operatorController.button(3).onTrue(new ShootNote());
+    m_operatorController.button(7).onTrue(new SystemZero());
+    m_operatorController.button(2).onTrue(
+    new SequentialCommandGroup(
+        new ArmSet(0),
+    new ArmIsAtPosition(ArmSubsystem.NOTE_INTAKE)));
+
+    m_operatorController.button(1).onTrue(
+    new SequentialCommandGroup(
+        new ArmSet(ArmSubsystem.NOTE_INTAKE),
+        new ArmIsAtPosition(ArmSubsystem.NOTE_INTAKE)));  
+         // m_operatorController.button(1).onTrue(new ArmSet(4*ArmSubsystem.NOTE_INTAKE));
+
+
+
 
     
 

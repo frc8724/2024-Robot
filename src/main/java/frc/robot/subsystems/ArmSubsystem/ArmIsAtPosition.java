@@ -5,15 +5,11 @@
 package frc.robot.subsystems.ArmSubsystem;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
 
 public class ArmIsAtPosition extends Command {
   /** Creates a new CheckingPosition. */
   double tolerance;
-
-  public ArmIsAtPosition() {
-    // Use addRequirements() here to declare subsystem dependencies.
-    this(ArmSubsystem.POSITION_SLOP);
-  }
 
    public ArmIsAtPosition(double t) {
     this.tolerance = t;
@@ -29,11 +25,15 @@ public class ArmIsAtPosition extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    if (interrupted) {
+      RobotContainer.m_arm.stop();
+    }
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return RobotContainer.m_arm.isAtPosition(tolerance);
   }
 }

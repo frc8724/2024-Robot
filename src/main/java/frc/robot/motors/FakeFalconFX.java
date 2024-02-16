@@ -716,4 +716,46 @@ public class FakeFalconFX implements IMayhemTalonFX {
         // TODO Auto-generated method stub
 
     }
+
+    @Override
+    public ErrorCode configPeakOutputForward(double d) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'configPeakOutputForward'");
+    }
+
+    @Override
+    public ErrorCode configPeakOutputReverse(double d) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'configPeakOutputReverse'");
+    }
+
+    @Override
+    public ErrorCode configNominalOutputForward(double d) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'configNominalOutputForward'");
+    }
+
+    @Override
+    public ErrorCode configNominalOutputReverse(double d) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'configNominalOutputReverse'");
+    }
+
+    @Override
+    public ErrorCode configForwardSoftLimitEnable(boolean b) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'configForwardSoftLimitEnable'");
+    }
+
+    @Override
+    public ErrorCode configReverseSoftLimitEnable(boolean b) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'configReverseSoftLimitEnable'");
+    }
+
+    @Override
+    public ErrorCode configClosedLoopPeakOutput(int slot, double d) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'configClosedLoopPeakOutput'");
+    }
 }

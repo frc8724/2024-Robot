@@ -4,39 +4,22 @@
 
 package frc.robot.subsystems.ArmSubsystem;
 
-import java.lang.annotation.Target;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.motors.IMayhemTalonFX;
 
 public class ArmSubsystem extends SubsystemBase {
-  public static final double[] LEVEL_X_PRESCORE = { 0.0, 2000.0, 75000.0, 82500.0 };
-  public static final double[] LEVEL_X_SCORE = { 0.0, 2000.0, 53000.0, 74000.0 };
-  public static final double[] LEVEL_X_SCORE_CUBE = { 0.0, 2000.0, 57000.0, 76000.0 };
 
-  public static final double HUMAN_PLAYER_STATION = 74000.0;
-  public static final double STOW = 9000.0;
-  public static final double FLOOR_PICKUP = 17000;
-  public static final double CONE_STOW = 14000;
-  public static final double SCORE_TOLERANCE = 40000;
-  public static final double STRAIGHT_UP = 100000;
-  public static final double HUMAN_PLAYER_STATION_BACK = 190000;
-  public static final double BACK_ISH = 140000;
-  public static final double FLOOR_PICKUP_BACK = 250000;
+  public static final double ZERO_POSITION = -210000;
+  public static final double NOTE_INTAKE = -160000;
 
-  public static final double POSITION_SLOP = 1000.0;
+  public static final double POSITION_SLOP = 10000.0;
 
-  final double kWheelP = 0.09; // 0.015;
+  final double kWheelP = 0.02; // 0.015;
   final double kWheelI = 0.000;
   final double kWheelD = 0.000;
   final double kWheelF = 0.000;
@@ -56,23 +39,24 @@ public class ArmSubsystem extends SubsystemBase {
     // rightMotor.configFactoryDefault();
 
     configTalon(leftMotor);
-    configTalon(rightMotor);
+    // configTalon(rightMotor);
 
-    
     leftMotor.setInverted(false);
     rightMotor.setInverted(true);
 
     leftMotor.setSensorPhase(false);
     rightMotor.setSensorPhase(false);
+      
+    rightMotor.follow(leftMotor);
 
-    configureDriveTalon(rightMotor);
+    // configureDriveTalon(rightMotor);
     configureDriveTalon(leftMotor);
 
-    zero();
+    setZeroArm();
   }
 
   private void configTalon(IMayhemTalonFX talon) {
-    talon.setNeutralMode(NeutralMode.Brake);
+    talon.setNeutralMode(NeutralMode.Coast);
   }
 
   // Ideas to tune the Shoulder.
@@ -96,18 +80,18 @@ public class ArmSubsystem extends SubsystemBase {
     talon.config_kD(slot, kWheelD, timeout);
     talon.config_kF(slot, kWheelF, timeout);
 
-    // talon.configPeakOutputForward(1.0);
-    // talon.configPeakOutputReverse(-1.0);
-    // talon.configNominalOutputForward(0.0);
-    // talon.configNominalOutputReverse(0.0);
+    talon.configPeakOutputForward(1.0);
+    talon.configPeakOutputReverse(-1.0);
+    talon.configNominalOutputForward(0.0);
+    talon.configNominalOutputReverse(0.0);
 
     talon.configClosedloopRamp(CLOSED_LOOP_RAMP_RATE); // specify minimum time for neutral to full in seconds
     talon.selectProfileSlot(slot, timeout);
-    // talon.configForwardSoftLimitEnable(false);
-    // talon.configReverseSoftLimitEnable(false);
-    talon.configAllowableClosedloopError(slot, 50, timeout);
+    talon.configForwardSoftLimitEnable(false);
+    talon.configReverseSoftLimitEnable(false);
+    talon.configAllowableClosedloopError(slot, 5000, timeout);
 
-    // talon.configClosedLoopPeakOutput(slot, 1.0);
+    talon.configClosedLoopPeakOutput(slot, 0.5);
 
     talon.configMotionCruiseVelocity(40000); // measured velocity of ~100K at 85%; set cruise to that
     talon.configMotionAcceleration(30000); // acceleration of 2x velocity allows cruise to be attained in 1 second
@@ -119,8 +103,10 @@ public class ArmSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // SmartDashboard.putNumber("Shoulder Current Ticks",
-    //     rightTalon.getSelectedSensorPosition());
+     SmartDashboard.putNumber("Shoulder left Ticks",
+      leftMotor.getSelectedSensorPosition());
+      SmartDashboard.putNumber("Shoulder right Ticks",
+      rightMotor.getSelectedSensorPosition());
     // if (rightTalon.getControlMode() != ControlMode.PercentOutput) {
     //   SmartDashboard.putNumber("Shoulder Target Ticks",
     //       rightTalon.getClosedLoopTarget());
@@ -150,17 +136,17 @@ public class ArmSubsystem extends SubsystemBase {
   public void setAngleInTicks(double ticks) {
     TargetPositionTicks = ticks;
     // rightTalon.set(ControlMode.MotionMagic, ticks, DemandType.ArbitraryFeedForward, 0.05);
+    leftMotor.set(ControlMode.Position, ticks);
   }
 
   public double getCurrentPositionInTicks() {
-    // return rightTalon.getSelectedSensorPosition();
-    return 0.0;
+    return leftMotor.getSelectedSensorPosition();
   }
 
   public double getTargetPositionTicks() {
-    // if (rightTalon.getControlMode() != ControlMode.PercentOutput) {
-    //   return rightTalon.getClosedLoopTarget();
-    // }
+    if (leftMotor.getControlMode() != ControlMode.PercentOutput) {
+      return leftMotor.getClosedLoopTarget();
+    }
     return 0.0;
   }
 
@@ -176,17 +162,15 @@ public class ArmSubsystem extends SubsystemBase {
     setAngleInTicks(getCurrentPositionInTicks());
   }
 
-  // Set the arm to horizontal and then call zero().
-  public void zero() {
-    // DriverStation.reportWarning("Shoulder: zero", false);
-    // rightTalon.setSelectedSensorPosition(0.0);
-    // rightTalon.set(TalonFXControlMode.Position, 0.0);
-
+  
+  public void setZeroArm(){
+    leftMotor.setSelectedSensorPosition(ZERO_POSITION);   
+    rightMotor.setSelectedSensorPosition(ZERO_POSITION);
   }
 
-  public void setPower(double power) {
+  public void setPower(double power) {;
     leftMotor.set(ControlMode.PercentOutput, power);   
-    rightMotor.set(ControlMode.PercentOutput, power);
+    // rightMotor.set(ControlMode.PercentOutput, power);
   }
 
   public boolean isAbove(double x){

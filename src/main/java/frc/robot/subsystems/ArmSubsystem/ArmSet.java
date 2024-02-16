@@ -9,17 +9,17 @@ import frc.robot.RobotContainer;
 
 public class ArmSet extends InstantCommand {
   /** Creates a new ArmSet. */
-  double percent;
+  double ticks;
   public ArmSet(double d) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_arm);
-    percent = d;
+    ticks = d;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-  RobotContainer.m_arm.setAngleInTicks(percent);
+  RobotContainer.m_arm.setAngleInTicks(ticks);
   }
   
   // Called every time the scheduler runs while the command is scheduled.

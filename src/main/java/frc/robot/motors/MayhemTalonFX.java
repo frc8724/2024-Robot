@@ -109,10 +109,10 @@ public class MayhemTalonFX extends TalonFX implements IMayhemTalonFX {
     // return this.getClosedLoopError(0);
     // }
 
-    // @Override
-    // public void setPosition(int zeroPositionCount) {
-    // this.setSelectedSensorPosition(zeroPositionCount, 0, 0);
-    // }
+    @Override
+    public void setPosition(int zeroPositionCount) {
+    this.setSelectedSensorPosition(zeroPositionCount, 0, 0);
+    }
 
     // public int getPosition() {
     // return this.getSelectedSensorPosition(0);

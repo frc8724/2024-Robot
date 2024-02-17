@@ -26,7 +26,7 @@ public class IntakeRollers extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void set(double d) {
+  public void setPower(double d) {
     topRollerMotor.set(ControlMode.PercentOutput, d);
   }
 

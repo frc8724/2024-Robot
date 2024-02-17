@@ -19,9 +19,12 @@ import frc.robot.motors.MayhemTalonFX.CurrentLimit;
 import frc.robot.subsystems.SystemZero;
 import frc.robot.subsystems.ArmSubsystem.ArmIsAtPosition;
 import frc.robot.subsystems.ArmSubsystem.ArmSet;
+import frc.robot.subsystems.ArmSubsystem.ArmSetPower;
 import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.Autonomous.AutoChooser;
 import frc.robot.subsystems.Autonomous.AutoDriveOut;
+import frc.robot.subsystems.Autonomous.AutoDriveandShootandPickup;
+import frc.robot.subsystems.Autonomous.AutoStandStill;
 import frc.robot.subsystems.ClimberSubsystem.ClimberSubsystem;
 import frc.robot.subsystems.DriveBase.DriveBaseSubsystem;
 import frc.robot.subsystems.DriveBase.DriveForDistance;
@@ -45,6 +48,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -125,6 +129,10 @@ public class RobotContainer {
     );
 
     m_auto.addAuto(new AutoDriveOut());
+    m_auto.addAuto(new AutoDriveandShootandPickup());
+    m_auto.addAuto(new AutoStandStill());
+
+
   }
 
   /**
@@ -151,38 +159,47 @@ public class RobotContainer {
             new DrivebaseResetEncoders(),
             new InstantCommand(() -> m_robotDrive.drive(0, 0, 0, true), m_robotDrive)));
 
-    DriverStick.Button(01).onTrue(new CenterOnTag());
-    DriverStick.Button(10).onTrue(new DriveForDistance(0.0, 0.2, 0.0, 1.0));
-    DriverStick.Button(11).onTrue(new DriveForDistance(0.2, 0.0, 0.0, 1.0));
-    DriverStick.Button(12).onTrue(new DriveForDistance(0, 0, -.3, 1.0));
+    // DriverStick.Button(01).onTrue(new CenterOnTag());
+    // DriverStick.Button(10).onTrue(new DriveForDistance(0.0, 0.2, 0.0, 1.0));
+    // DriverStick.Button(11).onTrue(new DriveForDistance(0.2, 0.0, 0.0, 1.0));
+    // DriverStick.Button(12).onTrue(new DriveForDistance(0, 0, -.3, 1.0));
 
-    // Set intake roller speed
-    //all for operator on the 
-    m_operatorController.button(5).onTrue(new IntakeRollersSet(0.5));
-    m_operatorController.button(5).onFalse(new IntakeRollersSet(0.0));
+    //OPERATOR BUTTONS
 
-    m_operatorController.button(5).onTrue(new ShooterMagSet(0.5));
-    m_operatorController.button(5).onFalse(new ShooterMagSet(0.0));
+    //intake sequence with all needed systems on and off
+    m_operatorController.button(5).onTrue(
+        new ParallelCommandGroup(
+            new IntakeRollersSet(0.5),
+            new ShooterMagSet(0.3),
+            new ShooterWheelsSet(-0.05)
+        ));
+    m_operatorController.button(5).onFalse(
+        new ParallelCommandGroup(
+            new IntakeRollersSet(0.0),
+            new ShooterMagSet(0.0),
+            new ShooterWheelsSet(0.0)
+        ));        
+    //  manual intake
+    m_operatorController.leftTrigger(2).onTrue(new IntakeRollersSet(1.0));
+    // manual intake reverse/spit out
+     m_operatorController.button(8).onTrue(new IntakeRollersSet(-1.0));
 
-    m_operatorController.button(5).onTrue(new ShooterWheelsSet(-0.0));
-    m_operatorController.button(5).onFalse(new ShooterWheelsSet(0.0));
-
-    // m_operatorController.leftTrigger(2).onFalse(new IntakeRollersSet(0.0));
-
-    // Set Shooter to on and off
-    m_operatorController.button(6).onTrue(new ShooterWheelsSetRPM(1500.0));
-    m_operatorController.button(6).onFalse(new ShooterWheelsSet(0));
-    // Set Mag to on and off
-    m_operatorController.button(4).onTrue(new ShooterMagSet(5));
-    m_operatorController.button(4).onFalse(new ShooterMagSet(0));
+    // manual shooter
+    m_operatorController.rightTrigger(3).onTrue(new ShooterWheelsSetRPM(1500));
+    // manual mag 
+    m_operatorController.button(6).onTrue(new ShooterMagSet(5));
     // shoot note automatically
     m_operatorController.button(3).onTrue(new ShootNote());
+    //"zero" arm at that position
     m_operatorController.button(7).onTrue(new SystemZero());
-    m_operatorController.button(2).onTrue(
+    // turn arm motors off so you can return to manual after shooting sequence
+    m_operatorController.button(2).onTrue(new ArmSetPower(0));
+    //sets arm to the highest position
+    m_operatorController.button(4).onTrue(
     new SequentialCommandGroup(
         new ArmSet(0),
     new ArmIsAtPosition(ArmSubsystem.NOTE_INTAKE)));
-
+    // sets arm to intake position
     m_operatorController.button(1).onTrue(
     new SequentialCommandGroup(
         new ArmSet(ArmSubsystem.NOTE_INTAKE),
@@ -204,7 +221,12 @@ public class RobotContainer {
     //         new ShooterMagSet(0),
     //         new IntakeRollersSet(0))
     // );
-  }
+    m_arm.setPower(0);
+    m_wheels.setShooterSpeed(0.0);
+    m_rollers.setPower(0);
+    m_mag.setPowerVbus(0);
+    m_climber.setPower(0);
+}
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

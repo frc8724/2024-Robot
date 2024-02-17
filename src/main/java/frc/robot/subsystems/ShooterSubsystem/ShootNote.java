@@ -17,14 +17,20 @@ public class ShootNote extends SequentialCommandGroup {
     addCommands(
       // set mag to backwards so note is at position
       new ShooterMagSet(-0.07),
-      new WaitCommand(0.1),
+      new ShooterWheelsSet(-0.1),
+      new WaitCommand(0.4),
+
+      new ShooterMagSet(0.0),
+      new ShooterWheelsSet(0.0),
+      new WaitCommand(0.2),
+
       // turn on the shooter wheels
-      new ShooterWheelsSetRPM(1000),
+      new ShooterWheelsSetRPM(2100),
 
       // wait until it is at speed or 2 seconds
       new ParallelRaceGroup(
         new ShooterWheelAtSpeed(),
-        new WaitCommand(0.5)),
+        new WaitCommand(0.4)),
 
       // move the note to the shooter
       new ShooterMagSet(1.0) ,

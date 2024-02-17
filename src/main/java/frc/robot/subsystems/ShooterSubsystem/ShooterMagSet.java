@@ -24,6 +24,6 @@ public class ShooterMagSet extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.m_mag.set(percent);
+    RobotContainer.m_mag.setPowerVbus(percent);
   }
 }

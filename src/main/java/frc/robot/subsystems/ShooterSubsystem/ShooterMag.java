@@ -29,7 +29,7 @@ public class ShooterMag extends SubsystemBase {
   }
 
   /** set vbus percent power */
-  public void set(double d) {
+  public void setPowerVbus(double d) {
     leftMotor.setVBusPower(d);
     rightMotor.setVBusPower(d);
   }

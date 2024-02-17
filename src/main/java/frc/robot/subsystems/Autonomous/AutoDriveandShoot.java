@@ -18,6 +18,7 @@ public class AutoDriveandShoot extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new SystemZero(),
+    // add in correct distance, then add a turn command, then zero and prepare to shoot-- all with a note preloaded
     new DriveForDistance(0.0,0.2, 0.0,100.0),
     new ShootNote()
     );

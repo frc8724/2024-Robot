@@ -19,5 +19,6 @@ public class SystemZero extends InstantCommand {
   @Override
   public void initialize() {
     RobotContainer.m_arm.setZeroArm();
+    
   }
 }

@@ -15,30 +15,29 @@ public class ShootNote extends SequentialCommandGroup {
   /** Creates a new ShootNote. */
   public ShootNote() {
     addCommands(
-      // set mag to backwards so note is at position
-      new ShooterMagSet(-0.07),
-      new ShooterWheelsSet(-0.1),
-      new WaitCommand(0.4),
+        // set mag to backwards so note is at position
+        new ShooterMagSet(-0.07),
+        new ShooterWheelsSet(-0.1),
+        new WaitCommand(0.4),
 
-      new ShooterMagSet(0.0),
-      new ShooterWheelsSet(0.0),
-      new WaitCommand(0.2),
+        new ShooterMagSet(0.0),
+        new ShooterWheelsSet(0.0),
+        new WaitCommand(0.2),
 
-      // turn on the shooter wheels
-      new ShooterWheelsSetRPM(2100),
+        // turn on the shooter wheels
+        new ShooterWheelsSetTicksPer100ms(2600),
 
-      // wait until it is at speed or 2 seconds
-      new ParallelRaceGroup(
-        new ShooterWheelAtSpeed(),
-        new WaitCommand(0.4)),
+        // wait until it is at speed or 2 seconds
+        new ParallelRaceGroup(
+            new ShooterWheelAtSpeed(),
+            new WaitCommand(1.0)),
 
-      // move the note to the shooter
-      new ShooterMagSet(1.0) ,
-      // wait for the note to leave
-      new WaitCommand(0.5),
-      // turn off the mag and shooter
-      new ShooterMagSet(0.0),
-      new ShooterWheelsSet(0.0))
-    ;
+        // move the note to the shooter
+        new ShooterMagSet(1.0),
+        // wait for the note to leave
+        new WaitCommand(0.5),
+        // turn off the mag and shooter
+        new ShooterMagSet(0.0),
+        new ShooterWheelsSet(0.0));
   }
 }

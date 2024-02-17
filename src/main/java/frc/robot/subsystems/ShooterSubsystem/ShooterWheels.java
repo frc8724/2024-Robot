@@ -88,16 +88,16 @@ public class ShooterWheels extends SubsystemBase {
     /**
      * Set shooter to rpm speed.
      * 
-     * @param rpm
+     * @param ticksPer100ms
      */
-    public void setShooterSpeed(double rpm) {
-        if (rpm < 0)
-            rpm = 0;
+    public void setShooterSpeed(double ticksPer100ms) {
+        if (ticksPer100ms < 0)
+            ticksPer100ms = 0;
 
-        m_targetSpeedRPM = rpm;
-        System.out.println("setShooterSpeed: " + rpm);
-        if (rpm > 50) {
-            leftMotor.set(ControlMode.Velocity, rpm);
+        m_targetSpeedRPM = ticksPer100ms;
+        System.out.println("setShooterSpeed: " + ticksPer100ms);
+        if (ticksPer100ms > 50) {
+            leftMotor.set(ControlMode.Velocity, ticksPer100ms);
         } else {
             setShooterSpeedVBus(0);
         }

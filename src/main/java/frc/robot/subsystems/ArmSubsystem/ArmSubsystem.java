@@ -16,6 +16,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   public static final double ZERO_POSITION = -210000;
   public static final double NOTE_INTAKE = -160000;
+  public static final double LONG_SHOT = -100000;
 
   public static final double POSITION_SLOP = 10000.0;
 
@@ -46,7 +47,7 @@ public class ArmSubsystem extends SubsystemBase {
 
     leftMotor.setSensorPhase(false);
     rightMotor.setSensorPhase(false);
-      
+
     rightMotor.follow(leftMotor);
 
     // configureDriveTalon(rightMotor);
@@ -103,13 +104,13 @@ public class ArmSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-     SmartDashboard.putNumber("Shoulder left Ticks",
-      leftMotor.getSelectedSensorPosition());
-      SmartDashboard.putNumber("Shoulder right Ticks",
-      rightMotor.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Shoulder left Ticks",
+        leftMotor.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Shoulder right Ticks",
+        rightMotor.getSelectedSensorPosition());
     // if (rightTalon.getControlMode() != ControlMode.PercentOutput) {
-    //   SmartDashboard.putNumber("Shoulder Target Ticks",
-    //       rightTalon.getClosedLoopTarget());
+    // SmartDashboard.putNumber("Shoulder Target Ticks",
+    // rightTalon.getClosedLoopTarget());
     // }
 
     // wheelP = SmartDashboard.getNumber("Shoulder P", kWheelP);
@@ -135,7 +136,8 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void setAngleInTicks(double ticks) {
     TargetPositionTicks = ticks;
-    // rightTalon.set(ControlMode.MotionMagic, ticks, DemandType.ArbitraryFeedForward, 0.05);
+    // rightTalon.set(ControlMode.MotionMagic, ticks,
+    // DemandType.ArbitraryFeedForward, 0.05);
     leftMotor.set(ControlMode.Position, ticks);
   }
 
@@ -162,19 +164,18 @@ public class ArmSubsystem extends SubsystemBase {
     setAngleInTicks(getCurrentPositionInTicks());
   }
 
-  
-  public void setZeroArm(){
-    leftMotor.setSelectedSensorPosition(ZERO_POSITION);   
+  public void setZeroArm() {
+    leftMotor.setSelectedSensorPosition(ZERO_POSITION);
     rightMotor.setSelectedSensorPosition(ZERO_POSITION);
   }
 
-  public void setPower(double power) {;
-    leftMotor.set(ControlMode.PercentOutput, power);   
+  public void setPower(double power) {
+    ;
+    leftMotor.set(ControlMode.PercentOutput, power);
     // rightMotor.set(ControlMode.PercentOutput, power);
   }
 
-  public boolean isAbove(double x){
-     return getCurrentPositionInTicks()>x;
+  public boolean isAbove(double x) {
+    return getCurrentPositionInTicks() > x;
   }
 }
-

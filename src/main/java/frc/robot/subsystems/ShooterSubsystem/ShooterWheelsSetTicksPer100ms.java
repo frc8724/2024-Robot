@@ -10,18 +10,18 @@ import frc.robot.RobotContainer;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ShooterWheelsSetRPM extends InstantCommand {
-  double m_rpm;
+public class ShooterWheelsSetTicksPer100ms extends InstantCommand {
+  double m_ticksPer100ms;
 
-  public ShooterWheelsSetRPM(double rpm) {
+  public ShooterWheelsSetTicksPer100ms(double t) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_rpm = rpm;
+    m_ticksPer100ms = t;
     addRequirements(RobotContainer.m_wheels);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.m_wheels.setShooterSpeed(m_rpm);
+    RobotContainer.m_wheels.setShooterSpeed(m_ticksPer100ms);
   }
 }

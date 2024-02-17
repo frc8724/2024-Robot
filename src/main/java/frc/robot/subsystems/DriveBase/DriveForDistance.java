@@ -27,7 +27,7 @@ public class DriveForDistance extends Command {
   @Override
   public void initialize() {
     Pose2d pose = new Pose2d();
-    RobotContainer.m_robotDrive.resetOdometry(pose);
+    RobotContainer.m_robotDrive.resetPose(pose);
     RobotContainer.m_robotDrive.drive(m_x, m_y, m_rot, false);
   }
 

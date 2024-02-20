@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.6727105761903848,
-      "y": 7.035130224106603
+      "x": 0.7319122330552369,
+      "y": 7.074597995349838
     },
-    "rotation": 0.0
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -14,7 +14,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "drive out"
+            "pathName": "drive and shoot"
           }
         }
       ]

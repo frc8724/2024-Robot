@@ -16,7 +16,6 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VelocityDutyCycle;
 import com.ctre.phoenix6.controls.VoltageOut;
 
-
 public class SwerveDriveKraken extends SubsystemBase {
   private TalonFX motor;
   private String name;
@@ -28,20 +27,17 @@ public class SwerveDriveKraken extends SubsystemBase {
   StatusSignal<Double> velocitySupplier;
   StatusSignal<Double> motorPosition;
 
-
   /** Creates a new SimpleFalconSubsystem. */
   public SwerveDriveKraken(String name, int id, boolean invert) {
     motor = new TalonFX(id);
     motor.setInverted(invert);
     this.name = name;
     var talonFXConfigs = new TalonFXConfiguration();
-   
- 
-// class member variable
-    final VoltageOut m_request = new VoltageOut(0);
-// main robot code, command 12 V output
-    motor.setControl(m_request.withOutput(12.0));
 
+    // class member variable
+    final VoltageOut m_request = new VoltageOut(0);
+    // main robot code, command 12 V output
+    motor.setControl(m_request.withOutput(12.0));
 
     var slot0Configs = new Slot0Configs();
     slot0Configs.kV = 0.05;
@@ -49,13 +45,10 @@ public class SwerveDriveKraken extends SubsystemBase {
     slot0Configs.kI = 0.0;
     slot0Configs.kD = 0.0;
 
-// apply gains, 50 ms total timeout
+    // apply gains, 50 ms total timeout
     motor.getConfigurator().apply(slot0Configs, 0.050);
 
-
-    
-
-    talonFXConfigs.MotorOutput.NeutralMode= NeutralModeValue.Coast;
+    talonFXConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
     velocitySupplier = motor.getVelocity();
     motorPosition = motor.getPosition();
@@ -66,11 +59,14 @@ public class SwerveDriveKraken extends SubsystemBase {
   double convertMpsToTicksPer100ms(double mps) {
     return mps * Drive1rotationTicks / WheelCircumferenceMeters / 10.0;
   }
-  //covert meters per second to rotations per second
-  double wheelRadiusMeters = 0.0508; //meters
+
+  // covert meters per second to rotations per second
+  double wheelRadiusMeters = 0.0508; // meters
+
   double convertMpsToRps(double mps) {
-    return mps / (2*wheelRadiusMeters*Math.PI);
+    return mps / (2 * wheelRadiusMeters * Math.PI);
   }
+
   /**
    * 
    * @param value meters per second

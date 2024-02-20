@@ -7,6 +7,7 @@ package frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.subsystems.ArmSubsystem.ArmIsAtPosition;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -16,6 +17,7 @@ public class ShootNote extends SequentialCommandGroup {
   public ShootNote() {
     addCommands(
         // set mag to backwards so note is at position
+        new ArmIsAtPosition(0),
         new ShooterMagSet(-0.07),
         new ShooterWheelsSet(-0.1),
         new WaitCommand(0.4),

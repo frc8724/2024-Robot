@@ -5,7 +5,6 @@
 package frc.robot.subsystems.Autonomous;
 
 import com.pathplanner.lib.commands.PathPlannerAuto;
-
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -17,8 +16,7 @@ public class AutoPathPlanner001 extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        // "example auto" means put in the name of the auto IN the application when you
-        // call it is robot container
-        new PathPlannerAuto("Example Auto"));
+     new PathPlannerAuto("example auto")
+    );
   }
 }

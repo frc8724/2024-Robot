@@ -43,7 +43,7 @@ public class SwerveDriveFalcon extends SubsystemBase {
     motor.configPeakOutputReverse(-12.0);
     motor.configNeutralDeadband(0.0);
 
-    motor.setNeutralMode(NeutralMode.Coast);
+    motor.setNeutralMode(NeutralMode.Brake);
   }
 
   double m_set;

@@ -16,6 +16,12 @@
           "data": {
             "pathName": "drive out"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoStandStill"
+          }
         }
       ]
     }

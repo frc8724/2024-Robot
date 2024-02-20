@@ -54,13 +54,13 @@ public final class Constants {
 
     public static final boolean kFrontLeftTurningEncoderReversed = true;
     public static final boolean kRearLeftTurningEncoderReversed = true;
-    public static final boolean kFrontRightTurningEncoderReversed = true;
-    public static final boolean kRearRightTurningEncoderReversed = true;
+    public static final boolean kFrontRightTurningEncoderReversed = false;
+    public static final boolean kRearRightTurningEncoderReversed = false;
 
     public static final boolean kFrontLeftDriveEncoderReversed = false;
     public static final boolean kRearLeftDriveEncoderReversed = false;
-    public static final boolean kFrontRightDriveEncoderReversed = false;
-    public static final boolean kRearRightDriveEncoderReversed = false;
+    public static final boolean kFrontRightDriveEncoderReversed = true;
+    public static final boolean kRearRightDriveEncoderReversed = true;
 
     public static final int FrontLeftMag = 3;
     public static final int RearLeftMag = 1;

@@ -10,8 +10,8 @@ import frc.robot.RobotContainer;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class SystemZero extends InstantCommand {
-  public SystemZero() {
+public class SystemArmZero extends InstantCommand {
+  public SystemArmZero() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -19,7 +19,7 @@ public class SystemZero extends InstantCommand {
   @Override
   public void initialize() {
     RobotContainer.m_arm.setZeroArm();
-    RobotContainer.m_robotDrive.zeroWheels();
+    
 
   }
 }

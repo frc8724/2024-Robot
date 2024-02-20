@@ -28,6 +28,7 @@ public class ShooterWheels extends SubsystemBase {
         right.follow(left);
 
         configureOneWheelFalcon(left);
+        setShooterSpeedVBus(0.0);
     }
 
     // Note: for ease of thinking, 1 RPM =~ 3.4 native units for the shooter

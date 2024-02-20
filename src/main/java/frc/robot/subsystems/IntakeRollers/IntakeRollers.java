@@ -19,6 +19,7 @@ public class IntakeRollers extends SubsystemBase {
   public IntakeRollers(IMayhemTalonFX top) {
     topRollerMotor = top;
     topRollerMotor.setInverted(true);
+    setPower(0.0);
   }
 
   @Override

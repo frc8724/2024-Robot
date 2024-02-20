@@ -16,7 +16,7 @@ import frc.robot.motors.IMayhemTalonFX;
 import frc.robot.motors.MayhemCANSparkMax;
 import frc.robot.motors.MayhemTalonFX;
 import frc.robot.motors.MayhemTalonFX.CurrentLimit;
-import frc.robot.subsystems.SystemZero;
+import frc.robot.subsystems.SystemArmZero;
 import frc.robot.subsystems.ArmSubsystem.ArmIsAtPosition;
 import frc.robot.subsystems.ArmSubsystem.ArmSet;
 import frc.robot.subsystems.ArmSubsystem.ArmSetPower;
@@ -24,6 +24,7 @@ import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.Autonomous.AutoChooser;
 import frc.robot.subsystems.Autonomous.AutoDriveOut;
 import frc.robot.subsystems.Autonomous.AutoDriveandShootandPickup;
+import frc.robot.subsystems.Autonomous.AutoPathPlanner001;
 import frc.robot.subsystems.Autonomous.AutoStandStill;
 import frc.robot.subsystems.ClimberSubsystem.ClimberSubsystem;
 import frc.robot.subsystems.DriveBase.DriveBaseSubsystem;
@@ -130,6 +131,7 @@ public class RobotContainer {
     m_auto.addAuto(new AutoDriveOut());
     m_auto.addAuto(new AutoDriveandShootandPickup());
     m_auto.addAuto(new AutoStandStill());
+    //m_auto.addAuto(new AutoPathPlanner001());
 
 
   }
@@ -190,7 +192,7 @@ public class RobotContainer {
     // shoot note automatically
     m_operatorController.button(3).onTrue(new ShootNote());
     //"zero" arm at that position
-    m_operatorController.button(7).onTrue(new SystemZero());
+    m_operatorController.button(7).onTrue(new SystemArmZero());
     // turn arm motors off so you can return to manual after shooting sequence
     m_operatorController.button(2).onTrue(new ArmSetPower(0));
     //sets arm to the highest position

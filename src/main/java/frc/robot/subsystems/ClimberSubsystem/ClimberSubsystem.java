@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems.ClimberSubsystem;
+
 import frc.robot.motors.MayhemTalonFX;
 import frc.robot.motors.MayhemTalonFX.CurrentLimit;
 
@@ -44,6 +45,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
     configTalon(leftMotor);
     zero();
+    setAutoPower(0.0);
   }
 
   private void configTalon(IMayhemTalonFX talon) {
@@ -70,7 +72,7 @@ public class ClimberSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
 
-    if ( !manualMode && isMovingIn()) {
+    if (!manualMode && isMovingIn()) {
       zero();
     }
 
@@ -82,8 +84,6 @@ public class ClimberSubsystem extends SubsystemBase {
     // getTargetPosition()));
     // SmartDashboard.putBoolean("Arm At Position", isAtPosition());
   }
-
- 
 
   public double getCurrentPosition() {
     return leftMotor.getSelectedSensorPosition();
@@ -139,4 +139,3 @@ public class ClimberSubsystem extends SubsystemBase {
     leftMotor.set(ControlMode.PercentOutput, d);
   }
 }
-

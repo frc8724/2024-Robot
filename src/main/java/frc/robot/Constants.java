@@ -54,8 +54,8 @@ public final class Constants {
 
     public static final boolean kFrontLeftTurningEncoderReversed = true;
     public static final boolean kRearLeftTurningEncoderReversed = true;
-    public static final boolean kFrontRightTurningEncoderReversed = false;
-    public static final boolean kRearRightTurningEncoderReversed = false;
+    public static final boolean kFrontRightTurningEncoderReversed = true;
+    public static final boolean kRearRightTurningEncoderReversed = true;
 
     public static final boolean kFrontLeftDriveEncoderReversed = false;
     public static final boolean kRearLeftDriveEncoderReversed = false;
@@ -64,16 +64,19 @@ public final class Constants {
 
     public static final int FrontLeftMag = 3;
     public static final int RearLeftMag = 1;
-    public static final int FrontRightMag = 0;
-    public static final int RearRightMag = 2;
+    public static final int FrontRightMag = 2;
+    public static final int RearRightMag = 0;
 
     public static final int ninety_degrees_in_ticks = 0;
     public static final int one_eighty_degrees_in_ticks = 2048;
-
-    public static final int FrontLeftMagZero = 1852;
-    public static final int RearLeftMagZero = 1974;
-    public static final int FrontRightMagZero = 3470;
-    public static final int RearRightMagZero = 359;
+    // mag 3
+    public static final int FrontLeftMagZero = 1788;
+    // mag 1
+    public static final int RearLeftMagZero = 1909;
+    // mag 2
+    public static final int FrontRightMagZero = 3474;
+    // mag 0
+    public static final int RearRightMagZero = 370;
 
     // If you call DriveSubsystem.drive() with a different period make sure to
     // update this.

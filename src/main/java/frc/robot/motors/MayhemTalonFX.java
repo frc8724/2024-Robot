@@ -34,7 +34,7 @@ public class MayhemTalonFX extends TalonFX implements IMayhemTalonFX {
         this.configVoltageCompSaturation(12.0); // "full output" scaled to 12.0V for all modes when enabled.
         this.enableVoltageCompensation(true); // turn on voltage compensation
 
-        this.setNeutralMode(NeutralMode.Brake);
+        this.setNeutralMode(NeutralMode.Coast);
 
         if (currentLimit == CurrentLimit.HIGH_CURRENT) {
             this.configSupplyCurrentLimit(

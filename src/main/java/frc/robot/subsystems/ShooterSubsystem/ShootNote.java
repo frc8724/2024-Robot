@@ -17,7 +17,7 @@ public class ShootNote extends SequentialCommandGroup {
   public ShootNote() {
     addCommands(
         // set mag to backwards so note is at position
-        new ArmIsAtPosition(0),
+
         new ShooterMagSet(-0.07),
         new ShooterWheelsSet(-0.1),
         new WaitCommand(0.4),

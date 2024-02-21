@@ -166,7 +166,7 @@ public class RobotContainer {
         // OPERATOR BUTTONS
 
         // intake sequence with all needed systems on and off
-        m_operatorController.button(5).onTrue(
+        m_operatorController.button(4).onTrue(
                 new ParallelCommandGroup(
                         new IntakeRollersSet(0.5),
                         new ShooterMagSet(0.3),
@@ -176,6 +176,7 @@ public class RobotContainer {
                         new IntakeRollersSet(0.0),
                         new ShooterMagSet(0.0),
                         new ShooterWheelsSet(0.0)));
+
         // manual intake
         m_operatorController.leftTrigger(2).onTrue(new IntakeRollersSet(1.0));
         // manual intake reverse/spit out
@@ -190,7 +191,10 @@ public class RobotContainer {
         // "zero" arm at that position
         m_operatorController.button(7).onTrue(new SystemArmZero());
         // turn arm motors off so you can return to manual after shooting sequence
-        m_operatorController.button(2).onTrue(new ArmSetPower(0));
+        m_operatorController.button(2).onTrue(
+                new ParallelCommandGroup(new ArmSetPower(0),
+                        new ShooterMagSet(0),
+                        new ShooterWheelsSet(0)));
 
         m_operatorController.button(1).onTrue(
                 new SequentialCommandGroup());

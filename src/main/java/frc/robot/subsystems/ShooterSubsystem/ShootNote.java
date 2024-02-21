@@ -14,7 +14,7 @@ import frc.robot.subsystems.ArmSubsystem.ArmIsAtPosition;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ShootNote extends SequentialCommandGroup {
   /** Creates a new ShootNote. */
-  public ShootNote() {
+  public ShootNote(double shooterSpeed) {
     addCommands(
         // set mag to backwards so note is at position
 
@@ -27,7 +27,7 @@ public class ShootNote extends SequentialCommandGroup {
         new WaitCommand(0.2),
 
         // turn on the shooter wheels
-        new ShooterWheelsSetTicksPer100ms(2600),
+        new ShooterWheelsSetTicksPer100ms(shooterSpeed),
 
         // wait until it is at speed or 2 seconds
         new ParallelRaceGroup(

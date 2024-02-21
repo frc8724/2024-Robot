@@ -114,7 +114,7 @@ public class RobotContainer {
                                         * DriveConstants.kMaxSpeedMetersPerSecond,
                                 -DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.X, 0.10)
                                         * DriveConstants.kMaxSpeedMetersPerSecond,
-                                -DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Z, 0.20)
+                                -DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Z, 0.40)
                                         * ModuleConstants.kMaxModuleAngularSpeedRadiansPerSecond,
                                 true),
                         m_robotDrive));
@@ -179,22 +179,32 @@ public class RobotContainer {
 
         // manual intake
         m_operatorController.leftTrigger(2).onTrue(new IntakeRollersSet(1.0));
+        m_operatorController.leftTrigger(2).onFalse(new IntakeRollersSet(0.0));
+
         // manual intake reverse/spit out
         m_operatorController.button(5).onTrue(new IntakeRollersSet(-1.0));
 
         // manual shooter
         m_operatorController.rightTrigger(3).onTrue(new ShooterWheelsSetTicksPer100ms(1500));
+        m_operatorController.rightTrigger(3).onFalse(new ShooterWheelsSetTicksPer100ms(1500));
+
         // manual mag
         m_operatorController.button(6).onTrue(new ShooterMagSet(5));
+        m_operatorController.button(6).onFalse(new ShooterMagSet(0));
+
         // shoot note automatically
-        m_operatorController.button(3).onTrue(new ShootNote());
+        m_operatorController.button(3).onTrue(new ShootNote(2600));
+        // SHOOT FOR LONG SHOT
+        m_operatorController.button(1).onTrue(new ShootNote(5000));
+
         // "zero" arm at that position
         m_operatorController.button(7).onTrue(new SystemArmZero());
         // turn arm motors off so you can return to manual after shooting sequence
         m_operatorController.button(2).onTrue(
                 new ParallelCommandGroup(new ArmSetPower(0),
                         new ShooterMagSet(0),
-                        new ShooterWheelsSet(0)));
+                        new ShooterWheelsSet(0),
+                        new IntakeRollersSet(0)));
 
         m_operatorController.button(1).onTrue(
                 new SequentialCommandGroup());

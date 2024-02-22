@@ -153,20 +153,20 @@ public class DriveBaseSubsystem extends SubsystemBase {
     /**
      * Method to drive the robot using joystick info.
      *
-     * @param xSpeed        Speed of the robot in the x direction (forward).
-     * @param ySpeed        Speed of the robot in the y direction (sideways).
+     * @param forwardSpeed  Speed of the robot in the x direction (forward).
+     * @param sideSpeed     Speed of the robot in the y direction (sideways).
      * @param rot           Angular rate of the robot.
      * @param fieldRelative Whether the provided x and y speeds are relative to the
      *                      field.
      */
-    public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
+    public void drive(double forwardSpeed, double sideSpeed, double rot, boolean fieldRelative) {
         ChassisSpeeds roboChassisSpeeds = null;
 
         if (fieldRelative) {
             var imu = m_gyro.getRotation2d();
-            roboChassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, imu);
+            roboChassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(forwardSpeed, sideSpeed, rot, imu);
         } else {
-            roboChassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, rot);
+            roboChassisSpeeds = new ChassisSpeeds(forwardSpeed, sideSpeed, rot);
         }
         // As of July 18th, the fromDiscreteSpeeds methods were added to ChassisSpeeds
         // to fix drift in complex turns
@@ -217,8 +217,8 @@ public class DriveBaseSubsystem extends SubsystemBase {
         m_rearRightSwerveModule.zeroTurningWheel(DriveConstants.RearRightMagZero);
     }
 
-    public void zeroGyro() {
-        m_gyro.setYaw(0);
+    public void zeroGyro(double startingAngle) {
+        m_gyro.setYaw(startingAngle);
     }
 
     public void setWheelsAt(double rad) {

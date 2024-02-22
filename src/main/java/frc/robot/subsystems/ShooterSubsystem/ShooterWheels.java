@@ -25,9 +25,11 @@ public class ShooterWheels extends SubsystemBase {
         rightMotor = right;
         left.setInverted(true);
         right.setInverted(false);
-        right.follow(left);
+        // right.follow(left);
 
-        configureOneWheelFalcon(left);
+        configureOneWheelFalcon(left);    
+        configureOneWheelFalcon(right);
+;
         setShooterSpeedVBus(0.0);
     }
 
@@ -99,6 +101,7 @@ public class ShooterWheels extends SubsystemBase {
         System.out.println("setShooterSpeed: " + ticksPer100ms);
         if (ticksPer100ms > 50) {
             leftMotor.set(ControlMode.Velocity, ticksPer100ms);
+            rightMotor.set(ControlMode.Velocity, ticksPer100ms*.2);
         } else {
             setShooterSpeedVBus(0);
         }
@@ -106,6 +109,7 @@ public class ShooterWheels extends SubsystemBase {
 
     public void setShooterSpeedVBus(double pos) {
         leftMotor.set(ControlMode.PercentOutput, pos);
+        rightMotor.set(ControlMode.PercentOutput, pos);
     }
 
     public double getShooterSpeed() {

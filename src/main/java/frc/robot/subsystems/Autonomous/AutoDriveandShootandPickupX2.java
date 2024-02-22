@@ -21,8 +21,8 @@ public class AutoDriveandShootandPickupX2 extends SequentialCommandGroup {
     addCommands(new SystemArmZero(),
         new DriveForDistance(0.0, 0.2, 0.0, 100.0),
         new ShootNote(2600),
-        new IntakeRollersPickupSet());
-    addCommands(new SystemArmZero(),
+        new IntakeRollersPickupSet(),
+
         new DriveForDistance(0.0, 0.2, 0.0, 100.0),
         new ShootNote(2600),
         new IntakeRollersPickupSet());

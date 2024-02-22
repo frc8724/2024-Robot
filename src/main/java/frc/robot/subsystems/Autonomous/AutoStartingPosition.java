@@ -5,22 +5,25 @@
 package frc.robot.subsystems.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.SystemArmZero;
 import frc.robot.subsystems.DriveBase.DriveForDistance;
-import frc.robot.subsystems.ShooterSubsystem.ShootNote;
+import frc.robot.subsystems.DriveBase.DriveZeroGyro;
+import frc.robot.subsystems.DriveBase.DriveZeroWheels;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoShootandDriveOut extends SequentialCommandGroup {
-  /** Creates a new AutoDriveOut. */
-  public AutoShootandDriveOut() {
+public class AutoStartingPosition extends SequentialCommandGroup {
+  /** Creates a new AutoStartingPosition. */
+  public AutoStartingPosition(double startingAngle) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new AutoStartingPosition(0.0),
-        new ShootNote(2600),
-        new DriveForDistance(0.2, 0.0, 0.0, 10.0));
-
+        new DriveForDistance(0, 0, 0, 0),
+        new SystemArmZero(),
+        // new DriveZeroWheels(),
+        new DriveZeroGyro(startingAngle),
+        new WaitCommand(1.0));
   }
 }

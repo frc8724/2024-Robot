@@ -9,14 +9,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 
 public class DriveForDistance extends Command {
-  double m_x;
-  double m_y;
+  double m_forward;
+  double m_side;
   double m_rot;
   double m_distance;
 
-  public DriveForDistance(double x, double y, double rot, double distance) {
-    m_x = x;
-    m_y = y;
+  public DriveForDistance(double forward, double side, double rot, double distance) {
+    m_forward = forward;
+    m_side = side;
     m_rot = rot;
     m_distance = distance;
     addRequirements(RobotContainer.m_robotDrive);
@@ -28,7 +28,7 @@ public class DriveForDistance extends Command {
   public void initialize() {
     Pose2d pose = new Pose2d();
     RobotContainer.m_robotDrive.resetPose(pose);
-    RobotContainer.m_robotDrive.drive(m_x, m_y, m_rot, false);
+    RobotContainer.m_robotDrive.drive(m_forward, m_side, m_rot, false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

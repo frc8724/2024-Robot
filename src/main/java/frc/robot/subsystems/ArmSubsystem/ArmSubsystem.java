@@ -14,10 +14,10 @@ import frc.robot.motors.IMayhemTalonFX;
 
 public class ArmSubsystem extends SubsystemBase {
 
-  public static final double ZERO_POSITION = -210000;
-  public static final double NOTE_INTAKE = -185000;
-  public static final double LONG_SHOT = -141000;
-  public static final double AMP_SHOOT = 88000;
+  public static final double ZERO_POSITION = -112000;
+  public static final double NOTE_INTAKE = -95000;
+  public static final double LONG_SHOT = -55000;
+  public static final double AMP_SHOOT = 55000;
 
   public static final double POSITION_SLOP = 500.0;
 

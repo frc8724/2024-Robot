@@ -122,7 +122,8 @@ public class SwerveModule extends SubsystemBase {
         int magTicks = m_magEncoder.get();
         double wheelTicks = m_turningMotor.getRotationTicks();
 
-        //System.out.println(this.m_magEncoder.m_analogInput.getChannel() + " Swerve Mag " + magTicks);
+        // System.out.println(this.m_magEncoder.m_analogInput.getChannel() + " Swerve
+        // Mag " + magTicks);
         SmartDashboard.putNumber(this.m_magEncoder.m_analogInput.getChannel() + " Swerve Mag ", magTicks);
         SmartDashboard.putNumber(this.m_magEncoder.m_analogInput.getChannel() + " Swerve Wheel ", wheelTicks);
         super.periodic();

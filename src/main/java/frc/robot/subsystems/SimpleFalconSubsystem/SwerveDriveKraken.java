@@ -26,11 +26,13 @@ public class SwerveDriveKraken extends SubsystemBase {
 
   StatusSignal<Double> velocitySupplier;
   StatusSignal<Double> motorPosition;
+  int motorID;
 
   /** Creates a new SimpleFalconSubsystem. */
   public SwerveDriveKraken(String name, int id, boolean invert) {
     motor = new TalonFX(id);
     motor.setInverted(invert);
+    this.motorID = id;
     this.name = name;
     var talonFXConfigs = new TalonFXConfiguration();
 
@@ -56,9 +58,9 @@ public class SwerveDriveKraken extends SubsystemBase {
 
   double m_set;
 
-  double convertMpsToTicksPer100ms(double mps) {
-    return mps * Drive1rotationTicks / WheelCircumferenceMeters / 10.0;
-  }
+  // double convertMpsToTicksPer100ms(double mps) {
+  // return mps * Drive1rotationTicks / WheelCircumferenceMeters / 10.0;
+  // }
 
   // covert meters per second to rotations per second
   double wheelRadiusMeters = 0.0508; // meters
@@ -88,7 +90,7 @@ public class SwerveDriveKraken extends SubsystemBase {
 
   // distance in meters
   public double getDistance() {
-    return motorPosition.getValueAsDouble() / Drive1rotationTicks * WheelDiameterMeters * Math.PI;
+    return motor.getPosition().getValueAsDouble() * WheelDiameterMeters * Math.PI;
   }
 
   public void reset() {
@@ -104,6 +106,12 @@ public class SwerveDriveKraken extends SubsystemBase {
     // SmartDashboard.putNumber(this.name + " position",
     // motor.getSelectedSensorPosition());
     // SmartDashboard.putNumber(this.name + " m_set", m_set);
+    // if (motorID == 1) {
+    // // System.out.println(motor.getRotorPosition());
+    // System.out.println(
+    // "Position =" + motor.getPosition().getValueAsDouble() * WheelDiameterMeters *
+    // Math.PI);
 
+    // }
   }
 }

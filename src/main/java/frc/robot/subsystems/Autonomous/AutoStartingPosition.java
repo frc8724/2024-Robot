@@ -22,7 +22,7 @@ public class AutoStartingPosition extends SequentialCommandGroup {
     addCommands(
         new DriveForDistance(0, 0, 0, 0),
         new SystemArmZero(),
-        // new DriveZeroWheels(),
+        new DriveZeroWheels(),
         new DriveZeroGyro(startingAngle),
         new WaitCommand(1.0));
   }

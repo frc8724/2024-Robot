@@ -131,10 +131,10 @@ public class RobotContainer {
                                                 m_arm));
 
                 m_auto.addAuto(new AutoShootandDriveOut());
-                // m_auto.addAuto(new AutoDriveOut());
+                m_auto.addAuto(new AutoDriveOut());
                 // m_auto.addAuto(new AutoDriveandShootandPickup());
                 // m_auto.addAuto(new AutoStandStill());
-                // m_auto.addAuto(new AutoPathPlanner001());
+                m_auto.addAuto(new AutoPathPlanner001());
 
         }
 
@@ -173,12 +173,12 @@ public class RobotContainer {
                 // shoot automatically at normal speed
                 m_operatorController.button(1).onTrue(new ShootNote(2600));
                 // all motors off
-                m_operatorController.button(2).onTrue(new ParallelCommandGroup(new ArmSetPower(0),
-                                new ShooterMagSet(0),
-                                new ShooterWheelsSet(0),
-                                new IntakeRollersSet(0)));
-                // zero arm position
-                m_operatorController.button(3).onTrue(new SystemArmZero());
+                m_operatorController.button(2).onTrue(
+                                new ParallelCommandGroup(
+                                                new ArmSetPower(0),
+                                                new ShooterMagSet(0),
+                                                new ShooterWheelsSet(0),
+                                                new IntakeRollersSet(0)));
                 // Shoot high speed
                 m_operatorController.button(4).onTrue(new ShootNote(7000));
                 // intake sequence
@@ -186,6 +186,13 @@ public class RobotContainer {
                                 new IntakeRollersSet(0.5),
                                 new ShooterMagSet(0.25),
                                 new ShooterWheelsSet(-0.1)));
+                m_operatorController.button(5).onFalse(new ParallelCommandGroup(
+                                new IntakeRollersSet(0.0),
+                                new ShooterMagSet(0.0),
+                                new ShooterWheelsSet(0.0)));
+
+                // zero arm position
+                m_operatorController.button(7).onTrue(new SystemArmZero());
 
                 // set arm to long shot position
                 m_operatorController.povUp().onTrue(new SequentialCommandGroup(
@@ -193,12 +200,12 @@ public class RobotContainer {
                                 new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP)));
 
                 // set are to intake position
-                m_operatorController.povRight().onTrue(new SequentialCommandGroup(
+                m_operatorController.povLeft().onTrue(new SequentialCommandGroup(
                                 new ArmSet(ArmSubsystem.NOTE_INTAKE),
                                 new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP)));
 
                 // to shoot at position for amp
-                m_operatorController.povLeft().onTrue(new SequentialCommandGroup(
+                m_operatorController.povRight().onTrue(new SequentialCommandGroup(
                                 new ArmSet(ArmSubsystem.AMP_SHOOT),
                                 new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP)));
                 // close shot

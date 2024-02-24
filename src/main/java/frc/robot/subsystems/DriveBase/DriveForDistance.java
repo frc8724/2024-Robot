@@ -28,7 +28,7 @@ public class DriveForDistance extends Command {
   public void initialize() {
     Pose2d pose = new Pose2d();
     RobotContainer.m_robotDrive.resetPose(pose);
-    RobotContainer.m_robotDrive.drive(m_forward, m_side, m_rot, false);
+    RobotContainer.m_robotDrive.drive(m_forward, m_side, m_rot, true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -51,7 +51,7 @@ public class DriveForDistance extends Command {
   public boolean isFinished() {
     Pose2d p = RobotContainer.m_robotDrive.getPose();
     double dist = getDistance(p.getX(), p.getY());
-
+    System.out.println("Distance =" + dist);
     return dist >= m_distance;
   }
 }

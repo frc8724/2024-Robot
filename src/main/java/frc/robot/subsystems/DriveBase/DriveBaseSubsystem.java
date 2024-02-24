@@ -112,6 +112,9 @@ public class DriveBaseSubsystem extends SubsystemBase {
         // Update the odometry in the periodic block
         // System.out.println("Gyro rotation: " + m_gyro.getRotation2d());
         // System.out.println("Gyro rotation 2: " + m_gyro.getYaw());
+        // System.out.println("Odometry =" + m_odometry.getPoseMeters());
+        // System.out.println("Position for swerve module fleft" +
+        // m_frontLeftSwerveModule.getPosition());
 
         m_odometry.update(
                 m_gyro.getRotation2d(),

@@ -17,7 +17,7 @@ public class AutoPathPlanner001 extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new DriveZeroWheels(),
+        new AutoStartingPosition(0.0),
         new PathPlannerAuto("Auto Drive Out"));
   }
 }

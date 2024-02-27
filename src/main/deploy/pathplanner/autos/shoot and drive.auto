@@ -2,19 +2,31 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.5444403196498717,
-      "y": 7.005529395674177
+      "x": 0.5762369299346287,
+      "y": 6.569779302183426
     },
-    "rotation": 0
+    "rotation": 59.03624346792642
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "ShootNote"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 2.0
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "drive and shoot"
+            "pathName": "Shoot+leftNote"
           }
         }
       ]

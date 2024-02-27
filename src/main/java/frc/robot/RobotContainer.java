@@ -78,9 +78,9 @@ public class RobotContainer {
                         MotorType.kBrushless);
         private static final IMayhemCANSparkMax magRight = new MayhemCANSparkMax(Constants.DriveConstants.kMagRightId,
                         MotorType.kBrushless);
-        private static final IMayhemTalonFX climberLeft = new FakeFalconFX(Constants.DriveConstants.kMagRightId,
+        private static final IMayhemTalonFX climberLeft = new MayhemTalonFX(Constants.DriveConstants.kClimberLeftId,
                         CurrentLimit.HIGH_CURRENT);
-        private static final IMayhemTalonFX climberRight = new FakeFalconFX(Constants.DriveConstants.kMagRightId,
+        private static final IMayhemTalonFX climberRight = new MayhemTalonFX(Constants.DriveConstants.kClimberRightId,
                         CurrentLimit.HIGH_CURRENT);
 
         public static final DriveBaseSubsystem m_robotDrive = new DriveBaseSubsystem();
@@ -112,13 +112,22 @@ public class RobotContainer {
                                                 () -> m_robotDrive.drive(
                                                                 -DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Y,
                                                                                 0.10)
-                                                                                * DriveConstants.kMaxSpeedMetersPerSecond,
+                                                                                * DriveConstants.kMaxSpeedMetersPerSecond
+                                                                                * (DriverStick.Button(11).getAsBoolean()
+                                                                                                ? DriveConstants.kSlowDriveModifier
+                                                                                                : DriveConstants.kFullDriveModifier),
                                                                 -DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.X,
                                                                                 0.10)
-                                                                                * DriveConstants.kMaxSpeedMetersPerSecond,
+                                                                                * DriveConstants.kMaxSpeedMetersPerSecond
+                                                                                * (DriverStick.Button(11).getAsBoolean()
+                                                                                                ? DriveConstants.kSlowDriveModifier
+                                                                                                : DriveConstants.kFullDriveModifier),
                                                                 -DriverStick.DeadbandAxis(MayhemExtreme3dPro.Axis.Z,
                                                                                 0.40)
-                                                                                * ModuleConstants.kMaxModuleAngularSpeedRadiansPerSecond,
+                                                                                * ModuleConstants.kMaxModuleAngularSpeedRadiansPerSecond
+                                                                                * (DriverStick.Button(11).getAsBoolean()
+                                                                                                ? DriveConstants.kSlowDriveModifier
+                                                                                                : DriveConstants.kFullDriveModifier),
                                                                 true),
                                                 m_robotDrive));
 
@@ -135,6 +144,7 @@ public class RobotContainer {
                 // m_auto.addAuto(new AutoDriveandShootandPickup());
                 // m_auto.addAuto(new AutoStandStill());
                 m_auto.addAuto(new AutoPathPlanner001());
+                m_auto.addAuto(new AutoShootAndDrivex2());
 
         }
 
@@ -155,14 +165,31 @@ public class RobotContainer {
         private void configureBindings() {
 
                 DriverStick.Button(9).onTrue(
+                                // new SequentialCommandGroup(
+                                // new DriveZeroWheels(),
+                                // new DriveZeroGyro(0.0),
+                                // new WaitCommand(1.0),
+                                // new DrivebaseResetEncoders(),
+                                // new InstantCommand(() -> m_robotDrive.drive(0, 0, 0, true),
+                                // m_robotDrive)));
                                 new SequentialCommandGroup(
                                                 new DriveZeroWheels(),
                                                 new DriveZeroGyro(0.0),
-                                                new WaitCommand(1.0),
+                                                new WaitCommand(0.1),
                                                 new DrivebaseResetEncoders(),
-                                                new InstantCommand(() -> m_robotDrive.drive(0, 0, 0, true),
-                                                                m_robotDrive)));
-
+                                                new InstantCommand(() -> m_robotDrive.drive(0.2, 0, 0, true),
+                                                                m_robotDrive),
+                                                new WaitCommand(0.1),
+                                                new DriveZeroWheels(),
+                                                new WaitCommand(0.1),
+                                                new DriveZeroWheels(),
+                                                new DriveZeroGyro(0.0),
+                                                new WaitCommand(0.1),
+                                                new DrivebaseResetEncoders(),
+                                                new InstantCommand(() -> m_robotDrive.drive(-0.2, 0, 0, true),
+                                                                m_robotDrive),
+                                                new WaitCommand(0.1),
+                                                new DriveZeroWheels()));
                 // DriverStick.Button(01).onTrue(new CenterOnTag());
                 // DriverStick.Button(10).onTrue(new DriveForDistance(0.0, 0.2, 0.0, 1.0));
                 // DriverStick.Button(11).onTrue(new DriveForDistance(0.2, 0.0, 0.0, 1.0));
@@ -171,7 +198,7 @@ public class RobotContainer {
                 // OPERATOR BUTTONS
 
                 // shoot automatically at normal speed
-                m_operatorController.button(1).onTrue(new ShootNote(2600));
+                m_operatorController.button(1).onTrue(new ShootNote(4500));
                 // all motors off
                 m_operatorController.button(2).onTrue(
                                 new ParallelCommandGroup(
@@ -180,7 +207,7 @@ public class RobotContainer {
                                                 new ShooterWheelsSet(0),
                                                 new IntakeRollersSet(0)));
                 // Shoot high speed
-                m_operatorController.button(4).onTrue(new ShootNote(7000));
+                m_operatorController.button(4).onTrue(new ShootNote(8000));
                 // intake sequence
                 m_operatorController.button(5).onTrue(new ParallelCommandGroup(
                                 new IntakeRollersSet(0.5),
@@ -230,10 +257,15 @@ public class RobotContainer {
                 operatorStick.Button(2).onTrue(new ShooterWheelsSet(-0.5));
                 operatorStick.Button(2).onFalse(new ShooterWheelsSet(0.0));
 
-                operatorStick.Button(8).onTrue(new ClimberSetPower(0.5));
-                operatorStick.Button(8).onFalse(new ClimberSetPower(0.0));
-                operatorStick.Button(9).onTrue(new ClimberSetPower(-0.5));
-                operatorStick.Button(9).onFalse(new ClimberSetPower(0.0));
+                // operatorStick.Button(8).onTrue(new ClimberSetPower(-0.3));
+                // operatorStick.Button(8).onFalse(new ClimberSetPower(0.0));
+                // operatorStick.Button(9).onTrue(new ClimberSetPower(0.3));
+                // operatorStick.Button(9).onFalse(new ClimberSetPower(0.0));
+
+                m_operatorController.leftTrigger().onTrue(new ClimberSetPower(0.3));
+                m_operatorController.leftTrigger().onFalse(new ClimberSetPower(0.0));
+                m_operatorController.rightTrigger().onTrue(new ClimberSetPower(-0.3));
+                m_operatorController.rightTrigger().onFalse(new ClimberSetPower(0.0));
 
                 m_arm.setPower(0);
                 m_wheels.setShooterSpeed(0.0);

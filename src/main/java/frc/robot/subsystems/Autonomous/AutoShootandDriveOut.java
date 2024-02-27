@@ -7,6 +7,7 @@ package frc.robot.subsystems.Autonomous;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.SystemArmZero;
 import frc.robot.subsystems.DriveBase.DriveForDistance;
+import frc.robot.subsystems.DriveBase.DriveZeroWheels;
 import frc.robot.subsystems.ShooterSubsystem.ShootNote;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -15,12 +16,10 @@ import frc.robot.subsystems.ShooterSubsystem.ShootNote;
 public class AutoShootandDriveOut extends SequentialCommandGroup {
   /** Creates a new AutoDriveOut. */
   public AutoShootandDriveOut() {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new AutoStartingPosition(0.0),
-        new ShootNote(2600),
-        new DriveForDistance(0.6, 0.0, 0.0, 0.5));
+        new AutoStartingPosition(30),
+        // new ShootNote(2600),
+        new DriveForDistance(1.0, -30.0, 0.0, 1.0));
 
   }
 }

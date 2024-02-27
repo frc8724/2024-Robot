@@ -54,6 +54,8 @@ public class SwerveDriveKraken extends SubsystemBase {
 
     velocitySupplier = motor.getVelocity();
     motorPosition = motor.getPosition();
+
+    set(0.0);
   }
 
   double m_set;
@@ -79,18 +81,20 @@ public class SwerveDriveKraken extends SubsystemBase {
     m_set = value;
   }
 
+  final private static double DRIVE_MOTOR_TO_WHEEL_RATIO = 6.75;
+
   /**
    * get meters per second of the drive wheel
    */
   public double getRotationalVelocity() {
-    var ticksPerSecond = velocitySupplier.getValueAsDouble();
-    var metersPerSecond = ticksPerSecond / Drive1rotationTicks * Math.PI * WheelDiameterMeters;
+    var motorSpeed = velocitySupplier.getValueAsDouble();
+    var metersPerSecond = motorSpeed / DRIVE_MOTOR_TO_WHEEL_RATIO * Math.PI * WheelDiameterMeters;
     return metersPerSecond;
   }
 
   // distance in meters
   public double getDistance() {
-    return motor.getPosition().getValueAsDouble() * WheelDiameterMeters * Math.PI;
+    return motor.getPosition().getValueAsDouble() / DRIVE_MOTOR_TO_WHEEL_RATIO * WheelDiameterMeters * Math.PI * 1.15;
   }
 
   public void reset() {

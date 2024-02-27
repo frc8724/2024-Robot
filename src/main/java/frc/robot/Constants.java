@@ -70,13 +70,13 @@ public final class Constants {
     public static final int ninety_degrees_in_ticks = 0;
     public static final int one_eighty_degrees_in_ticks = 2048;
     // mag 3
-    public static final int FrontLeftMagZero = 1788;
+    public static final int FrontLeftMagZero = 1788 + 18; // good
     // mag 1
-    public static final int RearLeftMagZero = 1909;
+    public static final int RearLeftMagZero = 1909 + 25; // good
     // mag 2
     public static final int FrontRightMagZero = 3474;
     // mag 0
-    public static final int RearRightMagZero = 370;
+    public static final int RearRightMagZero = 370 - 30;
 
     // If you call DriveSubsystem.drive() with a different period make sure to
     // update this.
@@ -105,10 +105,14 @@ public final class Constants {
     public static final double kaVoltSecondsSquaredPerMeter = 0.15;
 
     public static final double kMaxSpeedMetersPerSecond = 4.0;
+
+    public static final double kFullDriveModifier = 1.0;
+    public static final double kSlowDriveModifier = 0.4;
   }
 
   public static final class ModuleConstants {
     public static final double kMaxModuleAngularSpeedRadiansPerSecond = 2 * Math.PI;
+    public static final double kMaxModuleAngularSpeedDegreesPerSecond = 360;
     public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 2 * Math.PI;
 
     public static final int kEncoderCPR = 1024;

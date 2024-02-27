@@ -16,6 +16,7 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
 
 public class DriveBaseSubsystem extends SubsystemBase {
@@ -151,6 +152,33 @@ public class DriveBaseSubsystem extends SubsystemBase {
                         m_rearRightSwerveModule.getPosition()
                 },
                 pose);
+    }
+    // (1.0, 0.0)
+    // public void driveStraightOnHeading(double speed, double fieldHeading) {
+    // double vx;
+    // double vy;
+    // double robotHeading = m_gyro.getRotation2d().getDegrees() + fieldHeading;
+
+    // vx = speed * Math.cos(fieldHeading);
+    // vy = speed * Math.sin(fieldHeading);
+
+    // rot =
+    // drive(vx, vy, 0.0, true);
+    // }
+
+    public void driveOnHeading(double speed, double direction, double desiredOrientation) {
+        double vx = speed * Math.cos(direction);
+        double vy = speed * Math.sin(direction);
+        double currentRot = m_gyro.getAngle();
+        double angleChange = desiredOrientation - currentRot;
+        double angleChangeRads = angleChange * (2 * Math.PI) / 360.0;
+        double rot = angleChangeRads;
+        /// Math.PI * Constants.ModuleConstants.kMaxModuleAngularSpeedRadiansPerSecond /
+        /// 100;
+        // double rot = angleChange / Math.PI *
+        // Constants.ModuleConstants.kMaxModuleAngularSpeedDegreesPerSecond;
+
+        drive(vx, vy, rot, true);
     }
 
     /**

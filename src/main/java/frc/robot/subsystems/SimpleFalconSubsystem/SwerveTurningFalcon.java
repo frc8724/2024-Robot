@@ -29,10 +29,12 @@ public class SwerveTurningFalcon extends SubsystemBase {
     this.name = name;
     motor.setSelectedSensorPosition(0);
 
-    motor.config_kP(0, 0.5);
+    motor.config_kP(0, 1.0);
     motor.config_kI(0, 0.0);
-    motor.config_kD(0, 0.5);
+    motor.config_kD(0, 10.0);
     motor.config_kF(0, 0.0);
+
+    motor.configAllowableClosedloopError(0, 10);
 
     motor.configNominalOutputForward(0.0);
     motor.configNominalOutputReverse(0.0);

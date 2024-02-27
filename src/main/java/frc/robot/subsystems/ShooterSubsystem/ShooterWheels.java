@@ -27,9 +27,9 @@ public class ShooterWheels extends SubsystemBase {
         right.setInverted(false);
         // right.follow(left);
 
-        configureOneWheelFalcon(left);    
+        configureOneWheelFalcon(left);
         configureOneWheelFalcon(right);
-;
+        ;
         setShooterSpeedVBus(0.0);
     }
 
@@ -98,10 +98,10 @@ public class ShooterWheels extends SubsystemBase {
             ticksPer100ms = 0;
 
         m_targetSpeedRPM = ticksPer100ms;
-        System.out.println("setShooterSpeed: " + ticksPer100ms);
+        // System.out.println("setShooterSpeed: " + ticksPer100ms);
         if (ticksPer100ms > 50) {
             leftMotor.set(ControlMode.Velocity, ticksPer100ms);
-            rightMotor.set(ControlMode.Velocity, ticksPer100ms*.2);
+            rightMotor.set(ControlMode.Velocity, ticksPer100ms * .4);
         } else {
             setShooterSpeedVBus(0);
         }
@@ -117,7 +117,7 @@ public class ShooterWheels extends SubsystemBase {
     }
 
     public double getShooterTargetSpeed() {
-        System.out.println("getShooterTargetSpeed: " + m_targetSpeedRPM);
+        // System.out.println("getShooterTargetSpeed: " + m_targetSpeedRPM);
         return m_targetSpeedRPM;
     }
 

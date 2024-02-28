@@ -167,18 +167,22 @@ public class DriveBaseSubsystem extends SubsystemBase {
     // }
 
     public void driveOnHeading(double speed, double direction, double desiredOrientation) {
-        double vx = speed * Math.cos(direction);
-        double vy = speed * Math.sin(direction);
+        double vx = speed * Math.cos(-direction * 2 * Math.PI / 360);
+        double vy = speed * Math.sin(-direction * 2 * Math.PI / 360);
         double currentRot = m_gyro.getAngle();
         double angleChange = desiredOrientation - currentRot;
-        double angleChangeRads = angleChange * (2 * Math.PI) / 360.0;
-        double rot = angleChangeRads;
+        double angleChangeRads = angleChange * (3 * Math.PI) / 360.0;
+        // double rot = angleChangeRads;
         /// Math.PI * Constants.ModuleConstants.kMaxModuleAngularSpeedRadiansPerSecond /
         /// 100;
         // double rot = angleChange / Math.PI *
         // Constants.ModuleConstants.kMaxModuleAngularSpeedDegreesPerSecond;
+        System.out.println("Speed " + speed + " == vx: " + vx + ", vy: " + vy);
+        System.out.println("Current Rotation: " + currentRot + " Desired Orientation:" + desiredOrientation + " = "
+                + angleChange);
+        System.out.println(angleChange + " * (2 * PI) / 360.0 = " + angleChangeRads);
 
-        drive(vx, vy, rot, true);
+        drive(vx, vy, -angleChangeRads, true);
     }
 
     /**

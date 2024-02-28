@@ -15,13 +15,15 @@ import frc.robot.motors.IMayhemTalonFX;
 public class ArmSubsystem extends SubsystemBase {
 
   public static final double ZERO_POSITION = -112000;
-  public static final double NOTE_INTAKE = -95000;
+  public static final double ANGLE_SHOT_POSITION = -100000;
+
+  public static final double NOTE_INTAKE = -85000;
   public static final double LONG_SHOT = -57000;
   public static final double AMP_SHOOT = 55000;
 
   public static final double POSITION_SLOP = 500.0;
 
-  final double kWheelP = 0.02; // 0.015;
+  final double kWheelP = 0.08; // 0.015;
   final double kWheelI = 0.000;
   final double kWheelD = 0.000;
   final double kWheelF = 0.000;
@@ -33,15 +35,14 @@ public class ArmSubsystem extends SubsystemBase {
   IMayhemTalonFX leftMotor;
   IMayhemTalonFX rightMotor;
 
+  boolean manualMode = true;
+
   /** Creates a new Shoulder. */
   public ArmSubsystem(IMayhemTalonFX left, IMayhemTalonFX right) {
     leftMotor = left;
     rightMotor = right;
-    // leftMotor.configFactoryDefault();
-    // rightMotor.configFactoryDefault();
 
     configTalon(leftMotor);
-    // configTalon(rightMotor);
 
     leftMotor.setInverted(false);
     rightMotor.setInverted(true);
@@ -51,7 +52,6 @@ public class ArmSubsystem extends SubsystemBase {
 
     rightMotor.follow(leftMotor);
 
-    // configureDriveTalon(rightMotor);
     configureDriveTalon(leftMotor);
 
     setZeroArm();
@@ -91,14 +91,15 @@ public class ArmSubsystem extends SubsystemBase {
     talon.selectProfileSlot(slot, timeout);
     talon.configForwardSoftLimitEnable(false);
     talon.configReverseSoftLimitEnable(false);
-    talon.configAllowableClosedloopError(slot, 5000, timeout);
+    talon.configAllowableClosedloopError(slot, 100, timeout);
 
     talon.configClosedLoopPeakOutput(slot, 0.5);
 
-    talon.configMotionCruiseVelocity(40000); // measured velocity of ~100K at 85%; set cruise to that
-    talon.configMotionAcceleration(30000); // acceleration of 2x velocity allows cruise to be attained in 1 second
-                                           // second
-    // talon.set(TalonFXControlMode.Position, 0.0);
+    // talon.configMotionCruiseVelocity(40000); // measured velocity of ~100K at
+    // 85%; set cruise to that
+    // talon.configMotionAcceleration(30000); // acceleration of 2x velocity allows
+    // cruise to be attained in 1 second
+    // second
     talon.set(ControlMode.Position, 0.0);
   }
 
@@ -137,8 +138,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void setAngleInTicks(double ticks) {
     TargetPositionTicks = ticks;
-    // rightTalon.set(ControlMode.MotionMagic, ticks,
-    // DemandType.ArbitraryFeedForward, 0.05);
+    manualMode = false;
     leftMotor.set(ControlMode.Position, ticks);
   }
 
@@ -171,9 +171,10 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void setPower(double power) {
-    ;
-    leftMotor.set(ControlMode.PercentOutput, power);
-    // rightMotor.set(ControlMode.PercentOutput, power);
+    if ((!manualMode && power > 0.1) || manualMode) {
+      manualMode = true;
+      leftMotor.set(ControlMode.PercentOutput, power);
+    }
   }
 
   public boolean isAbove(double x) {

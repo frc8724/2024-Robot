@@ -18,9 +18,8 @@ public class ShooterMag extends SubsystemBase {
     rightMotor = right;
 
     leftMotor.setInverted(true);
-    
-    // rightMotor.follow(leftMotor.getMotor());
     rightMotor.setInverted(false);
+
     setPowerVbus(0);
   }
 

@@ -35,7 +35,7 @@ public class AutoStartLeftScore2 extends SequentialCommandGroup {
         new ShooterWheelsSet(-0.1),
         new DriveForDistance(1.0, 0, 0, 1.5),
         new DriveForDistance(-1.0, 0, -50, 1.5),
-        new DriveForDistance(0.1, 0, -50, .01),
+        new DriveForDistance(0.1, 0, -50, .01), // stop
 
         new IntakeRollersSet(0.0),
         new ShooterMagSet(0.0),

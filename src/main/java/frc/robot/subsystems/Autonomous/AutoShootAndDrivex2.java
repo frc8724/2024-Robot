@@ -34,7 +34,7 @@ public class AutoShootAndDrivex2 extends SequentialCommandGroup {
         // move the arm
         new ArmSet(ArmSubsystem.NOTE_INTAKE),
         // drive forward
-        new DriveForDistance(1.0, 0.0, 0.0, 0.5),
+        new DriveForDistance(1.7, 0.0, 0.0, 0.5),
 
         // make sure the arm is at position
         new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
@@ -44,9 +44,9 @@ public class AutoShootAndDrivex2 extends SequentialCommandGroup {
         new ShooterMagSet(0.25),
         new ShooterWheelsSet(-0.1),
         // drive to get the note
-        new DriveForDistance(0.7, 0.0, 0.0, 1.0),
+        new DriveForDistance(1.7, 0.0, 0.0, 1.0),
 
-        new DriveForDistance(-0.7, 0.0, 0.0, 0.5),
+        new DriveForDistance(-1.7, 0.0, 0.0, 0.5),
 
         // stop the intake
         new IntakeRollersSet(0),
@@ -54,9 +54,9 @@ public class AutoShootAndDrivex2 extends SequentialCommandGroup {
         new ShooterWheelsSet(0.0),
         // put the arm to the shooting position
         new ArmSet(ArmSubsystem.ZERO_POSITION),
-        new DriveForDistance(-0.7, 0.0, 0.0, 1.0),
+        new DriveForDistance(-1.7, 0.0, 0.0, 1.0),
         // stop
-        new DriveForDistance(0.1, 0.0, 0.0, 0.01),
+        new DriveForDistance(0., 0.0, 0.0, 0.0),
         // make sure the arm is at position.
         new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
         // shoot the note

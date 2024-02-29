@@ -22,7 +22,7 @@ public class AutoShootandDriveOut extends SequentialCommandGroup {
     addCommands(
         new AutoStartingPosition(0.0),
         new ShootNote(2600),
-        new DriveForDistance(1.0, 0.0, 0.0, 5.0),
+        new DriveForDistance(2.0, 0.0, 0.0, 2.0),
         new DriveForDistance(0.0, 0.0, 0.0, 0.0));
 
   }

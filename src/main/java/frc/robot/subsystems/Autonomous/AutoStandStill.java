@@ -17,7 +17,7 @@ public class AutoStandStill extends SequentialCommandGroup {
   public AutoStandStill() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new DriveZeroWheels(),
+    addCommands(new AutoStartingPosition(0.0),
         new DriveForDistance(0, 0, 0, 0));
 
   }

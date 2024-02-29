@@ -19,11 +19,9 @@ public class AutoDriveOut extends SequentialCommandGroup {
   public AutoDriveOut() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new SystemArmZero(),
-        new DriveZeroWheels(),
-        new DriveZeroGyro(0.0),
-        new WaitCommand(1.0),
-        new DriveForDistance(0.2, 0.0, 0.0, 2.0));
+    addCommands(
+        new AutoStartingPosition(0),
+        new DriveForDistance(3.0, 0.0, 0.0, 2.0));
 
   }
 }

@@ -20,7 +20,7 @@ public class ShootNote extends SequentialCommandGroup {
 
         new ShooterMagSet(-0.07),
         new ShooterWheelsSet(-0.1),
-        new WaitCommand(0.4),
+        new WaitCommand(0.2),
 
         new ShooterMagSet(0.0),
         new ShooterWheelsSet(0.0),

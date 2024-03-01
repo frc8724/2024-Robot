@@ -14,12 +14,12 @@ import frc.robot.motors.IMayhemTalonFX;
 
 public class ArmSubsystem extends SubsystemBase {
 
-  public static final double ZERO_POSITION = -112000;
-  public static final double ANGLE_SHOT_POSITION = -100000;
+  public static final double ZERO_POSITION = -110000;
+  public static final double ANGLE_SHOT_POSITION = ZERO_POSITION;
 
-  public static final double NOTE_INTAKE = -85000;
-  public static final double LONG_SHOT = -55000;
-  public static final double AMP_SHOOT = 55000;
+  public static final double NOTE_INTAKE = -100000;
+  public static final double LONG_SHOT = -45000;
+  public static final double AMP_SHOOT = -12000;
 
   public static final double POSITION_SLOP = 500.0;
 
@@ -171,7 +171,7 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void setPower(double power) {
-    if ((!manualMode && power > 0.1) || manualMode) {
+    if ((!manualMode && Math.abs(power) > 0.1) || manualMode) {
       manualMode = true;
       leftMotor.set(ControlMode.PercentOutput, power);
     }

@@ -4,20 +4,16 @@
 
 package frc.robot.subsystems.Autonomous;
 
-import com.pathplanner.lib.commands.PathPlannerAuto;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.subsystems.DriveBase.DriveZeroWheels;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoPathPlanner001 extends SequentialCommandGroup {
-  /** Creates a new AutoPathPlanner001. */
-  public AutoPathPlanner001() {
+public class AutoBlueStartShortScore2 extends SequentialCommandGroup {
+  /** Creates a new AutoBlueStartShortScore2. */
+  public AutoBlueStartShortScore2() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-        new AutoStartingPosition(0.0),
-        new PathPlannerAuto("Auto Drive Out"));
+    addCommands(new AutoStartShortScore2(1.0));
   }
 }

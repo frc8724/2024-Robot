@@ -17,16 +17,16 @@ import frc.robot.subsystems.ShooterSubsystem.ShooterWheelsSet;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoStartLeftScore2 extends SequentialCommandGroup {
+public class AutoStartShortScore2 extends SequentialCommandGroup {
   /** Creates a new AutoStartLeftScore2. */
-  public AutoStartLeftScore2() {
+  public AutoStartShortScore2(double alliance) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new AutoStartingPosition(-50.0),
+        new AutoStartingPosition(-50.0 * alliance),
         new ArmSet(ArmSubsystem.ANGLE_SHOT_POSITION),
         new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
-        new ShootNote(3000.0),
+        new ShootNote(4500.0),
         // move the arm
         new ArmSet(ArmSubsystem.NOTE_INTAKE),
         // intake the note
@@ -34,8 +34,8 @@ public class AutoStartLeftScore2 extends SequentialCommandGroup {
         new ShooterMagSet(0.25),
         new ShooterWheelsSet(-0.1),
         new DriveForDistance(1.7, 0, 0, 2.0),
-        new DriveForDistance(-1.7, 0, -50, 2.0),
-        new DriveForDistance(0.0, 0, -50, 0), // stop
+        new DriveForDistance(-1.7, 0, -50 * alliance, 2.0),
+        new DriveForDistance(0.0, 0, -50 * alliance, 0), // stop
 
         new IntakeRollersSet(0.0),
         new ShooterMagSet(0.0),

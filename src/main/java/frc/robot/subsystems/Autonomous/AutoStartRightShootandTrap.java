@@ -16,7 +16,7 @@ import frc.robot.subsystems.ShooterSubsystem.ShootNote;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoStartRightShootandTrap extends SequentialCommandGroup {
   /** Creates a new AutoStartLeftShootDriveOut. */
-  public AutoStartRightShootandTrap() {
+  public AutoStartRightShootandTrap(double alliance) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
@@ -25,7 +25,7 @@ public class AutoStartRightShootandTrap extends SequentialCommandGroup {
         new DriveForDistance(0.01, 20, 135, 0.01),
         new ArmSet(ArmSubsystem.NOTE_INTAKE),
         new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
-        new ShootNote(3500)
+        new ShootNote(4500)
     // new DriveForDistance(1.0, 0, 0, 2.0),
     // new ArmSet(ArmSubsystem.ANGLE_SHOT_POSITION),
     // new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP)

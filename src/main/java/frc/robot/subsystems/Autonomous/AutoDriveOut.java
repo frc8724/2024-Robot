@@ -22,6 +22,5 @@ public class AutoDriveOut extends SequentialCommandGroup {
     addCommands(
         new AutoStartingPosition(0),
         new DriveForDistance(3.0, 0.0, 0.0, 2.0));
-
   }
 }

@@ -149,13 +149,13 @@ public class RobotContainer {
                 m_auto.addAuto(new AutoStandStill());
                 m_auto.addAuto(new AutoShootAndDrivex2());
 
-                // m_auto.addAuto(new AutoPathPlanner001());
-                m_auto.addAuto(new AutoShootAndDrivex2());
-                m_auto.addAuto(new AutoBlueStartShortScore2());
                 m_auto.addAuto(new AutoBlueStartLongScore2());
+                m_auto.addAuto(new AutoBlueStartLongShootandDrive());
+                m_auto.addAuto(new AutoBlueStartShortShootandDrive());
+                m_auto.addAuto(new AutoBlueStartShortScore2());
 
                 m_auto.addAuto(new AutoRedStartLongScore2());
-                m_auto.addAuto(new AutoRedLongShootDrive());
+                m_auto.addAuto(new AutoRedStartLongShootDrive());
                 m_auto.addAuto(new AutoRedStartShortShootandDrive());
                 m_auto.addAuto(new AutoRedStartShortScore2());
 

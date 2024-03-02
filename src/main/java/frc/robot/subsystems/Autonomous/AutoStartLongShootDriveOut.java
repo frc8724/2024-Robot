@@ -25,7 +25,7 @@ public class AutoStartLongShootDriveOut extends SequentialCommandGroup {
         new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
         new ShootNote(4500.0),
         new DriveForDistance(2.0, 45 * alliance, 0, 2.0),
-        new DriveForDistance(2.0, 20 * alliance, 0, 3.0),
+        new DriveForDistance(2.0, 45 * alliance, 0, 3.0),
         new DriveForDistance(0, 0, 0, 0));
   }
 }

@@ -33,9 +33,11 @@ public class AutoStartLongScore2 extends SequentialCommandGroup {
         new IntakeRollersSet(0.5),
         new ShooterMagSet(0.25),
         new ShooterWheelsSet(-0.1),
+        // drive to get the note
         new DriveForDistance(1.7, 50 * alliance, 0, 1.0),
-        new DriveForDistance(1.7, 0.0, 0, 1.0),
-        new DriveForDistance(-1.7, 0.0, 0.0, 1.0),
+        new DriveForDistance(1.7, 20 * alliance, 0, 0.8),
+        // drive back to the speaker
+        new DriveForDistance(-1.7, 20.0 * alliance, 0.0, 0.8),
         new DriveForDistance(-1.7, 50 * alliance, 50 * alliance, 1.0),
         new DriveForDistance(0.0, 45 * alliance, 40 * alliance, 0.0), // stop
 

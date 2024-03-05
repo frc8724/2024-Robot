@@ -34,7 +34,7 @@ public class AutoStartShortScore2 extends SequentialCommandGroup {
         new ShooterMagSet(0.25),
         new ShooterWheelsSet(-0.1),
         new DriveForDistance(1.7, 0, 0, 2.0),
-        new DriveForDistance(-1.7, 0, -50 * alliance, 2.0),
+        new DriveForDistance(-1.7, 0, -45 * alliance, 2.0),
         new DriveForDistance(0.0, 0, -50 * alliance, 0), // stop
 
         new IntakeRollersSet(0.0),

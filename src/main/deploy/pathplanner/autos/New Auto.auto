@@ -1,0 +1,97 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.8924295166707293,
+      "y": 6.382405917450922
+    },
+    "rotation": 60.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "ArmSet"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ArmIsAtPosition"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShootNote"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeRollersSet"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShooterMagSet"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShooterWheelsSet"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "New Path"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeRollersSet"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShooterMagSet"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShooterWheelsSet"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ArmSet"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ArmIsAtPosition"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShootNote"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

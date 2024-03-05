@@ -29,6 +29,7 @@ public class AutoStartLongScore2 extends SequentialCommandGroup {
         new ShootNote(4500.0),
         // move the arm
         new ArmSet(ArmSubsystem.NOTE_INTAKE),
+        new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
         // intake the note
         new IntakeRollersSet(0.5),
         new ShooterMagSet(0.25),
@@ -39,7 +40,7 @@ public class AutoStartLongScore2 extends SequentialCommandGroup {
         // drive back to the speaker
         new DriveForDistance(-1.7, 20.0 * alliance, 0.0, 0.8),
         new DriveForDistance(-1.7, 50 * alliance, 50 * alliance, 1.0),
-        new DriveForDistance(0.0, 45 * alliance, 40 * alliance, 0.0), // stop
+        new DriveForDistance(0.01, 45 * alliance, 50 * alliance, 0.01), // stop
 
         new IntakeRollersSet(0.0),
         new ShooterMagSet(0.0),

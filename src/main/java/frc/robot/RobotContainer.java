@@ -36,6 +36,8 @@ import frc.robot.subsystems.IntakeRollers.IntakeRollersSet;
 import frc.robot.subsystems.LimeLight.CenterOnTag;
 import frc.robot.subsystems.LimeLight.LimeLightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem.ShootNote;
+import frc.robot.subsystems.ShooterSubsystem.ShootNotePost;
+import frc.robot.subsystems.ShooterSubsystem.ShootNotePre;
 import frc.robot.subsystems.ShooterSubsystem.ShooterMag;
 import frc.robot.subsystems.ShooterSubsystem.ShooterMagSet;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheels;
@@ -224,13 +226,9 @@ public class RobotContainer {
                                                 new ShooterMagSet(0),
                                                 new ShooterWheelsSet(0),
                                                 new IntakeRollersSet(0)));
-                // Shoot amp faster
-                // m_operatorController.button(4).onTrue(new ParallelCommandGroup(
-                // new ShooterMagSet(-0.07),
-                // new ShooterWheelsSet(-0.1),
-                // new WaitCommand(0.4),
-                // new ShooterMagSet(1.5),
-                // new ShooterWheelsSetTicksPer100ms(8000)));
+                // rev beforehand
+                m_operatorController.button(4).onTrue(new ShootNotePre(2500));
+                m_operatorController.button(4).onFalse(new ShootNotePost(2500));
                 // intake sequence
                 m_operatorController.button(5).onTrue(new ParallelCommandGroup(
                                 new IntakeRollersSet(0.5),

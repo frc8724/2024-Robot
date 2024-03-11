@@ -13,6 +13,7 @@ import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.DriveBase.DriveForDistance;
 import frc.robot.subsystems.IntakeRollers.IntakeRollersPickupSet;
 import frc.robot.subsystems.IntakeRollers.IntakeRollersSet;
+import frc.robot.subsystems.ShooterSubsystem.ShootShort;
 import frc.robot.subsystems.ShooterSubsystem.ShootNote;
 import frc.robot.subsystems.ShooterSubsystem.ShooterMagSet;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheelsSet;
@@ -26,11 +27,10 @@ public class AutoShootAndDrivex2 extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new SystemArmZero(),
         // start flat against the speaker
         new AutoStartingPosition(0.0),
         // shoot the note close
-        new ShootNote(2600),
+        new ShootShort(),
         // move the arm
         new ArmSet(ArmSubsystem.NOTE_INTAKE),
         // drive forward

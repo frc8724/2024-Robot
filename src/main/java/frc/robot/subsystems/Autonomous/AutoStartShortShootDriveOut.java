@@ -5,11 +5,8 @@
 package frc.robot.subsystems.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.subsystems.ArmSubsystem.ArmIsAtPosition;
-import frc.robot.subsystems.ArmSubsystem.ArmSet;
-import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.DriveBase.DriveForDistance;
-import frc.robot.subsystems.ShooterSubsystem.ShootNote;
+import frc.robot.subsystems.ShooterSubsystem.ShootShort;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -21,9 +18,7 @@ public class AutoStartShortShootDriveOut extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
         new AutoStartingPosition(-50.0 * alliance),
-        new ArmSet(ArmSubsystem.ANGLE_SHOT_POSITION),
-        new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
-        new ShootNote(4500.0),
+        new ShootShort(),
         new DriveForDistance(1.0, 0, 0, 3.0));
   }
 }

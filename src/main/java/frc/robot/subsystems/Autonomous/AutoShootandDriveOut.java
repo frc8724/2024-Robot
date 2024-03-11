@@ -5,12 +5,7 @@
 package frc.robot.subsystems.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.subsystems.SystemArmZero;
-import frc.robot.subsystems.ArmSubsystem.ArmIsAtPosition;
-import frc.robot.subsystems.ArmSubsystem.ArmSet;
-import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.DriveBase.DriveForDistance;
-import frc.robot.subsystems.DriveBase.DriveZeroWheels;
 import frc.robot.subsystems.ShooterSubsystem.ShootNote;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more

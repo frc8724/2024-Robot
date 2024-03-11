@@ -32,7 +32,7 @@ public class ShootNote extends SequentialCommandGroup {
         // wait until it is at speed or 2 seconds
         new ParallelRaceGroup(
             new ShooterWheelAtSpeed(),
-            new WaitCommand(1.0)),
+            new WaitCommand(0.4)),
 
         // move the note to the shooter
         new ShooterMagSet(1.0),

@@ -17,13 +17,13 @@ import frc.robot.subsystems.ShooterSubsystem.ShooterWheelsSet;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoStartShortScore2 extends SequentialCommandGroup {
+public class AutoStartShortScore3 extends SequentialCommandGroup {
   /** Creates a new AutoStartLeftScore2. */
-  public AutoStartShortScore2(double alliance) {
+  public AutoStartShortScore3(double alliance) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new AutoStartingPosition(-40.0 * alliance),
+        new AutoStartingPosition(-50.0 * alliance),
         new ArmSet(ArmSubsystem.ANGLE_SHOT_POSITION),
         new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
         new ShootNote(4500.0),
@@ -34,15 +34,25 @@ public class AutoStartShortScore2 extends SequentialCommandGroup {
         new ShooterMagSet(0.25),
         new ShooterWheelsSet(-0.1),
         new DriveForDistance(1.7, 0, 0, 2.0),
-        new DriveForDistance(-1.7, 0, -40 * alliance, 2.0),
-        new DriveForDistance(0.0, 0, -40 * alliance, 0), // stop
+        new DriveForDistance(-1.7, 0, -50 * alliance, 2.0),
+        new DriveForDistance(0.0, 0, -50 * alliance, 0), // stop
 
         new IntakeRollersSet(0.0),
         new ShooterMagSet(0.0),
         new ShooterWheelsSet(0.0),
         new ArmSet(ArmSubsystem.ANGLE_SHOT_POSITION),
         new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
-        new ShootNote(3000.0));
+        new ShootNote(3000.0),
+        // move arm to position
+        new ArmSet(ArmSubsystem.NOTE_INTAKE),
+        // intake the note
+        new IntakeRollersSet(0.5),
+        new ShooterMagSet(0.25),
+        new ShooterWheelsSet(-0.1),
+        new DriveForDistance(1.7, 30, 0, 2.0),
+        new DriveForDistance(-1.7, 0, -50 * alliance, 2.0),
+        new DriveForDistance(0.0, 0, -50 * alliance, 0) // stop
+    );
 
   }
 }

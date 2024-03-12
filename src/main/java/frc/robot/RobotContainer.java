@@ -150,6 +150,7 @@ public class RobotContainer {
                 m_auto.addAuto(new AutoDriveOut());
                 m_auto.addAuto(new AutoStandStill());
                 m_auto.addAuto(new AutoShootAndDrivex2());
+                m_auto.addAuto(new AutoStartShortScore3(0));
 
                 m_auto.addAuto(new AutoBlueStartLongScore2());
                 m_auto.addAuto(new AutoBlueStartLongShootandDrive());
@@ -227,8 +228,8 @@ public class RobotContainer {
                                                 new ShooterWheelsSet(0),
                                                 new IntakeRollersSet(0)));
                 // rev beforehand
-                m_operatorController.button(4).onTrue(new ShootNotePre(2500));
-                m_operatorController.button(4).onFalse(new ShootNotePost(2500));
+                m_operatorController.button(4).onTrue(new ShootNotePre(3600));
+                m_operatorController.button(4).onFalse(new ShootNotePost(3600));
                 // intake sequence
                 m_operatorController.button(5).onTrue(new ParallelCommandGroup(
                                 new IntakeRollersSet(0.5),

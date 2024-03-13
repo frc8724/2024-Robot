@@ -146,6 +146,7 @@ public class RobotContainer {
                                                 },
                                                 m_arm));
 
+                m_auto.addAuto(new AuthDriveMidNote3AndBack());
                 m_auto.addAuto(new AutoShootandDriveOut());
                 m_auto.addAuto(new AutoDriveOut());
                 m_auto.addAuto(new AutoStandStill());
@@ -161,6 +162,8 @@ public class RobotContainer {
                 m_auto.addAuto(new AutoRedStartLongShootDrive());
                 m_auto.addAuto(new AutoRedStartShortShootandDrive());
                 m_auto.addAuto(new AutoRedStartShortScore2());
+
+                m_auto.addAuto(new AutoScore2Mid3());
 
                 m_pathPlanner = AutoBuilder.buildAutoChooser();
                 SmartDashboard.putData("AutoChooser:", m_pathPlanner);

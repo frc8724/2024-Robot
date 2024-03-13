@@ -43,14 +43,16 @@ public class AutoStartShortScore3 extends SequentialCommandGroup {
         new ArmSet(ArmSubsystem.ANGLE_SHOT_POSITION),
         new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
         new ShootNote(3000.0),
+        // move to next position
+        new DriveForDistance(1.7, 30, 0, 2.0),
+        new DriveForDistance(-1.7, 0, -50 * alliance, 2.0),
         // move arm to position
         new ArmSet(ArmSubsystem.NOTE_INTAKE),
         // intake the note
         new IntakeRollersSet(0.5),
         new ShooterMagSet(0.25),
         new ShooterWheelsSet(-0.1),
-        new DriveForDistance(1.7, 30, 0, 2.0),
-        new DriveForDistance(-1.7, 0, -50 * alliance, 2.0),
+
         new DriveForDistance(0.0, 0, -50 * alliance, 0) // stop
     );
 

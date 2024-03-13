@@ -37,6 +37,7 @@ public class AutoStartingPosition extends SequentialCommandGroup {
             new InstantCommand(() -> RobotContainer.m_robotDrive.drive(-0.2, 0, 0, true), RobotContainer.m_robotDrive),
             new WaitCommand(0.1),
             new DriveZeroWheels(),
-            new DriveZeroGyro(-startingAngle)));
+            new DriveZeroGyro(-startingAngle),
+            new SystemArmZero()));
   }
 }

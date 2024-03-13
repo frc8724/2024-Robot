@@ -45,7 +45,6 @@ import frc.robot.subsystems.ShooterSubsystem.ShooterWheelsSet;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheelsSetTicksPer100ms;
 import frc.robot.subsystems.Targeting.Targeting;
 
-import com.pathplanner.lib.auto.AutoBuilder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -106,7 +105,7 @@ public class RobotContainer {
         // Replace with CommandPS4Controller or CommandJoystick if needed
         private final CommandXboxController m_operatorController = new CommandXboxController(
                         OperatorConstants.kOperatorControllerPort);
-        private final SendableChooser<Command> m_pathPlanner;
+        // private final SendableChooser<Command> m_pathPlanner;
 
         /**
          * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -165,8 +164,8 @@ public class RobotContainer {
 
                 m_auto.addAuto(new AutoScore2Mid3());
 
-                m_pathPlanner = AutoBuilder.buildAutoChooser();
-                SmartDashboard.putData("AutoChooser:", m_pathPlanner);
+                // m_pathPlanner = AutoBuilder.buildAutoChooser();
+                // SmartDashboard.putData("AutoChooser:", m_pathPlanner);
         }
 
         /**

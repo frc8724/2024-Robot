@@ -14,6 +14,8 @@ import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.DriveBase.DriveForDistance;
 import frc.robot.subsystems.IntakeRollers.IntakeRollersSet;
 import frc.robot.subsystems.ShooterSubsystem.ShootNote;
+import frc.robot.subsystems.ShooterSubsystem.ShootNotePost;
+import frc.robot.subsystems.ShooterSubsystem.ShootNotePre;
 import frc.robot.subsystems.ShooterSubsystem.ShootShort;
 import frc.robot.subsystems.ShooterSubsystem.ShooterMagSet;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheelsSet;
@@ -30,6 +32,7 @@ public class AuthDriveMidNote3AndBack extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
         // new AutoStartingPosition(0.0),
+
         // drive forward
         new DriveForDistance(4, 0, 0, 2.0),
         // slide to the right
@@ -47,7 +50,7 @@ public class AuthDriveMidNote3AndBack extends SequentialCommandGroup {
             new DriveForDistance(-2, 0, 0, 1.8),
             new ArmSet(ArmSubsystem.ZERO_POSITION),
             new SequentialCommandGroup(
-                new WaitCommand(0.2),
+                new WaitCommand(0.1),
                 new IntakeRollersSet(0.0),
                 new ShooterMagSet(0.0),
                 new ShooterWheelsSet(0.0))),
@@ -55,14 +58,18 @@ public class AuthDriveMidNote3AndBack extends SequentialCommandGroup {
         new DriveForDistance(-4, 0, 0, 2.5),
         // slide to the left
         new DriveForDistance(-4, 45, 0, 2.2),
-
+        //warm up shooter
+        new ParallelCommandGroup(
+            new ShootNotePre(5000),
         // drive back to the subwoofer
-        new DriveForDistance(-4, 0, 0, 2.0),
+        new DriveForDistance(-4, 0, 0, 2.0)),
+    
         // STOP! new ParallelRaceGroup(
+
         new DriveForDistance(-0.1, 0, 0, 0.0),
         new WaitCommand(0.1),
         // new WaitCommand((0.1))
 
-        new ShootNote(4500));
+        new ShootNotePost(5000));
   }
 }

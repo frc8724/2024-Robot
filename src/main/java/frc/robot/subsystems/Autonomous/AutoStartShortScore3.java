@@ -23,7 +23,7 @@ public class AutoStartShortScore3 extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new AutoStartingPosition(-50.0 * alliance),
+        new AutoStartingPosition(-45.0 * alliance),
         new ArmSet(ArmSubsystem.ANGLE_SHOT_POSITION),
         new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
         new ShootNote(5000.0),
@@ -34,8 +34,8 @@ public class AutoStartShortScore3 extends SequentialCommandGroup {
         new ShooterMagSet(0.25),
         new ShooterWheelsSet(-0.1),
         new DriveForDistance(1.7, 0, 0, 2.0),
-        new DriveForDistance(-1.7, 0, -50 * alliance, 2.0),
-        new DriveForDistance(0.0, 0, -50 * alliance, 0), // stop
+        new DriveForDistance(-1.7, 0, -35 * alliance, 2.0),
+        new DriveForDistance(0.0, 0, -35 * alliance, 0), // stop
 
         new IntakeRollersSet(0.0),
         new ShooterMagSet(0.0),
@@ -44,12 +44,12 @@ public class AutoStartShortScore3 extends SequentialCommandGroup {
         new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
         new ShootNote(5000.0),
         // move to next position
-        new DriveForDistance(1.7, -50*alliance, 0, 2.0),
-        new DriveForDistance(1.7, -60*alliance, 0, 6.0),
+        new DriveForDistance(1.7, -35*alliance, 0, 1.0),
+        new DriveForDistance(1.7, -50*alliance, 0, 6.0),
         // go back to short side
-        new DriveForDistance(-1.7, -40*alliance, 0, 6.0),
+        new DriveForDistance(-1.7, -50*alliance, 0, 6.0),
 
-        new DriveForDistance(-1.7, 0, -50 * alliance, 2.0),
+        new DriveForDistance(-1.7, 0, -35 * alliance, 2.0),
         // move arm to position
         new ArmSet(ArmSubsystem.NOTE_INTAKE),
         // intake the note
@@ -57,7 +57,7 @@ public class AutoStartShortScore3 extends SequentialCommandGroup {
         new ShooterMagSet(0.25),
         new ShooterWheelsSet(-0.1),
 
-        new DriveForDistance(0.0, 0, -50 * alliance, 0) // stop
+        new DriveForDistance(0.0, 0, -65 * alliance, 0) // stop
     );
 
   }

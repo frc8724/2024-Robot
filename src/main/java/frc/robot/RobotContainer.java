@@ -25,6 +25,8 @@ import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.Autonomous.*;
 import frc.robot.subsystems.ClimberSubsystem.ClimberSet;
 import frc.robot.subsystems.ClimberSubsystem.ClimberSetPower;
+import frc.robot.subsystems.ClimberSubsystem.ClimberSetPowerLeft;
+import frc.robot.subsystems.ClimberSubsystem.ClimberSetPowerRight;
 import frc.robot.subsystems.ClimberSubsystem.ClimberSubsystem;
 import frc.robot.subsystems.DriveBase.DriveBaseSubsystem;
 import frc.robot.subsystems.DriveBase.DriveForDistance;
@@ -266,7 +268,12 @@ public class RobotContainer {
                                 new ArmSet(ArmSubsystem.ZERO_POSITION),
                                 new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP)));
 
-                // manual buttons
+                
+                
+                
+                
+                
+                                // manual buttons
                 operatorStick.Button(6).onTrue(new IntakeRollersSet(0.5));
                 operatorStick.Button(6).onFalse(new IntakeRollersSet(0.0));
 
@@ -283,15 +290,17 @@ public class RobotContainer {
                 operatorStick.Button(2).onTrue(new ShooterWheelsSet(-0.5));
                 operatorStick.Button(2).onFalse(new ShooterWheelsSet(0.0));
 
-                // operatorStick.Button(8).onTrue(new ClimberSetPower(-0.3));
-                // operatorStick.Button(8).onFalse(new ClimberSetPower(0.0));
-                // operatorStick.Button(9).onTrue(new ClimberSetPower(0.3));
-                // operatorStick.Button(9).onFalse(new ClimberSetPower(0.0));
+                
+                // left climber
+                m_operatorController.leftTrigger().onTrue(new ClimberSetPowerLeft(0.3));
+                m_operatorController.leftTrigger().onFalse(new ClimberSetPowerLeft(0.0));
+                //right 
+                m_operatorController.rightTrigger().onTrue(new ClimberSetPowerRight(0.3));
+                m_operatorController.rightTrigger().onFalse(new ClimberSetPowerRight(0.0));
 
-                m_operatorController.leftTrigger().onTrue(new ClimberSetPower(0.3));
-                m_operatorController.leftTrigger().onFalse(new ClimberSetPower(0.0));
-                m_operatorController.rightTrigger().onTrue(new ClimberSetPower(-0.3));
-                m_operatorController.rightTrigger().onFalse(new ClimberSetPower(0.0));
+                // both down
+                m_operatorController.button(6).onTrue(new ClimberSetPower(-0.3));
+                m_operatorController.button(6).onFalse(new ClimberSetPower(0.0));
 
                 m_arm.setPower(0);
                 m_wheels.setShooterSpeed(0.0);

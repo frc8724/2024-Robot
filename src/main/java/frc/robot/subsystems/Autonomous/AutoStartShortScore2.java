@@ -23,7 +23,7 @@ public class AutoStartShortScore2 extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new AutoStartingPosition(-40.0 * alliance),
+        new AutoStartingPosition(-30.0 * alliance),
         new ArmSet(ArmSubsystem.ANGLE_SHOT_POSITION),
         new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
         new ShootNote(4500.0),
@@ -33,16 +33,16 @@ public class AutoStartShortScore2 extends SequentialCommandGroup {
         new IntakeRollersSet(0.5),
         new ShooterMagSet(0.25),
         new ShooterWheelsSet(-0.1),
-        new DriveForDistance(1.7, 0, 0, 2.0),
-        new DriveForDistance(-1.7, 0, -40 * alliance, 2.0),
-        new DriveForDistance(0.0, 0, -40 * alliance, 0), // stop
+        new DriveForDistance(1.7, 0, 0, 2.3),
+        new DriveForDistance(-1.7, 0, -30 * alliance, 2.3),
+        new DriveForDistance(0.0, 0, -30 * alliance, 0), // stop
 
         new IntakeRollersSet(0.0),
         new ShooterMagSet(0.0),
         new ShooterWheelsSet(0.0),
         new ArmSet(ArmSubsystem.ANGLE_SHOT_POSITION),
         new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
-        new ShootNote(3000.0));
+        new ShootNote(4500.0));
 
   }
 }

@@ -163,7 +163,7 @@ public class RobotContainer {
                 m_auto.addAuto(new AutoRedStartLongShootDrive());
                 m_auto.addAuto(new AutoRedStartShortShootandDrive());
                 m_auto.addAuto(new AutoRedStartShortScore2());
-
+                m_auto.addAuto(new AutoStartShortScore3(1.0));
                 m_auto.addAuto(new AutoScore2Mid3());
 
                 // m_pathPlanner = AutoBuilder.buildAutoChooser();
@@ -222,7 +222,7 @@ public class RobotContainer {
                 // shoot automatically at normal speed
                 m_operatorController.button(1).onTrue(new ShootNote(8000));
                 // trap shot
-                m_operatorController.button(3).onTrue(new ShootNote(2400));
+                m_operatorController.button(3).onTrue(new ShootNote(5000));
 
                 // all motors off
                 m_operatorController.button(2).onTrue(

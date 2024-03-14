@@ -26,7 +26,7 @@ public class AutoStartShortScore3 extends SequentialCommandGroup {
         new AutoStartingPosition(-50.0 * alliance),
         new ArmSet(ArmSubsystem.ANGLE_SHOT_POSITION),
         new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
-        new ShootNote(4500.0),
+        new ShootNote(5000.0),
         // move the arm
         new ArmSet(ArmSubsystem.NOTE_INTAKE),
         // intake the note
@@ -42,10 +42,10 @@ public class AutoStartShortScore3 extends SequentialCommandGroup {
         new ShooterWheelsSet(0.0),
         new ArmSet(ArmSubsystem.ANGLE_SHOT_POSITION),
         new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
-        new ShootNote(4500.0),
+        new ShootNote(5000.0),
         // move to next position
         new DriveForDistance(1.7, -50*alliance, 0, 2.0),
-        new DriveForDistance(1.7, -40*alliance, 0, 6.0),
+        new DriveForDistance(1.7, -60*alliance, 0, 6.0),
         // go back to short side
         new DriveForDistance(-1.7, -40*alliance, 0, 6.0),
 

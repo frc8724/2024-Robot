@@ -11,10 +11,10 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoBlueScore3Mid extends SequentialCommandGroup {
   /** Creates a new AutoRedScore3Mid. */
-  public AutoBlueScore3Mid(double alliance) {
+  public AutoBlueScore3Mid() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands( 
-      new AutoScore2Mid3(alliance));
+    addCommands(
+        new AutoScore2Mid3(1.0));
   }
 }

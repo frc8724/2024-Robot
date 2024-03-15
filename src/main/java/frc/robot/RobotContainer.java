@@ -147,24 +147,25 @@ public class RobotContainer {
                                                 },
                                                 m_arm));
 
-               // m_auto.addAuto(new AuthDriveMidNote3AndBack());
+                // m_auto.addAuto(new AuthDriveMidNote3AndBack());
                 m_auto.addAuto(new AutoShootandDriveOut());
                 m_auto.addAuto(new AutoDriveOut());
                 m_auto.addAuto(new AutoStandStill());
                 m_auto.addAuto(new AutoShootAndDrivex2());
-              //  m_auto.addAuto(new AutoStartShortScore3(0));
+                // m_auto.addAuto(new AutoStartShortScore3(0));
 
                 m_auto.addAuto(new AutoBlueStartLongScore2());
                 m_auto.addAuto(new AutoBlueStartLongShootandDrive());
                 m_auto.addAuto(new AutoBlueStartShortShootandDrive());
                 m_auto.addAuto(new AutoBlueStartShortScore2());
+                m_auto.addAuto(new AutoBlueScore3Mid());
 
                 m_auto.addAuto(new AutoRedStartLongScore2());
                 m_auto.addAuto(new AutoRedStartLongShootDrive());
                 m_auto.addAuto(new AutoRedStartShortShootandDrive());
                 m_auto.addAuto(new AutoRedStartShortScore2());
                 m_auto.addAuto(new AutoStartShortScore3(1.0));
-                m_auto.addAuto(new AutoScore2Mid3());
+                m_auto.addAuto(new AutoRedScore3Mid());
 
                 // m_pathPlanner = AutoBuilder.buildAutoChooser();
                 // SmartDashboard.putData("AutoChooser:", m_pathPlanner);
@@ -268,12 +269,7 @@ public class RobotContainer {
                                 new ArmSet(ArmSubsystem.ZERO_POSITION),
                                 new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP)));
 
-                
-                
-                
-                
-                
-                                // manual buttons
+                // manual buttons
                 operatorStick.Button(6).onTrue(new IntakeRollersSet(0.5));
                 operatorStick.Button(6).onFalse(new IntakeRollersSet(0.0));
 
@@ -290,11 +286,10 @@ public class RobotContainer {
                 operatorStick.Button(2).onTrue(new ShooterWheelsSet(-0.5));
                 operatorStick.Button(2).onFalse(new ShooterWheelsSet(0.0));
 
-                
                 // left climber
                 m_operatorController.leftTrigger().onTrue(new ClimberSetPowerLeft(0.3));
                 m_operatorController.leftTrigger().onFalse(new ClimberSetPowerLeft(0.0));
-                //right 
+                // right
                 m_operatorController.rightTrigger().onTrue(new ClimberSetPowerRight(0.3));
                 m_operatorController.rightTrigger().onFalse(new ClimberSetPowerRight(0.0));
 

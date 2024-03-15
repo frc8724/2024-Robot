@@ -26,7 +26,7 @@ import frc.robot.subsystems.ShooterSubsystem.ShooterWheelsSet;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoShootAndDrivex2 extends SequentialCommandGroup {
   /** Creates a new AutoDriveandShootandPickupX2. */
-  public AutoShootAndDrivex2(double alliance) {
+  public AutoShootAndDrivex2() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
@@ -38,22 +38,22 @@ public class AutoShootAndDrivex2 extends SequentialCommandGroup {
         new ArmSet(ArmSubsystem.NOTE_INTAKE),
 
         // drive forward
-       new ParallelCommandGroup(
-        new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
-        new DriveForDistance(2.5, 0.0, 0.0, 0.5)),
+        new ParallelCommandGroup(
+            new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
+            new DriveForDistance(2.5, 0.0, 0.0, 0.5)),
 
         // make sure the arm is at position
         // drive to get the note
 
-      new ParallelCommandGroup(
-        new IntakeRollersSet(0.5),
-        new ShooterMagSet(0.25),
-        new ShooterWheelsSet(-0.1),
-    //start driving
-        new DriveForDistance(2.5, 0.0, 0.0, 0.5)),
-    //finish driving
+        new ParallelCommandGroup(
+            new IntakeRollersSet(0.5),
+            new ShooterMagSet(0.25),
+            new ShooterWheelsSet(-0.1),
+            // start driving
+            new DriveForDistance(2.5, 0.0, 0.0, 0.5)),
+        // finish driving
         new DriveForDistance(2.5, 0.0, 0.0, 0.5),
-//drive back
+        // drive back
         new DriveForDistance(-2.5, 0.0, 0.0, 0.95),
 
         new ParallelCommandGroup(
@@ -67,7 +67,7 @@ public class AutoShootAndDrivex2 extends SequentialCommandGroup {
                 new ShootNotePre(4500))),
         // stop
         new DriveForDistance(0., 0.0, 0.0, 0.0),
-        //new DriveForDistance(0.1, 0., 0.0, 0.1),
+        // new DriveForDistance(0.1, 0., 0.0, 0.1),
         // make sure the arm is at position.
         new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
         new WaitCommand(0.5),

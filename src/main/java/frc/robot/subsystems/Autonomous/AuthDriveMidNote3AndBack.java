@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.subsystems.ArmSubsystem.ArmIsAtPosition;
 import frc.robot.subsystems.ArmSubsystem.ArmSet;
 import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.DriveBase.DriveForDistance;
@@ -38,8 +39,10 @@ public class AuthDriveMidNote3AndBack extends SequentialCommandGroup {
         // slide to the right
         new DriveForDistance(4, 45*alliance, 0, 1.9),
         // drive to the midline
+        new DriveForDistance(4, 0, 0, 1.5),
         new ParallelCommandGroup(
-            new DriveForDistance(4, 0, 0, 3.0),
+            new ArmSet(ArmSubsystem.NOTE_INTAKE),
+            new DriveForDistance(4, 0, 0, 1.5),
             new IntakeRollersSet(0.5),
             new ShooterMagSet(0.25),
             new ShooterWheelsSet(-0.1)), 

@@ -147,12 +147,12 @@ public class RobotContainer {
                                                 },
                                                 m_arm));
 
-                m_auto.addAuto(new AuthDriveMidNote3AndBack());
+               // m_auto.addAuto(new AuthDriveMidNote3AndBack());
                 m_auto.addAuto(new AutoShootandDriveOut());
                 m_auto.addAuto(new AutoDriveOut());
                 m_auto.addAuto(new AutoStandStill());
                 m_auto.addAuto(new AutoShootAndDrivex2());
-                m_auto.addAuto(new AutoStartShortScore3(0));
+              //  m_auto.addAuto(new AutoStartShortScore3(0));
 
                 m_auto.addAuto(new AutoBlueStartLongScore2());
                 m_auto.addAuto(new AutoBlueStartLongShootandDrive());
@@ -299,7 +299,7 @@ public class RobotContainer {
                 m_operatorController.rightTrigger().onFalse(new ClimberSetPowerRight(0.0));
 
                 // both down
-                m_operatorController.button(6).onTrue(new ClimberSetPower(-0.3));
+                m_operatorController.button(6).onTrue(new ClimberSetPower(-0.4));
                 m_operatorController.button(6).onFalse(new ClimberSetPower(0.0));
 
                 m_arm.setPower(0);

@@ -9,13 +9,11 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoScore2Mid3 extends SequentialCommandGroup {
-  /** Creates a new AutoScore2Mid3. */
-  public AutoScore2Mid3(double alliance) {
+public class AutoRedScore3Mid extends SequentialCommandGroup {
+  /** Creates a new AutoRedScore3Mid. */
+  public AutoRedScore3Mid() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-        new AutoShootAndDrivex2(),
-        new AuthDriveMidNote3AndBack(alliance));
+    addCommands( new AutoScore2Mid3(-1.0));
   }
 }

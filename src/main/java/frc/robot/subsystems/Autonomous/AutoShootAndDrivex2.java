@@ -26,7 +26,7 @@ import frc.robot.subsystems.ShooterSubsystem.ShooterWheelsSet;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoShootAndDrivex2 extends SequentialCommandGroup {
   /** Creates a new AutoDriveandShootandPickupX2. */
-  public AutoShootAndDrivex2() {
+  public AutoShootAndDrivex2(double alliance) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
@@ -53,14 +53,11 @@ public class AutoShootAndDrivex2 extends SequentialCommandGroup {
         new DriveForDistance(2.5, 0.0, 0.0, 0.5)),
     //finish driving
         new DriveForDistance(2.5, 0.0, 0.0, 0.5),
-
-        
-
 //drive back
-        new DriveForDistance(-2.5, 0.0, 0.0, 0.45),
+        new DriveForDistance(-2.5, 0.0, 0.0, 0.95),
 
         new ParallelCommandGroup(
-            new DriveForDistance(-2.5, 0.0, 0.0, 1.0),
+            new DriveForDistance(-2.5, 0.0, 0.0, .5),
             new SequentialCommandGroup(
                 new IntakeRollersSet(0),
                 new ShooterMagSet(0.0),

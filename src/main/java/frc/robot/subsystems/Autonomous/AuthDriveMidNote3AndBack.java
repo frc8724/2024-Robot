@@ -27,7 +27,7 @@ import frc.robot.subsystems.System.SystemIntakeOff;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AuthDriveMidNote3AndBack extends SequentialCommandGroup {
   /** Creates a new AuthDriveMidNote3AndBack. */
-  public AuthDriveMidNote3AndBack() {
+  public AuthDriveMidNote3AndBack(double alliance) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
@@ -36,18 +36,21 @@ public class AuthDriveMidNote3AndBack extends SequentialCommandGroup {
         // drive forward
         new DriveForDistance(4, 0, 0, 2.0),
         // slide to the right
-        new DriveForDistance(4, 45, 0, 2.2),
+        new DriveForDistance(4, 45*alliance, 0, 1.9),
         // drive to the midline
-        new DriveForDistance(4, 0, 0, 2.5),
         new ParallelCommandGroup(
-            new SystemIntakeNote(),
-            new DriveForDistance(2, 0, 0, 1.6)),
+            new DriveForDistance(4, 0, 0, 3.0),
+            new IntakeRollersSet(0.5),
+            new ShooterMagSet(0.25),
+            new ShooterWheelsSet(-0.1)), 
+
+        new DriveForDistance(2, 0, 0, 1.1),
 
         new ParallelRaceGroup(
             new DriveForDistance(-0.1, 0, 0, 0.0),
             new WaitCommand(0.1)),
         new ParallelCommandGroup(
-            new DriveForDistance(-2, 0, 0, 1.8),
+            new DriveForDistance(-2, 0, 0, 1.6),
             new ArmSet(ArmSubsystem.ZERO_POSITION),
             new SequentialCommandGroup(
                 new WaitCommand(0.1),
@@ -55,14 +58,14 @@ public class AuthDriveMidNote3AndBack extends SequentialCommandGroup {
                 new ShooterMagSet(0.0),
                 new ShooterWheelsSet(0.0))),
         // drive back under the stage
-        new DriveForDistance(-4, 0, 0, 2.5),
+        new DriveForDistance(-4, 0, 0, 2.4),
         // slide to the left
-        new DriveForDistance(-4, 45, 0, 2.2),
+        new DriveForDistance(-4, 45*alliance, 0, 1.9),
         //warm up shooter
         new ParallelCommandGroup(
             new ShootNotePre(5000),
         // drive back to the subwoofer
-        new DriveForDistance(-4, 0, 0, 2.0)),
+        new DriveForDistance(-4, 0, 0, 1.6)),
     
         // STOP! new ParallelRaceGroup(
 

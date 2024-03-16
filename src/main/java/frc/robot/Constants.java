@@ -70,7 +70,7 @@ public final class Constants {
     public static final int ninety_degrees_in_ticks = 0;
     public static final int one_eighty_degrees_in_ticks = 2048;
     // mag 3
-    public static final int FrontLeftMagZero = 1640; // good
+    public static final int FrontLeftMagZero = 1690; // good
     // mag 1
     public static final int RearLeftMagZero = 1909 + 25; // good
     // mag 2

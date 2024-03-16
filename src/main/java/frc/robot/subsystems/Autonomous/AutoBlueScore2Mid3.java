@@ -14,6 +14,9 @@ public class AutoBlueScore2Mid3 extends SequentialCommandGroup {
   public AutoBlueScore2Mid3() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands();
+    addCommands(
+        new AutoScore2Mid3(1)
+
+    );
   }
 }

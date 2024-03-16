@@ -22,6 +22,6 @@ public class ShootNotePost extends SequentialCommandGroup {
         new WaitCommand(0.5),
         // turn off the mag and shooter
         new ShooterMagSet(0.0),
-        new ShooterWheelsSet(0.0));
+        new ShooterWheelsSet(shooterSpeed));
   }
 }

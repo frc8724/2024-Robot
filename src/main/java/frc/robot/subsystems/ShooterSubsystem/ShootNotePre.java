@@ -19,7 +19,7 @@ public class ShootNotePre extends SequentialCommandGroup {
         // set mag to backwards so note is at position
 
         new ShooterMagSet(-0.07),
-        new ShooterWheelsSet(-0.1),
+        new ShooterWheelsSet(-0.2),
         new WaitCommand(0.2),
 
         new ShooterMagSet(0.0),

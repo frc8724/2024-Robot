@@ -150,19 +150,18 @@ public class RobotContainer {
                 m_auto.addAuto(new AutoDriveOut());
                 m_auto.addAuto(new AutoStandStill());
                 m_auto.addAuto(new AutoShootAndDrivex2());
-                m_auto.addAuto(new AutoStartShortScore3(0));
 
                 m_auto.addAuto(new AutoBlueStartLongScore2());
                 m_auto.addAuto(new AutoBlueStartLongShootandDrive());
                 m_auto.addAuto(new AutoBlueStartShortShootandDrive());
                 m_auto.addAuto(new AutoBlueStartShortScore2());
+                m_auto.addAuto(new AutoBlueScore2Mid3());
 
                 m_auto.addAuto(new AutoRedStartLongScore2());
                 m_auto.addAuto(new AutoRedStartLongShootDrive());
                 m_auto.addAuto(new AutoRedStartShortShootandDrive());
                 m_auto.addAuto(new AutoRedStartShortScore2());
-
-                // m_auto.addAuto(new AutoScore2Mid3());
+                m_auto.addAuto(new AutoRedScore2Mid3());
 
                 // m_pathPlanner = AutoBuilder.buildAutoChooser();
                 // SmartDashboard.putData("AutoChooser:", m_pathPlanner);
@@ -231,7 +230,8 @@ public class RobotContainer {
                                                 new IntakeRollersSet(0)));
                 // rev beforehand
                 m_operatorController.button(4).onTrue(new ShootNotePre(3600));
-                m_operatorController.button(4).onFalse(new ShootNotePost(3600));
+                // releas to shoot
+                m_operatorController.button(4).onFalse(new ShootNotePost(4000));
                 // intake sequence
                 m_operatorController.button(5).onTrue(new ParallelCommandGroup(
                                 new IntakeRollersSet(0.5),
@@ -244,7 +244,6 @@ public class RobotContainer {
 
                 // zero arm position
                 m_operatorController.button(7).onTrue(new SystemArmZero());
-
                 m_operatorController.button(8).onTrue(new SystemArmZero());
 
                 // set arm to long shot position
@@ -265,6 +264,11 @@ public class RobotContainer {
                 m_operatorController.povDown().onTrue(new SequentialCommandGroup(
                                 new ArmSet(ArmSubsystem.ZERO_POSITION),
                                 new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP)));
+                // CLIMBER
+                m_operatorController.leftTrigger().onTrue(new ClimberSetPower(0.3));
+                m_operatorController.leftTrigger().onFalse(new ClimberSetPower(0.0));
+                m_operatorController.rightTrigger().onTrue(new ClimberSetPower(-0.3));
+                m_operatorController.rightTrigger().onFalse(new ClimberSetPower(0.0));
 
                 // manual buttons
                 operatorStick.Button(6).onTrue(new IntakeRollersSet(0.5));
@@ -287,11 +291,6 @@ public class RobotContainer {
                 // operatorStick.Button(8).onFalse(new ClimberSetPower(0.0));
                 // operatorStick.Button(9).onTrue(new ClimberSetPower(0.3));
                 // operatorStick.Button(9).onFalse(new ClimberSetPower(0.0));
-
-                m_operatorController.leftTrigger().onTrue(new ClimberSetPower(0.3));
-                m_operatorController.leftTrigger().onFalse(new ClimberSetPower(0.0));
-                m_operatorController.rightTrigger().onTrue(new ClimberSetPower(-0.3));
-                m_operatorController.rightTrigger().onFalse(new ClimberSetPower(0.0));
 
                 m_arm.setPower(0);
                 m_wheels.setShooterSpeed(0.0);

@@ -25,8 +25,6 @@ import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.Autonomous.*;
 import frc.robot.subsystems.ClimberSubsystem.ClimberSet;
 import frc.robot.subsystems.ClimberSubsystem.ClimberSetPower;
-import frc.robot.subsystems.ClimberSubsystem.ClimberSetPowerLeft;
-import frc.robot.subsystems.ClimberSubsystem.ClimberSetPowerRight;
 import frc.robot.subsystems.ClimberSubsystem.ClimberSubsystem;
 import frc.robot.subsystems.DriveBase.DriveBaseSubsystem;
 import frc.robot.subsystems.DriveBase.DriveForDistance;
@@ -152,20 +150,19 @@ public class RobotContainer {
                 m_auto.addAuto(new AutoDriveOut());
                 m_auto.addAuto(new AutoStandStill());
                 m_auto.addAuto(new AutoShootAndDrivex2());
-                // m_auto.addAuto(new AutoStartShortScore3(0));
+                m_auto.addAuto(new AutoStartShortScore3(0));
 
                 m_auto.addAuto(new AutoBlueStartLongScore2());
                 m_auto.addAuto(new AutoBlueStartLongShootandDrive());
                 m_auto.addAuto(new AutoBlueStartShortShootandDrive());
                 m_auto.addAuto(new AutoBlueStartShortScore2());
-                m_auto.addAuto(new AutoBlueScore3Mid());
 
                 m_auto.addAuto(new AutoRedStartLongScore2());
                 m_auto.addAuto(new AutoRedStartLongShootDrive());
                 m_auto.addAuto(new AutoRedStartShortShootandDrive());
                 m_auto.addAuto(new AutoRedStartShortScore2());
-                m_auto.addAuto(new AutoStartShortScore3(1.0));
-                m_auto.addAuto(new AutoRedScore3Mid());
+
+                // m_auto.addAuto(new AutoScore2Mid3());
 
                 // m_pathPlanner = AutoBuilder.buildAutoChooser();
                 // SmartDashboard.putData("AutoChooser:", m_pathPlanner);
@@ -223,7 +220,7 @@ public class RobotContainer {
                 // shoot automatically at normal speed
                 m_operatorController.button(1).onTrue(new ShootNote(8000));
                 // trap shot
-                m_operatorController.button(3).onTrue(new ShootNote(5000));
+                m_operatorController.button(3).onTrue(new ShootNote(2400));
 
                 // all motors off
                 m_operatorController.button(2).onTrue(
@@ -286,16 +283,15 @@ public class RobotContainer {
                 operatorStick.Button(2).onTrue(new ShooterWheelsSet(-0.5));
                 operatorStick.Button(2).onFalse(new ShooterWheelsSet(0.0));
 
-                // left climber
-                m_operatorController.leftTrigger().onTrue(new ClimberSetPowerLeft(0.3));
-                m_operatorController.leftTrigger().onFalse(new ClimberSetPowerLeft(0.0));
-                // right
-                m_operatorController.rightTrigger().onTrue(new ClimberSetPowerRight(0.3));
-                m_operatorController.rightTrigger().onFalse(new ClimberSetPowerRight(0.0));
+                // operatorStick.Button(8).onTrue(new ClimberSetPower(-0.3));
+                // operatorStick.Button(8).onFalse(new ClimberSetPower(0.0));
+                // operatorStick.Button(9).onTrue(new ClimberSetPower(0.3));
+                // operatorStick.Button(9).onFalse(new ClimberSetPower(0.0));
 
-                // both down
-                m_operatorController.button(6).onTrue(new ClimberSetPower(-0.4));
-                m_operatorController.button(6).onFalse(new ClimberSetPower(0.0));
+                m_operatorController.leftTrigger().onTrue(new ClimberSetPower(0.3));
+                m_operatorController.leftTrigger().onFalse(new ClimberSetPower(0.0));
+                m_operatorController.rightTrigger().onTrue(new ClimberSetPower(-0.3));
+                m_operatorController.rightTrigger().onFalse(new ClimberSetPower(0.0));
 
                 m_arm.setPower(0);
                 m_wheels.setShooterSpeed(0.0);

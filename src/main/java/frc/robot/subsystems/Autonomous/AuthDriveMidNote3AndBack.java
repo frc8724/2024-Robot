@@ -27,55 +27,55 @@ import frc.robot.subsystems.System.SystemIntakeOff;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AuthDriveMidNote3AndBack extends SequentialCommandGroup {
-  /** Creates a new AuthDriveMidNote3AndBack. */
-  public AuthDriveMidNote3AndBack(double alliance) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-        // new AutoStartingPosition(0.0),
+        /** Creates a new AuthDriveMidNote3AndBack. */
+        public AuthDriveMidNote3AndBack(double alliance) {
+                // Add your commands in the addCommands() call, e.g.
+                // addCommands(new FooCommand(), new BarCommand());
+                addCommands(
+                                // new AutoStartingPosition(0.0),
 
-        // drive forward
-        new DriveForDistance(4, 0, 0, 2.0),
-        // slide to the right
-        new DriveForDistance(4, 45*alliance, 0, 1.9),
-        // drive to the midline
-        new DriveForDistance(4, 0, 0, 1.5),
-        new ParallelCommandGroup(
-            new ArmSet(ArmSubsystem.NOTE_INTAKE),
-            new DriveForDistance(4, 0, 0, 1.5),
-            new IntakeRollersSet(0.5),
-            new ShooterMagSet(0.25),
-            new ShooterWheelsSet(-0.1)), 
+                                // drive forward
+                                new DriveForDistance(4, 0, 0, 2.0),
+                                // slide to the right
+                                new DriveForDistance(4, 45 * alliance, 0, 1.7),
+                                // drive to the midline
+                                new DriveForDistance(4, 0, 0, 1.5),
+                                new ParallelCommandGroup(
+                                                new ArmSet(ArmSubsystem.NOTE_INTAKE),
+                                                new DriveForDistance(4, 0, 0, 1.5),
+                                                new IntakeRollersSet(0.5),
+                                                new ShooterMagSet(0.25),
+                                                new ShooterWheelsSet(-0.1)),
+                                // drive straight to note, but slower
+                                new DriveForDistance(2, 0, 0, 1.1),
+                                // waqit to intake fully
+                                new ParallelRaceGroup(
+                                                new DriveForDistance(-0.1, 0, 0, 0.0),
+                                                new WaitCommand(0.5)),
+                                new ParallelCommandGroup(
+                                                new DriveForDistance(-2, 0, 0, 1.6),
+                                                new ArmSet(ArmSubsystem.ZERO_POSITION),
+                                                new SequentialCommandGroup(
+                                                                new WaitCommand(0.1),
+                                                                new IntakeRollersSet(0.0),
+                                                                new ShooterMagSet(0.0),
+                                                                new ShooterWheelsSet(0.0))),
+                                // drive back under the stage
+                                new DriveForDistance(-4, 0, 0, 2.4),
+                                // slide to the left
+                                new DriveForDistance(-4, 45 * alliance, 0, 1.9),
+                                // warm up shooter
+                                new ParallelCommandGroup(
+                                                new ShootNotePre(5000),
+                                                // drive back to the subwoofer
+                                                new DriveForDistance(-4, 0, 0, 1.6)),
 
-        new DriveForDistance(2, 0, 0, 1.1),
+                                // STOP! new ParallelRaceGroup(
 
-        new ParallelRaceGroup(
-            new DriveForDistance(-0.1, 0, 0, 0.0),
-            new WaitCommand(0.1)),
-        new ParallelCommandGroup(
-            new DriveForDistance(-2, 0, 0, 1.6),
-            new ArmSet(ArmSubsystem.ZERO_POSITION),
-            new SequentialCommandGroup(
-                new WaitCommand(0.1),
-                new IntakeRollersSet(0.0),
-                new ShooterMagSet(0.0),
-                new ShooterWheelsSet(0.0))),
-        // drive back under the stage
-        new DriveForDistance(-4, 0, 0, 2.4),
-        // slide to the left
-        new DriveForDistance(-4, 45*alliance, 0, 1.9),
-        //warm up shooter
-        new ParallelCommandGroup(
-            new ShootNotePre(5000),
-        // drive back to the subwoofer
-        new DriveForDistance(-4, 0, 0, 1.6)),
-    
-        // STOP! new ParallelRaceGroup(
+                                new DriveForDistance(-0.1, 0, 0, 0.0),
+                                new WaitCommand(0.1),
+                                // new WaitCommand((0.1))
 
-        new DriveForDistance(-0.1, 0, 0, 0.0),
-        new WaitCommand(0.1),
-        // new WaitCommand((0.1))
-
-        new ShootNotePost(5000));
-  }
+                                new ShootNotePost(5000));
+        }
 }

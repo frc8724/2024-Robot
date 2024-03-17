@@ -163,6 +163,8 @@ public class RobotContainer {
                 m_auto.addAuto(new AutoRedStartShortScore2());
                 m_auto.addAuto(new AutoRedScore2Mid3());
 
+                m_auto.addAuto(new AutoRedPositiveShootAndStandStill());
+
                 // m_pathPlanner = AutoBuilder.buildAutoChooser();
                 // SmartDashboard.putData("AutoChooser:", m_pathPlanner);
         }
@@ -191,24 +193,25 @@ public class RobotContainer {
                                 // new DrivebaseResetEncoders(),
                                 // new InstantCommand(() -> m_robotDrive.drive(0, 0, 0, true),
                                 // m_robotDrive)));
-                                new SequentialCommandGroup(
-                                                new DriveZeroWheels(),
-                                                new DriveZeroGyro(0.0),
-                                                new WaitCommand(0.1),
-                                                new DrivebaseResetEncoders(),
-                                                new InstantCommand(() -> m_robotDrive.drive(0.2, 0, 0, true),
-                                                                m_robotDrive),
-                                                new WaitCommand(0.1),
-                                                new DriveZeroWheels(),
-                                                new WaitCommand(0.1),
-                                                new DriveZeroWheels(),
-                                                new DriveZeroGyro(0.0),
-                                                new WaitCommand(0.1),
-                                                new DrivebaseResetEncoders(),
-                                                new InstantCommand(() -> m_robotDrive.drive(-0.2, 0, 0, true),
-                                                                m_robotDrive),
-                                                new WaitCommand(0.1),
-                                                new DriveZeroWheels()));
+                                // new SequentialCommandGroup(
+                                // new DriveZeroWheels(),
+                                // new DriveZeroGyro(0.0),
+                                // new WaitCommand(0.1),
+                                // new DrivebaseResetEncoders(),
+                                // new InstantCommand(() -> m_robotDrive.drive(0.2, 0, 0, true),
+                                // m_robotDrive),
+                                // new WaitCommand(0.1),
+                                // new DriveZeroWheels(),
+                                // new WaitCommand(0.1),
+                                // new DriveZeroWheels(),
+                                new DriveZeroGyro(0.0)
+                // new WaitCommand(0.1),
+                // new DrivebaseResetEncoders(),
+                // new InstantCommand(() -> m_robotDrive.drive(-0.2, 0, 0, true),
+                // m_robotDrive),
+                // new WaitCommand(0.1),
+                // new DriveZeroWheels()));
+                );
                 // DriverStick.Button(01).onTrue(new CenterOnTag());
                 // DriverStick.Button(10).onTrue(new DriveForDistance(0.0, 0.2, 0.0, 1.0));
                 // DriverStick.Button(11).onTrue(new DriveForDistance(0.2, 0.0, 0.0, 1.0));

@@ -43,7 +43,7 @@ public class AuthDriveMidNote3AndBack extends SequentialCommandGroup {
                                 new ParallelCommandGroup(
                                                 new ArmSet(ArmSubsystem.NOTE_INTAKE),
                                                 new DriveForDistance(4, 0, 0, 1.5),
-                                                new IntakeRollersSet(0.5),
+                                                new IntakeRollersSet(0.6),
                                                 new ShooterMagSet(0.25),
                                                 new ShooterWheelsSet(-0.1)),
                                 // drive straight to note, but slower

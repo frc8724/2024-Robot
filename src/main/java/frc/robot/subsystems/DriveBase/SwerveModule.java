@@ -5,11 +5,12 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsystems.SimpleFalconSubsystem.SwerveDriveFalcon;
+// import frc.robot.subsystems.SimpleFalconSubsystem.SwerveDriveFalcon;
+import frc.robot.subsystems.SimpleFalconSubsystem.SwerveDriveKraken;
 import frc.robot.subsystems.SimpleFalconSubsystem.SwerveTurningFalcon;
 
 public class SwerveModule extends SubsystemBase {
-    private final SwerveDriveFalcon m_driveMotor;
+    private final SwerveDriveKraken m_driveMotor;
     private final SwerveTurningFalcon m_turningMotor;
     private final SwerveEncoder m_magEncoder;
 
@@ -21,7 +22,7 @@ public class SwerveModule extends SubsystemBase {
             boolean driveReversed,
             boolean turningReversed,
             int magInput) {
-        m_driveMotor = new SwerveDriveFalcon(driveMotorName, driveMotorID, driveReversed);
+        m_driveMotor = new SwerveDriveKraken(driveMotorName, driveMotorID, driveReversed);
         m_turningMotor = new SwerveTurningFalcon(turningMotorName, turningMotorID, turningReversed);
         m_magEncoder = new SwerveEncoder(magInput);
     }
@@ -121,7 +122,8 @@ public class SwerveModule extends SubsystemBase {
         int magTicks = m_magEncoder.get();
         double wheelTicks = m_turningMotor.getRotationTicks();
 
-        //System.out.println(this.m_magEncoder.m_analogInput.getChannel() + " Swerve Mag " + magTicks);
+        // System.out.println(this.m_magEncoder.m_analogInput.getChannel() + " Swerve
+        // Mag " + magTicks);
         SmartDashboard.putNumber(this.m_magEncoder.m_analogInput.getChannel() + " Swerve Mag ", magTicks);
         SmartDashboard.putNumber(this.m_magEncoder.m_analogInput.getChannel() + " Swerve Wheel ", wheelTicks);
         super.periodic();

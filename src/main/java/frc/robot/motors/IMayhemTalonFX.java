@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.robot.motors;
 
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -38,4 +38,20 @@ public interface IMayhemTalonFX extends IMotorControllerEnhanced {
     void configNominalOutputVoltage(double f, double g);
 
     void setFeedbackDevice(FeedbackDevice integratedsensor);
+
+    void setPosition(int zeroPositionCount) ;
+
+    ErrorCode configPeakOutputForward(double d);
+
+    ErrorCode configPeakOutputReverse(double d);
+
+    ErrorCode configNominalOutputForward(double d);
+
+    ErrorCode configNominalOutputReverse(double d);
+
+    ErrorCode configForwardSoftLimitEnable(boolean b);
+
+    ErrorCode configReverseSoftLimitEnable(boolean b);
+
+    ErrorCode configClosedLoopPeakOutput(int slot, double d);
 }

@@ -5,7 +5,7 @@
 package frc.robot.subsystems.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.subsystems.SystemZero;
+import frc.robot.subsystems.SystemArmZero;
 import frc.robot.subsystems.ClimberSubsystem.ClimberSet;
 import frc.robot.subsystems.DriveBase.DriveForDistance;
 
@@ -17,7 +17,7 @@ public class AutoDriveandClimb extends SequentialCommandGroup {
   public AutoDriveandClimb() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-   addCommands(new SystemZero(),
+   addCommands(new SystemArmZero(),
     new DriveForDistance(0.0,0.2, 0.0,100.0),
     new ClimberSet(0.0));
   }

@@ -5,23 +5,16 @@
 package frc.robot.subsystems.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.subsystems.SystemZero;
-import frc.robot.subsystems.DriveBase.DriveForDistance;
-import frc.robot.subsystems.IntakeRollers.IntakeRollersPickupSet;
-import frc.robot.subsystems.ShooterSubsystem.ShootNote;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoDriveandShootandPickup extends SequentialCommandGroup {
-  /** Creates a new AutoDriveandShootandPickup. */
-  public AutoDriveandShootandPickup() {
+public class AutoBlueStartLongShootandDrive extends SequentialCommandGroup {
+  /** Creates a new AutoBlueStartLongShootandDrive. */
+  public AutoBlueStartLongShootandDrive() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new SystemZero(),
-    new DriveForDistance(0.0,0.2, 0.0,100.0),
-    new ShootNote(),
-    new IntakeRollersPickupSet()
-    );
+    // addCommands(AutoStartLongShootDriveOut(1.0));
+    addCommands(new AutoStartLongShootDriveOut(1.0));
   }
 }

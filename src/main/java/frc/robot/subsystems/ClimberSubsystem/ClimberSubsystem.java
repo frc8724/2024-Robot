@@ -3,8 +3,9 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems.ClimberSubsystem;
-import frc.robot.subsystems.MayhemTalonFX;
-import frc.robot.subsystems.MayhemTalonFX.CurrentLimit;
+
+import frc.robot.motors.MayhemTalonFX;
+import frc.robot.motors.MayhemTalonFX.CurrentLimit;
 
 import org.opencv.dnn.Image2BlobParams;
 
@@ -17,19 +18,12 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.IMayhemTalonFX;
+import frc.robot.motors.IMayhemTalonFX;
 import frc.robot.RobotContainer;
 
 public class ClimberSubsystem extends SubsystemBase {
 
   // static final double TICKS_PER_INCH = 3442;
-  public static final double[] LEVEL_X_SCORE = { 0.0, 2000.0, 45000.0, 119000.0 };
-  public static final double[] LEVEL_X_SCORE_Cube = { 0.0, 2000.0, 32000.0, 80000.0 };
-
-  public static final double HUMAN_PLAYER_STATION = 20000.0;
-  public static final double ALMOST_STOW = 500.0;
-  public static final double FLOOR_PICKUP = 35000.0;
-  public static final double FLOOR_PICKUP_BACK = 36700;
 
   public static final double POSITION_SLOP = 1000.0;
   static final double CLOSED_LOOP_RAMP_RATE = 1.0; // todo: lower this value
@@ -43,7 +37,13 @@ public class ClimberSubsystem extends SubsystemBase {
     rightMotor = right;
 
     configTalon(leftMotor);
+    configTalon(rightMotor);
+    leftMotor.setInverted(true);
+    rightMotor.setInverted(false);
+
     zero();
+    setPower(0.0);
+
   }
 
   private void configTalon(IMayhemTalonFX talon) {
@@ -70,9 +70,9 @@ public class ClimberSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
 
-    if ( !manualMode && isMovingIn()) {
-      zero();
-    }
+    // if (!manualMode && isMovingIn()) {
+    // zero();
+    // }
 
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Arm Position", getCurrentPosition());
@@ -82,8 +82,6 @@ public class ClimberSubsystem extends SubsystemBase {
     // getTargetPosition()));
     // SmartDashboard.putBoolean("Arm At Position", isAtPosition());
   }
-
- 
 
   public double getCurrentPosition() {
     return leftMotor.getSelectedSensorPosition();
@@ -127,16 +125,25 @@ public class ClimberSubsystem extends SubsystemBase {
     // DriverStation.reportWarning("Arm: zero", false);
     leftMotor.setSelectedSensorPosition(0.0);
     leftMotor.set(ControlMode.PercentOutput, 0.0);
+
+    rightMotor.setSelectedSensorPosition(0.0);
+    rightMotor.set(ControlMode.PercentOutput, 0.0);
   }
 
   public void setPower(double d) {
     manualMode = true;
     leftMotor.set(ControlMode.PercentOutput, d);
+    rightMotor.set(ControlMode.PercentOutput, d);
   }
 
-  public void setAutoPower(double d) {
-    manualMode = false;
+  public void setLeftPower(double d) {
+    manualMode = true;
     leftMotor.set(ControlMode.PercentOutput, d);
   }
-}
 
+  public void setRightPower(double d) {
+    manualMode = true;
+    rightMotor.set(ControlMode.PercentOutput, d);
+  }
+
+}

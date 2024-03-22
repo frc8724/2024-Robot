@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot;
+package frc.robot.motors;
 
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.ParamEnum;
@@ -33,7 +33,7 @@ import com.ctre.phoenix.motorcontrol.can.BaseTalon;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
 
-import frc.robot.subsystems.MayhemTalonFX.CurrentLimit;
+import frc.robot.motors.MayhemTalonFX.CurrentLimit;
 
 /** Add your docs here. */
 public class FakeFalconFX implements IMayhemTalonFX {
@@ -77,7 +77,7 @@ public class FakeFalconFX implements IMayhemTalonFX {
         return ErrorCode.OK;
     }
 
-    public FakeFalconFX(int id, CurrentLimit limit) {
+    public FakeFalconFX(int id, frc.robot.motors.MayhemTalonFX.CurrentLimit limit) {
     }
 
     public void set(double d) {
@@ -715,5 +715,47 @@ public class FakeFalconFX implements IMayhemTalonFX {
     public void configNominalOutputVoltage(double f, double g) {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public ErrorCode configPeakOutputForward(double d) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'configPeakOutputForward'");
+    }
+
+    @Override
+    public ErrorCode configPeakOutputReverse(double d) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'configPeakOutputReverse'");
+    }
+
+    @Override
+    public ErrorCode configNominalOutputForward(double d) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'configNominalOutputForward'");
+    }
+
+    @Override
+    public ErrorCode configNominalOutputReverse(double d) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'configNominalOutputReverse'");
+    }
+
+    @Override
+    public ErrorCode configForwardSoftLimitEnable(boolean b) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'configForwardSoftLimitEnable'");
+    }
+
+    @Override
+    public ErrorCode configReverseSoftLimitEnable(boolean b) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'configReverseSoftLimitEnable'");
+    }
+
+    @Override
+    public ErrorCode configClosedLoopPeakOutput(int slot, double d) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'configClosedLoopPeakOutput'");
     }
 }

@@ -14,6 +14,8 @@ public class IntakeRollersPickupSet extends SequentialCommandGroup {
   public IntakeRollersPickupSet() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands();
+    addCommands(
+      new IntakeRollersSet(1.0)
+    );
   }
 }

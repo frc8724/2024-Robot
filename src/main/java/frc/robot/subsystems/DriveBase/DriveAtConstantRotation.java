@@ -8,26 +8,21 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 
-public class DriveForDistance extends Command {
+public class DriveAtConstantRotation extends Command {
   double m_startingSpeed;
   double m_finalSpeed;
   double m_direction;
-  double m_orientation;
   double m_distance;
   double m_rotationSpeed;
 
-  public DriveForDistance(double startSpeed, double finalSpeed, double direction, double orientation,
+  public DriveAtConstantRotation(double startSpeed, double finalSpeed, double direction, double rotationSpeed,
       double distance) {
     m_startingSpeed = startSpeed;
     m_finalSpeed = finalSpeed;
-    m_orientation = orientation;
+    m_rotationSpeed = rotationSpeed;
     m_direction = direction;
     m_distance = distance;
     addRequirements(RobotContainer.m_robotDrive);
-  }
-
-  public DriveForDistance(double speed, double direction, double orientation, double distance) {
-    this(speed, speed, direction, orientation, distance);
   }
 
   // Called when the command is initially scheduled.
@@ -37,7 +32,7 @@ public class DriveForDistance extends Command {
   @Override
   public void initialize() {
     this.pose = RobotContainer.m_robotDrive.getPose();
-    RobotContainer.m_robotDrive.driveOnHeading(m_startingSpeed, m_direction, m_orientation, m_rotationSpeed);
+    RobotContainer.m_robotDrive.driveOnHeadingWithRotation(m_startingSpeed, m_direction, m_rotationSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -48,7 +43,7 @@ public class DriveForDistance extends Command {
 
     double power = m_startingSpeed + dist / m_distance * (this.m_finalSpeed - m_startingSpeed);
 
-    RobotContainer.m_robotDrive.driveOnHeading(power, m_direction, m_orientation, m_rotationSpeed);
+    RobotContainer.m_robotDrive.driveOnHeadingWithRotation(power, m_direction, m_rotationSpeed);
   }
 
   // Called once the command ends or is interrupted.

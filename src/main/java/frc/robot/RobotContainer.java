@@ -166,6 +166,8 @@ public class RobotContainer {
                 m_auto.addAuto(new AutoRedScore2Mid3());
 
                 m_auto.addAuto(new AutoRedPositiveShootAndStandStill());
+                m_auto.addAuto(new AutoTestSpeeds());
+                m_auto.addAuto(new AutoStealAllNotes(1.0));
 
                 // m_pathPlanner = AutoBuilder.buildAutoChooser();
                 // SmartDashboard.putData("AutoChooser:", m_pathPlanner);

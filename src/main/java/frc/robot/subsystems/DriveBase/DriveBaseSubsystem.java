@@ -15,6 +15,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
@@ -125,6 +126,8 @@ public class DriveBaseSubsystem extends SubsystemBase {
                         m_rearLeftSwerveModule.getPosition(),
                         m_rearRightSwerveModule.getPosition()
                 });
+
+        SmartDashboard.putNumber("drive heading", getHeading());
     }
 
     public Pose2d getPose() {
@@ -166,12 +169,12 @@ public class DriveBaseSubsystem extends SubsystemBase {
     // drive(vx, vy, 0.0, true);
     // }
 
-    public void driveOnHeading(double speed, double direction, double desiredOrientation) {
+    public void driveOnHeading(double speed, double direction, double desiredOrientation, double rotationSpeed) {
         double vx = speed * Math.cos(-direction * 2 * Math.PI / 360);
         double vy = speed * Math.sin(-direction * 2 * Math.PI / 360);
         double currentRot = m_gyro.getAngle();
         double angleChange = desiredOrientation - currentRot;
-        double angleChangeRads = angleChange * (3 * Math.PI) / 360.0;
+        double angleChangeRads = angleChange * (rotationSpeed * Math.PI) / 180;
         // double rot = angleChangeRads;
         /// Math.PI * Constants.ModuleConstants.kMaxModuleAngularSpeedRadiansPerSecond /
         /// 100;
@@ -183,6 +186,12 @@ public class DriveBaseSubsystem extends SubsystemBase {
         System.out.println(angleChange + " * (2 * PI) / 360.0 = " + angleChangeRads);
 
         drive(vx, vy, -angleChangeRads, true);
+    }
+
+    public void driveOnHeadingWithRotation(double speed, double direction, double desiredRotationSpeed) {
+        double vx = speed * Math.cos(-direction * 2 * Math.PI / 360);
+        double vy = speed * Math.sin(-direction * 2 * Math.PI / 360);
+        drive(vx, vy, desiredRotationSpeed, true);
     }
 
     /**

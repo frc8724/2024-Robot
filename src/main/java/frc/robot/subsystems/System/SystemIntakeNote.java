@@ -10,6 +10,7 @@ import frc.robot.subsystems.ArmSubsystem.ArmSet;
 import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.IntakeRollers.IntakeRollersSet;
 import frc.robot.subsystems.ShooterSubsystem.ShooterMagSet;
+import frc.robot.subsystems.ShooterSubsystem.ShooterWheelBrake;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheelsSet;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -25,6 +26,7 @@ public class SystemIntakeNote extends SequentialCommandGroup {
         new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
         new IntakeRollersSet(0.45),
         new ShooterMagSet(0.5),
-        new ShooterWheelsSet(-0.1));
+        new ShooterWheelsSet(0.0),
+        new ShooterWheelBrake());
   }
 }

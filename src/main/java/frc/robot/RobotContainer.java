@@ -42,6 +42,7 @@ import frc.robot.subsystems.ShooterSubsystem.ShootNotePost;
 import frc.robot.subsystems.ShooterSubsystem.ShootNotePre;
 import frc.robot.subsystems.ShooterSubsystem.ShooterMag;
 import frc.robot.subsystems.ShooterSubsystem.ShooterMagSet;
+import frc.robot.subsystems.ShooterSubsystem.ShooterWheelBrake;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheels;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheelsSet;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheelsSetTicksPer100ms;
@@ -224,7 +225,7 @@ public class RobotContainer {
                 // OPERATOR BUTTONS
 
                 // shoot automatically at normal speed
-                m_operatorController.button(1).onTrue(new ShootNote(8000));
+                // m_operatorController.button(1).onTrue();
                 // trap shot
                 m_operatorController.button(3).onTrue(new ShootNote(2400));
 
@@ -236,15 +237,16 @@ public class RobotContainer {
                                                 new ShooterWheelsSet(0),
                                                 new IntakeRollersSet(0)));
                 // rev beforehand
-                m_operatorController.button(4).onTrue(new ShootNotePre(3600));
+                m_operatorController.button(4).onTrue(new ShootNotePre(5500));
                 // releas to shoot
-                m_operatorController.button(4).onFalse(new ShootNotePost(4000));
+                m_operatorController.button(4).onFalse(new ShootNotePost(4500));
                 // intake sequence
-                m_operatorController.button(5).onTrue(new ParallelCommandGroup(
+                m_operatorController.button(5).onTrue(new SequentialCommandGroup(
                                 new IntakeRollersSet(0.5),
                                 new ShooterMagSet(0.25),
-                                new ShooterWheelsSet(-0.1)));
-                m_operatorController.button(5).onFalse(new ParallelCommandGroup(
+                                new ShooterWheelsSet(0.00),
+                                new ShooterWheelBrake()));
+                m_operatorController.button(5).onFalse(new SequentialCommandGroup(
                                 new IntakeRollersSet(0.0),
                                 new ShooterMagSet(0.0),
                                 new ShooterWheelsSet(0.0)));
@@ -269,7 +271,7 @@ public class RobotContainer {
                                 new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP)));
                 // close shot
                 m_operatorController.povDown().onTrue(new SequentialCommandGroup(
-                                new ArmSet(ArmSubsystem.ZERO_POSITION),
+                                new ArmSet(ArmSubsystem.SHORT_SHOT),
                                 new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP)));
                 // CLIMBER
                 m_operatorController.leftTrigger().onTrue(new ClimberSetPowerLeft(0.3));

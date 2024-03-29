@@ -19,7 +19,7 @@ public class ShootNotePost extends SequentialCommandGroup {
         // move the note to the shooter
         new ShooterMagSet(1.0),
         // wait for the note to leave
-        new WaitCommand(0.5),
+        new WaitCommand(1.0),
         // turn off the mag and shooter
         new ShooterMagSet(0.0),
         new ShooterWheelsSet(0)); // set to zero power after the note is shot.

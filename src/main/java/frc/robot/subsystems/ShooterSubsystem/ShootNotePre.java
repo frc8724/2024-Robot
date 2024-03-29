@@ -17,16 +17,16 @@ public class ShootNotePre extends SequentialCommandGroup {
   public ShootNotePre(double shooterSpeed) {
     addCommands(
         // set mag to backwards so note is at position
-
         new ShooterMagSet(-0.07),
         new ShooterWheelsSet(-0.2),
-        new WaitCommand(0.2),
+        new WaitCommand(0.05),
 
         new ShooterMagSet(0.0),
         new ShooterWheelsSet(0.0),
         new WaitCommand(0.2),
 
         // turn on the shooter wheels
-        new ShooterWheelsSetTicksPer100ms(shooterSpeed));
+        // new ShooterWheelsSetTicksPer100ms(shooterSpeed));
+        new ShooterWheelsSet(1.0));
   }
 }

@@ -9,7 +9,7 @@ import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 public class ShootShort extends SequentialCommandGroup {
     public ShootShort() {
         addCommands(
-                new ArmSet(ArmSubsystem.ANGLE_SHOT_POSITION),
+                new ArmSet(ArmSubsystem.SHORT_SHOT),
                 new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
                 new ShootNote(4500.0));
     }

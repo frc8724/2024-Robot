@@ -21,7 +21,7 @@ public class AutoStartLongShootDriveOut extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
         new AutoStartingPosition(60.0 * alliance),
-        new ArmSet(ArmSubsystem.ANGLE_SHOT_POSITION),
+        new ArmSet(ArmSubsystem.SHORT_SHOT),
         new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
         new ShootNote(4500.0),
         new DriveForDistance(2.0, 55 * alliance, 0, 2.0),

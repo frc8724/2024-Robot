@@ -17,7 +17,7 @@ public class ArmSubsystem extends SubsystemBase {
   public static final double ZERO_POSITION = 0;
 
   public static final double NOTE_INTAKE = 15000;
-  public static final double SHORT_SHOT = 45000;
+  public static final double SHORT_SHOT = 42000;
   public static final double LONG_SHOT = 58500;
   public static final double AMP_SHOOT = 130000;
 

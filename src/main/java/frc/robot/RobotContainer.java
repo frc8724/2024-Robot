@@ -23,19 +23,14 @@ import frc.robot.subsystems.ArmSubsystem.ArmSet;
 import frc.robot.subsystems.ArmSubsystem.ArmSetPower;
 import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.Autonomous.*;
-import frc.robot.subsystems.ClimberSubsystem.ClimberSet;
 import frc.robot.subsystems.ClimberSubsystem.ClimberSetPower;
 import frc.robot.subsystems.ClimberSubsystem.ClimberSetPowerLeft;
 import frc.robot.subsystems.ClimberSubsystem.ClimberSetPowerRight;
 import frc.robot.subsystems.ClimberSubsystem.ClimberSubsystem;
 import frc.robot.subsystems.DriveBase.DriveBaseSubsystem;
-import frc.robot.subsystems.DriveBase.DriveForDistance;
 import frc.robot.subsystems.DriveBase.DriveZeroGyro;
-import frc.robot.subsystems.DriveBase.DriveZeroWheels;
-import frc.robot.subsystems.DriveBase.DrivebaseResetEncoders;
 import frc.robot.subsystems.IntakeRollers.IntakeRollers;
 import frc.robot.subsystems.IntakeRollers.IntakeRollersSet;
-import frc.robot.subsystems.LimeLight.CenterOnTag;
 import frc.robot.subsystems.LimeLight.LimeLightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem.ShootNote;
 import frc.robot.subsystems.ShooterSubsystem.ShootNotePost;
@@ -45,20 +40,14 @@ import frc.robot.subsystems.ShooterSubsystem.ShooterMagSet;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheelBrake;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheels;
 import frc.robot.subsystems.ShooterSubsystem.ShooterWheelsSet;
-import frc.robot.subsystems.ShooterSubsystem.ShooterWheelsSetTicksPer100ms;
 import frc.robot.subsystems.Targeting.Targeting;
 
-import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -152,6 +141,7 @@ public class RobotContainer {
                 m_auto.addAuto(new AutoShootandDriveOut());
                 m_auto.addAuto(new AutoDriveOut());
                 m_auto.addAuto(new AutoStandStill());
+                m_auto.addAuto(new AutoShootAndStandStill());
                 m_auto.addAuto(new AutoShootAndDrivex2());
 
                 m_auto.addAuto(new AutoBlueStartLongScore2());

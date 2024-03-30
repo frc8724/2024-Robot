@@ -9,7 +9,7 @@ import frc.robot.subsystems.ArmSubsystem.ArmIsAtPosition;
 import frc.robot.subsystems.ArmSubsystem.ArmSet;
 import frc.robot.subsystems.ArmSubsystem.ArmSubsystem;
 import frc.robot.subsystems.DriveBase.DriveForDistance;
-import frc.robot.subsystems.ShooterSubsystem.ShootNote;
+import frc.robot.subsystems.ShooterSubsystem.ShootShort;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -23,10 +23,11 @@ public class AutoStartLongShootDriveOut extends SequentialCommandGroup {
         new AutoStartingPosition(60.0 * alliance),
         new ArmSet(ArmSubsystem.SHORT_SHOT),
         new ArmIsAtPosition(ArmSubsystem.POSITION_SLOP),
-        new ShootNote(4500.0),
+        new ShootShort(),
         new DriveForDistance(2.0, 55 * alliance, 0, 2.0),
+        new ArmSet(ArmSubsystem.NOTE_INTAKE),
         new DriveForDistance(2.0, 55 * alliance, 0, 3.0),
-        new DriveForDistance(2.0, 0, 0, 2.5),
+        new DriveForDistance(2.0, 2.0, 0, 0, 2.5, 4),
         new DriveForDistance(0, 0, 0, 0));
   }
 }

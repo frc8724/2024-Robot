@@ -6,6 +6,7 @@ package frc.robot.subsystems.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.ShooterSubsystem.ShootNote;
+import frc.robot.subsystems.ShooterSubsystem.ShootShort;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -17,8 +18,6 @@ public class AutoShootAndStandStill extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
         new AutoStartingPosition(0.0),
-        new ShootNote(2600)
-
-    );
+        new ShootShort());
   }
 }

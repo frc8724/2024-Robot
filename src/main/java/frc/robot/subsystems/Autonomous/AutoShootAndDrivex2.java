@@ -60,7 +60,7 @@ public class AutoShootAndDrivex2 extends SequentialCommandGroup {
 
         // drive back
         new DriveForDistance(-.1, -2.5, 0.0, 0.0, 0.1),
-        new DriveForDistance(-2.5, 0.0, 0.0, 0.5),
+        new DriveForDistance(-2.5, 0.0, 0.0, 0.3),
 
         new ParallelCommandGroup(
             new DriveForDistance(-2.5, 0.0, 0.0, .4),

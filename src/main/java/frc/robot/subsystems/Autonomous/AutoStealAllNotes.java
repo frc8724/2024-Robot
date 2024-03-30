@@ -25,7 +25,7 @@ public class AutoStealAllNotes extends SequentialCommandGroup {
         new DriveForDistance(4.0, 0 * alliance, 0, 7.5),
         new DriveForDistance(4.0, 0.01, 0 * alliance, 0, .5),
         new DriveForDistance(-0.1, 0, 0, 0.01),
-        new WaitCommand(1.0),
+        new WaitCommand(0.2),
         // new DriveForDistance(2.25, -90, 0, 4)
         new DriveAtConstantRotation(2.25, 1.0, -85 * alliance, 3.0, 7)
     // new ParallelCommandGroup(

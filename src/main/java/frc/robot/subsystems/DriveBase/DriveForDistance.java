@@ -14,16 +14,21 @@ public class DriveForDistance extends Command {
   double m_direction;
   double m_orientation;
   double m_distance;
-  double m_rotationSpeed;
+  double m_rotationSpeed = 2.0;
 
   public DriveForDistance(double startSpeed, double finalSpeed, double direction, double orientation,
-      double distance) {
+      double distance, double rotationSpeed) {
     m_startingSpeed = startSpeed;
     m_finalSpeed = finalSpeed;
     m_orientation = orientation;
     m_direction = direction;
     m_distance = distance;
     addRequirements(RobotContainer.m_robotDrive);
+  }
+
+  public DriveForDistance(double startSpeed, double finalSpeed, double direction, double orientation,
+      double distance) {
+    this(startSpeed, finalSpeed, direction, orientation, distance, 2.0);
   }
 
   public DriveForDistance(double speed, double direction, double orientation, double distance) {

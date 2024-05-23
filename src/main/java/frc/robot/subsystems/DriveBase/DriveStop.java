@@ -22,6 +22,7 @@ public class DriveStop extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.m_robotDrive.drive(0, 0, 0, true);
+    // RobotContainer.m_robotDrive.drive(0, 0, 0, true);
+    RobotContainer.m_robotDrive.lockWheels();
   }
 }

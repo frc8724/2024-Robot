@@ -241,6 +241,14 @@ public class DriveBaseSubsystem extends SubsystemBase {
         m_rearRightSwerveModule.setDesiredState(desiredStates[3]);
     }
 
+    public void lockWheels() {
+        var state = new SwerveModuleState(0, Rotation2d.fromDegrees(45));
+        m_frontLeftSwerveModule.setDesiredState(state);
+        m_frontRightSwerveModule.setDesiredState(state);
+        m_rearLeftSwerveModule.setDesiredState(state);
+        m_rearRightSwerveModule.setDesiredState(state);
+    }
+
     /** Resets the drive encoders to currently read a position of 0. */
     public void resetEncoders() {
         m_frontLeftSwerveModule.resetEncoders();

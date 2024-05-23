@@ -16,9 +16,9 @@ public class ArmSubsystem extends SubsystemBase {
 
   public static final double ZERO_POSITION = 0;
 
-  public static final double NOTE_INTAKE = 15000;
-  public static final double SHORT_SHOT = 42000;
-  public static final double LONG_SHOT = 58500;
+  public static final double NOTE_INTAKE = 41000;
+  public static final double SHORT_SHOT = 41500;
+  public static final double LONG_SHOT = 59500;
   public static final double AMP_SHOOT = 130000;
 
   // public static final double ANGLE_SHOT_POSITION = SHORT_SHOT;
@@ -30,6 +30,12 @@ public class ArmSubsystem extends SubsystemBase {
   final double kWheelD = 0.000;
   final double kWheelF = 0.000;
 
+  // public static final double POSITION_SLOP = 100.0;
+
+  // final double kWheelP = 1.5; // 0.015;
+  // final double kWheelI = 0.000;
+  // final double kWheelD = 2.00;
+  // final double kWheelF = 0.20;
   private static final double CLOSED_LOOP_RAMP_RATE = 0.01; // time from neutral to full in seconds
 
   double TargetPositionTicks;
@@ -112,10 +118,8 @@ public class ArmSubsystem extends SubsystemBase {
         leftMotor.getSelectedSensorPosition());
     SmartDashboard.putNumber("Shoulder right Ticks",
         rightMotor.getSelectedSensorPosition());
-    // if (rightTalon.getControlMode() != ControlMode.PercentOutput) {
-    // SmartDashboard.putNumber("Shoulder Target Ticks",
-    // rightTalon.getClosedLoopTarget());
-    // }
+    SmartDashboard.putNumber("Shoulder Target Ticks",
+        this.getTargetPositionTicks());
 
     // wheelP = SmartDashboard.getNumber("Shoulder P", kWheelP);
     // SmartDashboard.putNumber("Shoulder P", kWheelP);

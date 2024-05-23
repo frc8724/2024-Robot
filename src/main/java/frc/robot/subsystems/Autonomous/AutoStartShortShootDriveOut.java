@@ -17,8 +17,8 @@ public class AutoStartShortShootDriveOut extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new AutoStartingPosition(-50.0 * alliance),
+        new AutoStartingPosition(-45.0 * alliance),
         new ShootShort(),
-        new DriveForDistance(1.0, 0, 0, 3.0));
+        new DriveForDistance(1.0, 0, 0, 2.0));
   }
 }

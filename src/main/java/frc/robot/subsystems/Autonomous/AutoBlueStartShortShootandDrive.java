@@ -14,6 +14,6 @@ public class AutoBlueStartShortShootandDrive extends SequentialCommandGroup {
   public AutoBlueStartShortShootandDrive() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new AutoStartShortShootDriveOut(-1.0));
+    addCommands(new AutoStartShortShootDriveOut(1.0));
   }
 }

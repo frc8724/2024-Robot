@@ -720,42 +720,58 @@ public class FakeFalconFX implements IMayhemTalonFX {
     @Override
     public ErrorCode configPeakOutputForward(double d) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'configPeakOutputForward'");
+        return null;
     }
 
     @Override
     public ErrorCode configPeakOutputReverse(double d) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'configPeakOutputReverse'");
+        return null;
+
     }
 
     @Override
     public ErrorCode configNominalOutputForward(double d) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'configNominalOutputForward'");
+        return null;
+
+        // throw new UnsupportedOperationException("Unimplemented method
+        // 'configNominalOutputForward'");
     }
 
     @Override
     public ErrorCode configNominalOutputReverse(double d) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'configNominalOutputReverse'");
+        return null;
+
+        // throw new UnsupportedOperationException("Unimplemented method
+        // 'configNominalOutputReverse'");
     }
 
     @Override
     public ErrorCode configForwardSoftLimitEnable(boolean b) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'configForwardSoftLimitEnable'");
+        return null;
+
+        // throw new UnsupportedOperationException("Unimplemented method
+        // 'configForwardSoftLimitEnable'");
     }
 
     @Override
     public ErrorCode configReverseSoftLimitEnable(boolean b) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'configReverseSoftLimitEnable'");
+        return null;
+
+        // throw new UnsupportedOperationException("Unimplemented method
+        // 'configReverseSoftLimitEnable'");
     }
 
     @Override
     public ErrorCode configClosedLoopPeakOutput(int slot, double d) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'configClosedLoopPeakOutput'");
+        return null;
+
+        // throw new UnsupportedOperationException("Unimplemented method
+        // 'configClosedLoopPeakOutput'");
     }
 }

@@ -10,16 +10,17 @@ import frc.robot.RobotContainer;
 public class TargetingSet extends InstantCommand {
   /** Creates a new TargetingSet. */
   double percent;
-  public TargetingSet( double d) {
+
+  public TargetingSet(double d) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_targets);
+    // addRequirements(RobotContainer.m_targets);
     percent = d;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-  RobotContainer.m_climber.setInTicks(percent);
+    // RobotContainer.m_climber.setInTicks(percent);
 
   }
 }

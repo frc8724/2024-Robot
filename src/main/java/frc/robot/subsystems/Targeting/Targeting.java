@@ -30,21 +30,21 @@ public class Targeting extends SubsystemBase {
    * @return
    */
   public double getHeadingToTarget() {
-    var target = RobotContainer.vision.getTarget();
+    // var target = RobotContainer.vision.getTarget();
 
-    if (target == null) {
-      return Double.NaN;
-    }
+    // if (target == null) {
+    // return Double.NaN;
+    // }
 
-    var point = target.getCenter();
+    // var point = target.getCenter();
 
-    double targetHeading;
-    // if the target is on the right half...
-    if (point.x > 0.5) {
-      targetHeading = (point.x - 0.5) * fieldOfViewDegrees / 2;
-    } else {
-      targetHeading = -(0.5 - point.x) * fieldOfViewDegrees / 2;
-    }
+    double targetHeading = 0.0;
+    // // if the target is on the right half...
+    // if (point.x > 0.5) {
+    // targetHeading = (point.x - 0.5) * fieldOfViewDegrees / 2;
+    // } else {
+    // targetHeading = -(0.5 - point.x) * fieldOfViewDegrees / 2;
+    // }
 
     return targetHeading;
   }

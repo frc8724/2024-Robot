@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
-import org.opencv.core.Point;
+// import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.CvSink;
-import edu.wpi.first.cscore.CvSource;
-import edu.wpi.first.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.Timer;
+// import edu.wpi.first.cameraserver.CameraServer;
+// import edu.wpi.first.cscore.CvSink;
+// import edu.wpi.first.cscore.CvSource;
+// import edu.wpi.first.cscore.UsbCamera;
+// import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Vision {
@@ -25,7 +25,7 @@ public class Vision {
 
     private VisionObject target;
 
-    private UsbCamera camera;
+    // private UsbCamera camera;
 
     // private Timer benchmarkTimer;
 
@@ -40,42 +40,43 @@ public class Vision {
     // this.benchmarkTimer.reset();
     // }
 
-    public void init() {
-        new Thread(() -> {
-            this.camera = CameraServer.startAutomaticCapture(this.cameraIndex);
+    // public void init() {
+    // new Thread(() -> {
+    // this.camera = CameraServer.startAutomaticCapture(this.cameraIndex);
 
-            this.camera.setResolution(640, 480);
-            this.camera.setFPS(10);
+    // this.camera.setResolution(640, 480);
+    // this.camera.setFPS(10);
 
-            CvSink cvSink = CameraServer.getVideo(camera);
-            CvSource outputStream = CameraServer.putVideo("Output " + this.cameraIndex, 640, 480);
+    // CvSink cvSink = CameraServer.getVideo(camera);
+    // CvSource outputStream = CameraServer.putVideo("Output " + this.cameraIndex,
+    // 640, 480);
 
-            Mat source = new Mat();
+    // Mat source = new Mat();
 
-            while (!Thread.interrupted()) {
-                if (!this.isRunning || this.model == null) {
-                    // Why should we process vision if nobody needs it?
-                    try {
-                        // zzz
-                        Thread.sleep(30);
-                    } catch (InterruptedException e) {
-                        // idk maybe handle this exception gracefully
-                        // (sounds like a problem for someone else)
-                    }
+    // while (!Thread.interrupted()) {
+    // if (!this.isRunning || this.model == null) {
+    // // Why should we process vision if nobody needs it?
+    // try {
+    // // zzz
+    // Thread.sleep(30);
+    // } catch (InterruptedException e) {
+    // // idk maybe handle this exception gracefully
+    // // (sounds like a problem for someone else)
+    // }
 
-                    continue;
-                }
+    // continue;
+    // }
 
-                if (cvSink.grabFrame(source) == 0) {
-                    continue;
-                }
+    // if (cvSink.grabFrame(source) == 0) {
+    // continue;
+    // }
 
-                Mat output = processImage(source);
+    // Mat output = processImage(source);
 
-                outputStream.putFrame(output);
-            }
-        }).start();
-    }
+    // outputStream.putFrame(output);
+    // }
+    // }).start();
+    // }
 
     private Mat processImage(Mat source) {
         // blur
@@ -160,16 +161,16 @@ public class Vision {
         this.model = model;
 
         // TODO: make this work |
-        //                      v
+        // v
 
         // if (this.camera != null) {
-        //     var exposure = model.cameraExposure();
+        // var exposure = model.cameraExposure();
 
-        //     if (exposure == null) {
-        //         this.camera.setExposureAuto();
-        //     } else {
-        //         this.camera.setExposureManual(exposure);
-        //     }
+        // if (exposure == null) {
+        // this.camera.setExposureAuto();
+        // } else {
+        // this.camera.setExposureManual(exposure);
+        // }
         // }
     }
 }

@@ -12,10 +12,7 @@ import frc.robot.subsystems.SimpleFalconSubsystem.SwerveTurningFalcon;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class DriveZeroWheels extends InstantCommand {
-  SwerveTurningFalcon subsystem;
-
   public DriveZeroWheels() {
-
     addRequirements(RobotContainer.m_robotDrive);
   }
 

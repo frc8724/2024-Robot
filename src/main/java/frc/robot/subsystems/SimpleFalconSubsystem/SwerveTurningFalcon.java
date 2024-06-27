@@ -160,6 +160,12 @@ public class SwerveTurningFalcon extends SubsystemBase {
     m_set = e;
   }
 
+  public void setMotorPositionTick(double ticks) {
+    motor.setSelectedSensorPosition(ticks, 0, 100);
+    motor.set(TalonFXControlMode.Position, ticks);
+    m_set = ticks;
+  }
+
   public double getRotationRadians() {
     double limitedSensorPosition = motor.getSelectedSensorPosition() % (MOTOR_TICKS_PER_WHEEL_ROTATION);
     return limitedSensorPosition / MOTOR_TICKS_PER_WHEEL_ROTATION * 2 * Math.PI;
@@ -170,6 +176,10 @@ public class SwerveTurningFalcon extends SubsystemBase {
   }
 
   public void reset() {
+    this.reset(0);
+  }
+
+  public void reset(double tick) {
     set(0.0);
     motor.setSelectedSensorPosition(0.0);
   }

@@ -4,75 +4,69 @@
 
 package frc.robot.subsystems.ArmSubsystem;
 
-import java.lang.annotation.Target;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
-import frc.robot.IMayhemTalonFX;
+import frc.robot.motors.IMayhemTalonFX;
 
 public class ArmSubsystem extends SubsystemBase {
-  public static final double[] LEVEL_X_PRESCORE = { 0.0, 2000.0, 75000.0, 82500.0 };
-  public static final double[] LEVEL_X_SCORE = { 0.0, 2000.0, 53000.0, 74000.0 };
-  public static final double[] LEVEL_X_SCORE_CUBE = { 0.0, 2000.0, 57000.0, 76000.0 };
 
-  public static final double HUMAN_PLAYER_STATION = 74000.0;
-  public static final double STOW = 9000.0;
-  public static final double FLOOR_PICKUP = 17000;
-  public static final double CONE_STOW = 14000;
-  public static final double SCORE_TOLERANCE = 40000;
-  public static final double STRAIGHT_UP = 100000;
-  public static final double HUMAN_PLAYER_STATION_BACK = 190000;
-  public static final double BACK_ISH = 140000;
-  public static final double FLOOR_PICKUP_BACK = 250000;
+  public static final double ZERO_POSITION = 0;
 
-  public static final double POSITION_SLOP = 1000.0;
+  public static final double NOTE_INTAKE = 41000;
+  public static final double SHORT_SHOT = 41500;
+  public static final double LONG_SHOT = 59500;
+  public static final double AMP_SHOOT = 130000;
 
-  final double kWheelP = 0.09; // 0.015;
+  // public static final double ANGLE_SHOT_POSITION = SHORT_SHOT;
+
+  public static final double POSITION_SLOP = 500.0;
+
+  final double kWheelP = 0.08; // 0.015;
   final double kWheelI = 0.000;
   final double kWheelD = 0.000;
   final double kWheelF = 0.000;
 
-  // private final TalonFX leftTalon = new TalonFX(Constants.DriveConstants.LEFT_SHOULDER_FALCON);
-  // private final TalonFX rightTalon = new TalonFX(Constants.DriveConstants.RIGHT_SHOULDER_FALCON);
+  // public static final double POSITION_SLOP = 100.0;
+
+  // final double kWheelP = 1.5; // 0.015;
+  // final double kWheelI = 0.000;
+  // final double kWheelD = 2.00;
+  // final double kWheelF = 0.20;
   private static final double CLOSED_LOOP_RAMP_RATE = 0.01; // time from neutral to full in seconds
 
-IMayhemTalonFX leftMotor;
-IMayhemTalonFX rightMotor;
+  double TargetPositionTicks;
+
+  IMayhemTalonFX leftMotor;
+  IMayhemTalonFX rightMotor;
+
+  boolean manualMode = true;
 
   /** Creates a new Shoulder. */
   public ArmSubsystem(IMayhemTalonFX left, IMayhemTalonFX right) {
     leftMotor = left;
     rightMotor = right;
-    // leftTalon.configFactoryDefault();
-    // rightTalon.configFactoryDefault();
 
-    // configTalon(leftTalon);
-    // configTalon(rightTalon);
+    configTalon(leftMotor);
 
-    // leftTalon.follow(rightTalon);
-    // leftTalon.setInverted(true);
-    // rightTalon.setInverted(false);
+    leftMotor.setInverted(false);
+    rightMotor.setInverted(true);
 
-    // leftTalon.setSensorPhase(false);
-    // rightTalon.setSensorPhase(false);
+    leftMotor.setSensorPhase(false);
+    rightMotor.setSensorPhase(false);
 
-    // configureDriveTalon(rightTalon);
-    // configureDriveTalon(leftTalon);
+    rightMotor.follow(leftMotor);
 
-    zero();
+    configureDriveTalon(leftMotor);
+
+    setZeroArm();
   }
 
-  private void configTalon(TalonFX talon) {
-    talon.setNeutralMode(NeutralMode.Brake);
+  private void configTalon(IMayhemTalonFX talon) {
+    talon.setNeutralMode(NeutralMode.Coast);
   }
 
   // Ideas to tune the Shoulder.
@@ -83,7 +77,7 @@ IMayhemTalonFX rightMotor;
   // 3. Command the Shoulder to go to 0.
   // 4. Update wheelF until it is stable at 0 degrees.
 
-  private void configureDriveTalon(final TalonFX talon) {
+  private void configureDriveTalon(final IMayhemTalonFX talon) {
 
     final int slot = 0;
     final int timeout = 100;
@@ -105,25 +99,27 @@ IMayhemTalonFX rightMotor;
     talon.selectProfileSlot(slot, timeout);
     talon.configForwardSoftLimitEnable(false);
     talon.configReverseSoftLimitEnable(false);
-    talon.configAllowableClosedloopError(slot, 50, timeout);
+    talon.configAllowableClosedloopError(slot, 100, timeout);
 
-    talon.configClosedLoopPeakOutput(slot, 1.0);
+    talon.configClosedLoopPeakOutput(slot, 0.5);
 
-    talon.configMotionCruiseVelocity(40000); // measured velocity of ~100K at 85%; set cruise to that
-    talon.configMotionAcceleration(30000); // acceleration of 2x velocity allows cruise to be attained in 1 second
-                                           // second
-    talon.set(TalonFXControlMode.Position, 0.0);
+    // talon.configMotionCruiseVelocity(40000); // measured velocity of ~100K at
+    // 85%; set cruise to that
+    // talon.configMotionAcceleration(30000); // acceleration of 2x velocity allows
+    // cruise to be attained in 1 second
+    // second
+    talon.set(ControlMode.Position, 0.0);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // SmartDashboard.putNumber("Shoulder Current Ticks",
-    //     rightTalon.getSelectedSensorPosition());
-    // if (rightTalon.getControlMode() != ControlMode.PercentOutput) {
-    //   SmartDashboard.putNumber("Shoulder Target Ticks",
-    //       rightTalon.getClosedLoopTarget());
-    // }
+    SmartDashboard.putNumber("Shoulder left Ticks",
+        leftMotor.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Shoulder right Ticks",
+        rightMotor.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Shoulder Target Ticks",
+        this.getTargetPositionTicks());
 
     // wheelP = SmartDashboard.getNumber("Shoulder P", kWheelP);
     // SmartDashboard.putNumber("Shoulder P", kWheelP);
@@ -142,22 +138,24 @@ IMayhemTalonFX rightMotor;
     // rightTalon.getMotorOutputPercent());
   }
 
-  double TargetPositionTicks;
+  public void moveArm(double outputPercentage) {
+    SmartDashboard.putNumber("Controller X input", outputPercentage);
+  }
 
   public void setAngleInTicks(double ticks) {
     TargetPositionTicks = ticks;
-    // rightTalon.set(ControlMode.MotionMagic, ticks, DemandType.ArbitraryFeedForward, 0.05);
+    manualMode = false;
+    leftMotor.set(ControlMode.Position, ticks);
   }
 
   public double getCurrentPositionInTicks() {
-    // return rightTalon.getSelectedSensorPosition();
-    return 0.0;
+    return leftMotor.getSelectedSensorPosition();
   }
 
   public double getTargetPositionTicks() {
-    // if (rightTalon.getControlMode() != ControlMode.PercentOutput) {
-    //   return rightTalon.getClosedLoopTarget();
-    // }
+    if (leftMotor.getControlMode() != ControlMode.PercentOutput) {
+      return leftMotor.getClosedLoopTarget();
+    }
     return 0.0;
   }
 
@@ -173,19 +171,19 @@ IMayhemTalonFX rightMotor;
     setAngleInTicks(getCurrentPositionInTicks());
   }
 
-  // Set the arm to horizontal and then call zero().
-  public void zero() {
-    // DriverStation.reportWarning("Shoulder: zero", false);
-    // rightTalon.setSelectedSensorPosition(0.0);
-    // rightTalon.set(TalonFXControlMode.Position, 0.0);
-
+  public void setZeroArm() {
+    leftMotor.setSelectedSensorPosition(ZERO_POSITION);
+    rightMotor.setSelectedSensorPosition(ZERO_POSITION);
   }
 
   public void setPower(double power) {
-    // rightTalon.set(TalonFXControlMode.PercentOutput, power);
+    if ((!manualMode && Math.abs(power) > 0.1) || manualMode) {
+      manualMode = true;
+      leftMotor.set(ControlMode.PercentOutput, power);
+    }
   }
-  public boolean isAbove(double x){
-     return getCurrentPositionInTicks()>x;
+
+  public boolean isAbove(double x) {
+    return getCurrentPositionInTicks() > x;
   }
 }
-

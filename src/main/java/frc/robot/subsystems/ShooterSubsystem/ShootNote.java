@@ -7,27 +7,22 @@ package frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.subsystems.ArmSubsystem.ArmIsAtPosition;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ShootNote extends SequentialCommandGroup {
   /** Creates a new ShootNote. */
-  public ShootNote() {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
+  public ShootNote(double shooterSpeed) {
     addCommands(
-     new ShooterWheelsSet(1.0),
+        new ShootNotePre(shooterSpeed),
 
-      new ParallelRaceGroup(
-        new ShooterWheelAtSpeed(),
-        new WaitCommand(2.0)),
+        // wait until it is at speed or 2 seconds
+        new ParallelRaceGroup(
+            new ShooterWheelAtSpeed(),
+            new WaitCommand(2.0)),
 
-
-     new ShooterMagSet(1.0) ,
-     new WaitCommand(1.0),
-     new ShooterMagSet(0.0),
-     new ShooterWheelsSet(0.0))
-    ;
+        new ShootNotePost(shooterSpeed));
   }
 }

@@ -5,8 +5,11 @@
 package frc.robot.subsystems.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.subsystems.SystemZero;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.subsystems.SystemArmZero;
 import frc.robot.subsystems.DriveBase.DriveForDistance;
+import frc.robot.subsystems.DriveBase.DriveZeroGyro;
+import frc.robot.subsystems.DriveBase.DriveZeroWheels;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -16,9 +19,8 @@ public class AutoDriveOut extends SequentialCommandGroup {
   public AutoDriveOut() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new SystemZero(),
-    new DriveForDistance(0.0,0.2, 0.0,100.0)
-    );
-
+    addCommands(
+        new AutoStartingPosition(0),
+        new DriveForDistance(3.0, 0.0, 0.0, 2.0));
   }
 }

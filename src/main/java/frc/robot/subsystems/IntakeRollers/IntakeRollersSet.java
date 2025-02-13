@@ -22,6 +22,6 @@ public class IntakeRollersSet extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.m_rollers.set(percent);
+    RobotContainer.m_rollers.setPower(percent);
   }
 }

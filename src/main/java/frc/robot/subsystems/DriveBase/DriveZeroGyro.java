@@ -6,22 +6,23 @@ package frc.robot.subsystems.DriveBase;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.SimpleFalconSubsystem.SwerveTurningFalcon;
+// import frc.robot.subsystems.SimpleFalconSubsystem.SwerveTurningFalcon;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class DriveZeroGyro extends InstantCommand {
-    SwerveTurningFalcon subsystem;
+    // SwerveTurningFalcon subsystem;
+    double startingAngle;
 
-    public DriveZeroGyro() {
-
+    public DriveZeroGyro(double d) {
+        startingAngle = d;
         addRequirements(RobotContainer.m_robotDrive);
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        RobotContainer.m_robotDrive.zeroGyro();
+        RobotContainer.m_robotDrive.zeroGyro(this.startingAngle);
     }
 }

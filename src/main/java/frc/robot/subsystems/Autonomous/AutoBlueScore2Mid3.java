@@ -5,22 +5,18 @@
 package frc.robot.subsystems.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.subsystems.SystemZero;
-import frc.robot.subsystems.DriveBase.DriveForDistance;
-import frc.robot.subsystems.ShooterSubsystem.ShootNote;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoDriveandShoot extends SequentialCommandGroup {
-  /** Creates a new AutoDriveandShoot. */
-  public AutoDriveandShoot() {
+public class AutoBlueScore2Mid3 extends SequentialCommandGroup {
+  /** Creates a new AutoBlueScore2Mid3. */
+  public AutoBlueScore2Mid3() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new SystemZero(),
-    new DriveForDistance(0.0,0.2, 0.0,100.0),
-    new ShootNote()
+    addCommands(
+        new AutoScore2Mid3(1)
+
     );
-    
   }
 }

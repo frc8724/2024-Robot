@@ -4,11 +4,12 @@
 
 package frc.robot.subsystems.IntakeRollers;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.IMayhemTalonFX;
+import frc.robot.motors.IMayhemTalonFX;
 
 public class IntakeRollers extends SubsystemBase {
   IMayhemTalonFX topRollerMotor;
@@ -17,9 +18,8 @@ public class IntakeRollers extends SubsystemBase {
   /** Creates a new IntakeRollers. */
   public IntakeRollers(IMayhemTalonFX top) {
     topRollerMotor = top;
-    // bottomRollerMotor = bottom;
-    // topRollerMotor.setSmartCurrentLimit(999);
-    // bottomRollerMotor.setSmartCurrentLimit(999);
+    topRollerMotor.setInverted(true);
+    setPower(0.0);
   }
 
   @Override
@@ -27,9 +27,8 @@ public class IntakeRollers extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void set(double d) {
-    // topRollerMotor.set(d);
-    // bottomRollerMotor.set(d);
+  public void setPower(double d) {
+    topRollerMotor.set(ControlMode.PercentOutput, d);
   }
 
 }

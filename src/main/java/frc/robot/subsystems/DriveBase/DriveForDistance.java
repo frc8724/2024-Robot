@@ -9,37 +9,56 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 
 public class DriveForDistance extends Command {
-  double m_x;
-  double m_y;
-  double m_rot;
+  double m_startingSpeed;
+  double m_finalSpeed;
+  double m_direction;
+  double m_orientation;
   double m_distance;
+  double m_rotationSpeed = 2.0;
 
-  public DriveForDistance(double x, double y, double rot, double distance) {
-    m_x = x;
-    m_y = y;
-    m_rot = rot;
+  public DriveForDistance(double startSpeed, double finalSpeed, double direction, double orientation,
+      double distance, double rotationSpeed) {
+    m_startingSpeed = startSpeed;
+    m_finalSpeed = finalSpeed;
+    m_orientation = orientation;
+    m_direction = direction;
     m_distance = distance;
     addRequirements(RobotContainer.m_robotDrive);
+  }
 
+  public DriveForDistance(double startSpeed, double finalSpeed, double direction, double orientation,
+      double distance) {
+    this(startSpeed, finalSpeed, direction, orientation, distance, 2.0);
+  }
+
+  public DriveForDistance(double speed, double direction, double orientation, double distance) {
+    this(speed, speed, direction, orientation, distance);
   }
 
   // Called when the command is initially scheduled.
+
+  Pose2d pose = new Pose2d();
+
   @Override
   public void initialize() {
-    Pose2d pose = new Pose2d();
-    RobotContainer.m_robotDrive.resetOdometry(pose);
-    RobotContainer.m_robotDrive.drive(m_x, m_y, m_rot, false);
+    this.pose = RobotContainer.m_robotDrive.getPose();
+    RobotContainer.m_robotDrive.driveOnHeading(m_startingSpeed, m_direction, m_orientation, m_rotationSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
-  @Override
+
   public void execute() {
+    Pose2d p = RobotContainer.m_robotDrive.getPose();
+    double dist = getDistance(p.getX() - this.pose.getX(), p.getY() - this.pose.getY());
+
+    double power = m_startingSpeed + dist / m_distance * (this.m_finalSpeed - m_startingSpeed);
+
+    RobotContainer.m_robotDrive.driveOnHeading(power, m_direction, m_orientation, m_rotationSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // RobotContainer.m_robotDrive.drive(0.0, 0.0, 0.0, false);
   }
 
   double getDistance(double x, double y) {
@@ -50,8 +69,8 @@ public class DriveForDistance extends Command {
   @Override
   public boolean isFinished() {
     Pose2d p = RobotContainer.m_robotDrive.getPose();
-    double dist = getDistance(p.getX(), p.getY());
-
+    double dist = getDistance(p.getX() - this.pose.getX(), p.getY() - this.pose.getY());
+    // System.out.println("Distance =" + dist);
     return dist >= m_distance;
   }
 }

@@ -6,8 +6,8 @@ package frc.robot.subsystems.SimpleFalconSubsystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsystems.MayhemTalonFX;
-import frc.robot.subsystems.MayhemTalonFX.CurrentLimit;
+import frc.robot.motors.MayhemTalonFX;
+import frc.robot.motors.MayhemTalonFX.CurrentLimit;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
@@ -29,17 +29,19 @@ public class SwerveTurningFalcon extends SubsystemBase {
     this.name = name;
     motor.setSelectedSensorPosition(0);
 
-    motor.config_kP(0, 0.5);
+    motor.config_kP(0, 1.0);
     motor.config_kI(0, 0.0);
-    motor.config_kD(0, 0.5);
+    motor.config_kD(0, 10.0);
     motor.config_kF(0, 0.0);
+
+    motor.configAllowableClosedloopError(0, 10);
 
     motor.configNominalOutputForward(0.0);
     motor.configNominalOutputReverse(0.0);
     motor.configPeakOutputForward(+12.0);
     motor.configPeakOutputReverse(-12.0);
     motor.configNeutralDeadband(0.0);
-    motor.setNeutralMode(NeutralMode.Coast);
+    motor.setNeutralMode(NeutralMode.Brake);
   }
 
   double m_set;

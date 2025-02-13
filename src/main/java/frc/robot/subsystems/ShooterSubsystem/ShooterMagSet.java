@@ -13,9 +13,10 @@ import frc.robot.RobotContainer;
 public class ShooterMagSet extends InstantCommand {
 
   double percent;
+
   public ShooterMagSet(double d) {
     // Use addRequirements() here to declare subsystem dependencies.
-     addRequirements(RobotContainer.m_mag);
+    addRequirements(RobotContainer.m_mag);
     percent = d;
   }
   
@@ -23,8 +24,6 @@ public class ShooterMagSet extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.m_mag.set(percent);
-
+    RobotContainer.m_mag.setPowerVbus(percent);
   }
-
 }
